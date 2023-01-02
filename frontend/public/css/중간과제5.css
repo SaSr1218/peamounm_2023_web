@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+*{
+	background-color: #808080;
+}
+
+table
+{
+	 margin : 0 auto; 
+}
+
+h2
+{
+	text-align: center;
+}
