@@ -14,6 +14,10 @@
 	 -->
 
 	<form>
+		<fieldset> <!-- 입력 그룹 s -->
+			<legend>자주 사용되는 input</legend> <!-- 그룹 타이틀 -->
+		
+	
 	
 		읽기모드 : <input value="인사과" readonly="readonly"/> 								<br/>   <!-- 입력상자 -->
 		사용금지 : <input type="text" disabled="disabled"/> 								<br/>	<!-- 문자 -->
@@ -34,24 +38,36 @@
 		<select>
 			<option> 네이버 </option>
 			<option> 카카오 </option>
-			<option> 네이트 </option>									<br/>
-		</select>
+			<option> 네이트 </option>								    
+		</select>													<br/>
+		
+		<hr/> <!-- 구분선 -->
+		[첨부파일 1개]
+		<input type="file">											<br/>
+		[첨부파일 여러개]
+		<input type="file" multiple="multiple">						<br/>
+		<hr/>
 		
 		[버튼목록]
 		<input type="button" 	value="인증">
 		<input type="submit" 	value="폼 전송">
 		<input type="reset" 	value="입력 초기화">					<br/>
 		
-		<input type="color">										<br/> 	<!-- 색상 선택 -->
-		<input type="date">											<br/>	<!-- 날짜 선택 -->
-		<input type="datetime-LocaL">								<br/>	<!-- 날짜/시간 선택 -->
-		<input type="email">										<br/>	<!-- 이메일[@] 형식 입력 -->
-		<input type="month">										<br/>	<!-- 날짜[월] 선택 -->
-		<input type="time">											<br/>	<!-- 시간 선택 -->
-		<input type="week">											<br/>	<!-- 날짜[주] 선택 -->
-		<input type="range" min = 0 max = 10>						<br/>	<!-- 범위 스크롤 -->
-		<input type="number" min = 0 max = 10>						<br/>	<!-- 범위 내 숫자 입력 -->
+		</fieldset> <!-- 입력 그룹 e -->
 		
+		<fieldset>
+			<legend>html5 이상부터 추가된 input</legend>
+			<input type="color">										<br/> 	<!-- 색상 선택 -->
+			<input type="date">											<br/>	<!-- 날짜 선택 -->
+			<input type="datetime-LocaL">								<br/>	<!-- 날짜/시간 선택 -->
+			<input type="email">										<br/>	<!-- 이메일[@] 형식 입력 -->
+			<input type="month">										<br/>	<!-- 날짜[월] 선택 -->
+			<input type="time">											<br/>	<!-- 시간 선택 -->
+			<input type="week">											<br/>	<!-- 날짜[주] 선택 -->
+			<input type="range" min = 0 max = 10>						<br/>	<!-- 범위 스크롤 -->
+			<input type="number" min = 0 max = 10>						<br/>	<!-- 범위 내 숫자 입력 -->
+			
+		</fieldset>
 	</form>
 
 </body>
