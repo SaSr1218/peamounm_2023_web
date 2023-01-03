@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+h3 {
+	border-left: solid 10px green;
+	padding-left : solid 10px green;
+}
+
+ul {
+	border: solid 2px #cccccc;  /* 테두리 */
+	background-color: #eeeeee;  /* 배경색 */
+	padding: 30px;				/* 안쪽여백 */
+	border-radius: 10px;		/* 둥근모서리 */
+	width: 700px;				/* 가로사이즈 */
+}	
+
+li {
+	margin: 20px;
+	line-height: 170%;
+}
+
+form{
+	width: 300px;
+	border: solid 2px gray;
+	border-radius: 10px;
+	padding: 20px;
+	margin: 30px;
+}
+
+p{
+	border-bottom: 1px dotted;  /* 아래쪽 테두리 */
+	padding-bottom: 20px; 		/* 아래쪽 안쪽 여백 */
+}
+
+h4{
+	text-align: right;
+}
+
+a{
+	color: black;
+	text-decoration: none;
+}

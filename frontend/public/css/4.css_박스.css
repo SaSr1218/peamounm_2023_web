@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+/* css 주석 */
+/* 준비물 : 누구[식별자]를 어떻게 꾸밀것인가? */
+/* 1. 선택자 2. 속성 3. 속성값 */
+
+h4 {
+	border: solid 1px red;
+}
+
+h5 {
+	border-top: solid 2px skyblue;
+	border-right: dotted 3px orange;
+	border-bottom: double 4px red;
+	border-left: dashed 2px black;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px purple;
+}
+
+h6 {
+	border: solid 2px red;
+	padding-top:20px;     /* 안쪽(테두리와 내용 간격) 위 여백 */
+	padding-bottom: 20px; /* 안쪽 아래 여백 */
+	padding-right: 30px;  /* 안쪽 오른쪽 여백 */
+	padding-left: 10px;   /* 안쪽 왼쪽 여백 */
+	
+	margin-top: 50px; /* 바깥쪽(테두리부터 윗 아이템 간격) 위 여백 */
+	margin-right: 500px;
+	margin-bottom: 30px;
+	margin-left: 40px;
+}
+
+h2{
+	border: solid 1px red;
+	padding: 10px; /* 모든 위치 마진 여백 */
+	padding: 10px 20px; /* 위/아래, 왼/오 */
+	padding: 10px 20px 30px 40px; /* 시계 방향*/
+}
+
+h1{
+	border: solid 1px yellow;
+	width: 200px; /* 박스 가로 사이즈 */
+	height: 50px; /* 박스 세로 사이즈 */
+	text-align: center;
+	margin: 0 auto; /* 박스 가운데정렬 */
+}
+
+/* 클래스 선택자 */
+.box1{
+	border: solid 10px red;
+	width: 100px;
+	margin: 60px;
+	padding: 60px;
+	box-sizing: border-box; /* ! */
+}
+
+/* id 선택자 */
+#box2{
+	border: solid 10px red;
+	width: 100px;
+	margin: 60px;
+	padding: 60px;
+	box-sizing: content-box; /* ! */
+}
+
+#box3{
+	border: solid 10px red;
+	width: 100px;
+	
+}
