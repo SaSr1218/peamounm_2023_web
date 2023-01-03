@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+h3 {
+	text-align: center;
+}
+
+.Login_t {
+	margin: 0 auto;
+	width: 400px;
+}
+
+/* input 크기변경 */
+
+.Login_t .input_id, .input_pw {
+	height: 30px; 
+	width: 200px;
+}
+
+.btn_login{
+	padding: 30px 20px;
+}
