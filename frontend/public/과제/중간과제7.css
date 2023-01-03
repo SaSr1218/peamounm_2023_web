@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.bi
+{
+	width: 300px;
+}
+
+.s1
+{
+	font-size: 40px;
+	color: orange;
+}
+
+
+.s2
+{
+	background-color: #48BAA9;
+	width: 500px;
+	padding: 20px;
+	color: white;
+	line-height: 150%;
+}
+
+.s3{
+	color: orange;
+	font-weight: bold;
+}
