@@ -22,3 +22,7 @@ span {
 	margin-left:450px;
 }
 
+.col1, .col2
+{
+	border-bottom: dotted 1px gray;
+}
