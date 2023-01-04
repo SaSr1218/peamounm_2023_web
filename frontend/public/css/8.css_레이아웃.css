@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+#web_box{
+	border: 1px solid red;
+}
+
+#header
+{
+	/* border: 1px solid blue; */
+	background-color: blue;
+	height: 200px;	
+}
+
+#content
+{
+	/* border: 1px solid orange; */
+	background-color: orange;
+	height: 600px; width: 1200px; /* 컴퓨터 기준 1000~1300px */
+	margin: 0 auto;	
+	display: flex;
+}
+
+#left_menu
+{
+	/* border: 1px solid white; */
+	background-color: gray;
+	height: 600px;
+	width: 900px;			/* 부모[상위요소] 1200ㅔㅌ / 부모-본인 = 300px - 4px(양 옆 픽셀)*/
+}
+
+#right_menu
+{
+	/* border: 1px solid purple; */
+	background-color: purple;
+	height: 600px;
+	width: 300px;
+}
+
+#footer{
+	/* border: 1px solid black; */
+	background-color: black;
+	height: 200px;
+}
