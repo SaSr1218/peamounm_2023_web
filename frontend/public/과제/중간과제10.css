@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.t_name
+{
+	border: 600px;
+	border-top: solid 5px;
+}
+
+.text1
+{
+	width: 498px;
+}
+
+textarea {
+	width: 500px;
+	height: 100px;
+	resize: none;
+}
+
+span {
+	display: inline-block;
+	margin-left:450px;
+}
+
