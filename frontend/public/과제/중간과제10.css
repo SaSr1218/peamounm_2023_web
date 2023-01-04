@@ -2,13 +2,14 @@
 
 .t_name
 {
-	border: 600px;
+	width: 700px;
 	border-top: solid 5px;
 }
 
 .text1
 {
 	width: 498px;
+	height: 25px;
 }
 
 textarea {
@@ -17,12 +18,17 @@ textarea {
 	resize: none;
 }
 
-span {
-	display: inline-block;
-	margin-left:450px;
+.btn {
+	text-align: right;
+}
+
+.btn input{
+	padding: 5px 20px;
+	margin: 20px 5px;
 }
 
 .col1, .col2
 {
-	border-bottom: dotted 1px gray;
+	border-bottom: dotted 1px #eeeeee;
+	padding: 7px;
 }
