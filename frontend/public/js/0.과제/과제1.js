@@ -35,12 +35,16 @@ let studentArray = [ '20230110' , '20230109' , '20230108' ]
 
 function onRegister( ){
 	let sre = document.querySelector('.sre') 
-	studentArray.push( sre.value )
 	let sreValue = sre.value;
 	let sreIndex = studentArray.indexOf( sreValue )
-		if ( sreIndex !== -1 ) {
-			document.querySelector('.result2Box').innerHTML = '실패'
-		}
-		else{ document.querySelector('.result2Box').innerHTML = '등록성공'
-		}
+		if ( sreValue == '' ) {
+			document.querySelector('.result2Box').innerHTML = '학번을 입력해주세요.'
+		} else if(sreValue.length != 8){
+			document.querySelector('.result2Box').innerHTML = '8자리로 입력해주세요.'
+		} 
+		  else if (sreIndex !== -1 ) {
+			document.querySelector('.result2Box').innerHTML = '등록실패'
+	}
 }
+
+	
