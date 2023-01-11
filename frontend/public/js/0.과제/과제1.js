@@ -71,9 +71,9 @@ function onAdd( ){ // 1. 함수 시작
 	// ! 추가코드 1. 만약에 입력된 값이 공백이면
 	if ( sno2Value == '' ) {console.log('공백이네요.~'); confirm++; }
 	// ! 추가코드 2. 만약에 입력된 값이 8자리 아니면 
-	if ( sno2Value.length !=8 ) {console.log('8자리로 입력해주세요.'); confirm++; }
+	if ( confirm == 0 && sno2Value.length !=8 ) {console.log('8자리로 입력해주세요.'); confirm++; }
 	
-	if ( confitm ==0 ) {
+	if ( confirm ==0 ) {
 	
 	
 	// 3. 유효성검사[ 중복체크 ]
