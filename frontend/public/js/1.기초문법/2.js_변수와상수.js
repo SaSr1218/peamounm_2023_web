@@ -37,8 +37,8 @@ console.log( '변수값 : ' + value1 )	// 'value1' 이라는 변수 상자에 �
 value1 = 20							// 'value1' 이라는 변수 상자에 새로운 값 대입했다.
 console.log( '변수값 수정후 : ' + value1 )
 // 4. 변수 연산
-console.log( '변수값 더하기 5 : ' + value1+5 )		// 문자열 + 숫자 + 숫자 
-console.log( '변수값 더하기 5 : ' + (value1+5) )	// 문자열 + ( 숫자 + 숫자 )
+console.log( '변수값 더하기 5 : ' + value1+5 )		// 문자열 + 숫자 + 숫자  205
+console.log( '변수값 더하기 5 : ' + (value1+5) )	// 문자열 + ( 숫자 + 숫자 ) 25
 let value2 = 30
 let result = value1 + value2
 console.log( '변수들 간에 연산 : ' + result ) 
