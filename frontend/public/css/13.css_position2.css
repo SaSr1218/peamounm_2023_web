@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.all_box { position:relative; background-color: green; border: 1px solid; width:500px; height : 500px;}
+
+.all_box div
+{ position:absolute; border-radius: 5px; background-color: yellow; border: 1px solid black; width:50px; height:50px; text-align: center;}
+
+.box1
+{left: 225px; top: 100px;}
+
+.box2
+{left: 100px; top: 200px;}
+
+.box3
+{right: 100px; top: 200px;}
+
+.box4
+{left: 100px; top: 300px;}
+
+.box5
+{right: 100px; top: 300px;}
+
+.box6
+{left: 225px; top: 400px;}
