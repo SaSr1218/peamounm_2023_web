@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+/*
+	class : .	id : #
+	복수 선택자 : , 
+	하위 선택자 : 띄어쓰기 
+	
+	align-items = 위에서부터 오는 flex 속성. flex-start, center, flex-end, stretch(높이가 없을때 가장 큰 요소 높이랑 같게 하는것)
+*/
+
+.flexbox1 , .flexbox2 , .flexbox3 , 
+.flexbox4 , .flexbox5 
+{ display: flex; width: 200px; }
+
+.flexbox1{ align-items: flex-start; flex-wrap: wrap; }
+.flexbox2{ align-items: center; }
+.flexbox3{ align-items: flex-end; }
+.flexbox4{ align-items: stretch; }
+.flexbox5{ align-items: baseline; flex-wrap: wrap; }
+
+.box1 , .box2 , .box3 , .box4 , .box5 , .box6
+{ 	background: blue; 
+	color: white; 
+	border: 1px solid white; }
+
+.box1{ width: 50px; height: 50px; }
+.box2{ width: 100px; height: 100px; display: inline-flex; align-items: center; }
+
+.box4{ width: 50px; height: 80px; }
+.box5{ width: 100px; height: 150px; display: inline-flex; align-items: center; }
+
+
+
+
+
