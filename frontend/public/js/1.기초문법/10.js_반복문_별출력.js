@@ -129,7 +129,7 @@ console.log(output)*/
 *******
 */
 
-output = ''
+/*output = ''
 let line5 = Number(prompt('문제 5 줄수'))
 for ( let i = 1; i <= line5; i++){
 	for ( let b = 1; b <= line5-i; b++) {output += ' '}
@@ -142,7 +142,7 @@ for ( let i = 1; i <= line5; i++){
 	for ( let k = 1; k <= line5-i+1; k++ ) { output += '*'}
 	{ output += '\n' }
 }
-console.log(output)
+console.log(output)*/
 
 /*
 i for ( let i = 1; i <= line5; i++)
@@ -174,7 +174,27 @@ s, 별, 가운데
 
  */
 
-
+output = ''
+let line7 = Number(prompt('문제5) 줄수'))
+for(let i = 1 ; i<=line7/2; i++){
+	for(let b = 1 ; b<=line7/2-i; b++){
+		output += ' '
+	}
+	for(let s = 1 ; s<=i*2-1; s++){
+		output += '*'
+	}
+	output += '\n'
+}
+for(let i = 1 ; i<=line7/2; i++){
+	for(let b = line7 ; b>line7-i+1; b--){
+		output += ' '
+	}
+	for(let s = line7 ; s>=i*2; s--){
+		output += '*'
+	}
+	output += '\n'
+}
+console.log(output)
 
  
  
