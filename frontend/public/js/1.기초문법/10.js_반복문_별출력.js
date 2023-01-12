@@ -12,7 +12,7 @@
  */
 //예시1) 입력받은 수 만큼 * 출력
 let output = ''
-let s1 = Number(prompt('예시1 별 개수'))
+/*let s1 = Number(prompt('예시1 별 개수'))
 for ( let i = 1; i <= s1; i++ ){
 	output += '*'
 }
@@ -28,7 +28,7 @@ for ( let i = 1; i <= s2; i++ ){
 	// 2. 줄바꿈 출력
 	if( i%3 == 0 ) {output += '\n'}
 }
-console.log(output)
+console.log(output)*/
 
 
 /* 예시3) 입력받은 줄수[line]만큼 출력 
@@ -45,7 +45,7 @@ console.log(output)
 	s는 1부터 3까지..
 		s는 1부터 i까지			= for ( let s = 1; s <= i ; s++ )
  */
-output = ''
+/*output = ''
 let line1 = Number(prompt('문제1 줄수'))
 for( let i = 1; i <= line1; i++){
 	// 1. 별찍기
@@ -53,7 +53,7 @@ for( let i = 1; i <= line1; i++){
 	// 2. 줄바꿈
 	output += '\n'
 }
-console.log(output)
+console.log(output)*/
 
  /* 예시4) 입력받은 줄수[line]만큼 출력 
 **** 
@@ -62,7 +62,7 @@ console.log(output)
 *
 */
 
-output = ''
+/*output = ''
 let line2 = Number(prompt('문제2 줄수'))
 for( let i = 1; i <= line2; i++){
 	// 1. 별찍기
@@ -70,7 +70,7 @@ for( let i = 1; i <= line2; i++){
 	// 2. 줄바꿈
 	output += '\n'
 }
-console.log(output)
+console.log(output)*/
  
  /* 예시5) 입력받은 줄수[line]만큼 왼쪽부터 출력
     *
@@ -84,7 +84,7 @@ b는 1부터 (입력받은 줄 - 현재줄수) 까지 1씩증가 = for ( let b =
 s는 1부터 현재줄수까지 1씩 증가				  = for ( let s = 1; s<=i; s++)
 */
 
- output = ''
+/* output = ''
  let line3 = Number(prompt('문제 3 줄수'))
  for ( let i = 1; i <= line3; i++ ){
 	 // 1. 공백출력
@@ -98,7 +98,7 @@ s는 1부터 현재줄수까지 1씩 증가				  = for ( let s = 1; s<=i; s++)
 	 // 3. 줄바꿈
 	{ output += '\n' }
  }
- console.log(output)
+ console.log(output)*/
 
 /* 예시6) 
 *****
@@ -108,7 +108,7 @@ s는 1부터 현재줄수까지 1씩 증가				  = for ( let s = 1; s<=i; s++)
     *
 */ 
 
-output = ''
+/*output = ''
 let line4 = Number(prompt('문제 4 줄수'))
 for ( let i = 1; i <= line4; i++ ){
 	for ( let s = 1; s <= line4-i+1; s++ ) {
@@ -120,7 +120,7 @@ for ( let i = 1; i <= line4; i++ ){
 	
 	{ output += '\n'}
 }
-console.log(output)
+console.log(output)*/
  
 /* 예시 7)
    *  
@@ -130,16 +130,16 @@ console.log(output)
 */
 
 output = ''
-let line5 = Number(prompt('문제 5 줄수 '))
+let line5 = Number(prompt('문제 5 줄수'))
 for ( let i = 1; i <= line5; i++){
 	for ( let b = 1; b <= line5-i; b++) {output += ' '}
 	for ( let s = 1; s <= (i*2)-1; s++) { output += '*'}
 	{ output += '\n' }
 }
-for ( let i = 1; i <= 5; i++){
+for ( let i = 1; i <= line5; i++){
 	for ( let b = 1; b <= i-1;  b++) {output += ' '}
-	for ( let s = 1; s <= 5-i; s++ ) { output += '*'}
-	for ( let s = 1; s <= 6-i; s++ ) { output += '*'}
+	for ( let s = 1; s <= line5-i; s++ ) { output += '*'}
+	for ( let k = 1; k <= line5-i+1; k++ ) { output += '*'}
 	{ output += '\n' }
 }
 console.log(output)
@@ -174,27 +174,7 @@ s, 별, 가운데
 
  */
 
-output = ''
-let line7 = Number(prompt('문제5) 줄수'))
-for(let i = 1 ; i<=line7/2; i++){
-	for(let k = 1 ; k<=line7/2-i; k++){
-		output += ' '
-	}
-	for(let j = 1 ; j<=i*2-1; j++){
-		output += '*'
-	}
-	output += '\n'
-}
-for(let i = 1 ; i<=line7/2; i++){
-	for(let k = line7 ; k>line7-i+1; k--){
-		output += ' '
-	}
-	for(let j = line7 ; j>=i*2; j--){
-		output += '*'
-	}
-	output += '\n'
-}
-console.log(output)
+
 
  
  
