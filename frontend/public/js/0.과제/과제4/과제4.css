@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+* { background-color: white; } /* 연동 확인용 */
+
+* { color: black; }
+
+.wrap{ display: flex; }
+
+.content{
+	width: 50%;
+	border: 1px solid white;
+}
+
+.등록버튼{
+	border: 1px solid white;
+}
