@@ -1,18 +1,25 @@
 //최성아
 
 let 도서목록 = ['혼자공부하는자바', '이것이자바다', '열혈C언어']
+let 대여목록 = ['혼자공부하는자바']
 
 function click_btn() { // f s
 
 let content_register = document.querySelector('.content_register').value
-	등록하기( content_register )
-	printContent( )
+	등록하기( content_register ) // 이 안에 유효성 검사
+	printContent( ) // 이 안에 Delete 기능
 } // f e
 
 // 2. 삭제 버튼 함수
 
-function Delete ( d ){
-	도서목록.splice ( d , 1 )
+function Delete ( i ){
+	for ( value of 도서목록 ){
+		if(대여목록.includes(도서목록[i]) == true){
+			alert ('대여중인 도서는 삭제가 불가능합니다.')
+			return;
+		}
+	}
+	도서목록.splice ( i , 1 )
 	printContent( )
 }
 
@@ -24,15 +31,23 @@ function printContent( ){
 					<th>비고</th>
 				</tr>`
 	for ( let i = 0 ; i < 도서목록.length; i++ ){ // for s
+			if( 대여목록.includes(도서목록[i]) == true ){
 			html += `<tr>
 					<td>${ i+1 }</td>
 					<td>${ 도서목록[i] }</td>
-					<td>대여가능여부</td>
+					<td>대여중</td>
 					<td><button onclick="Delete( ${i} )">삭제</button></td>
 				</tr>`	
-
+			}else{
+			html += `<tr>
+					<td>${ i+1 }</td>
+					<td>${ 도서목록[i] }</td>
+					<td>대여가능</td>
+					<td><button onclick="Delete( ${i} )">삭제</button></td>
+				</tr>`	
+			}
+				document.querySelector('.result_box1').innerHTML = html
 	} // for e
-	document.querySelector('.result_box1').innerHTML = html
 } // f e
 
 // 유효성검사 (중복, 글자수 제한)
@@ -46,7 +61,6 @@ function 등록하기 ( 등록 ){
 	}
 	if ( 등록.length < 5 || 등록.length > 10){
 		alert('글자 길이[5-10]를 맞춰주세요.')
-		도서목록.splice( 도서목록.indexOf(등록), 1 )
 		printContent()
 		return;
 	}
@@ -58,6 +72,6 @@ function 등록하기 ( 등록 ){
 
 /*
 구현해야할 기능
-1. 도서대여여부 -> 배열과 비교해서 있으면 대여중, 없으면 대여가능으로 출력
+1. 도서대여여부 -> 배열과 비교해서 있으면 대여중, 없으면 대여가능으로 출력 O
 2. 도서대여여부가 대여중일 경우 삭제 버튼 비활성화
 */
