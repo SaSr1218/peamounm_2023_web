@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+/* --------- 기본 css  ----------- */
+*{ margin: 0; padding: 0; font-family: "맑은 고딕";}
+a{ text-decoration: none; color: black; }
+li{ list-style-type: none; }
+
+/* *{ border: 1px solid blue;} */
+
+/* -------------- 헤더 -----------------*/
+#header{ 
+	width: 1200px; margin: 0 auto; height: 100px;
+	position: relative;		/* 상위요소에 relative */
+}
+.h_logo{ 
+	position: absolute; 	/* 하위요소에 absolute */
+	left: 0px; top:20px; 
+}
+.h_logo span{ color: blue; font-weight: bold;}
+.h_menu{
+	position: absolute; 	 /* 하위요소에 absolute */
+	right: 0px; top:30px;
+}
+.h_menu li{ display: inline-block; margin-left: 30px; }
+
+/* -------------- 대표이미지 -----------------*/
+#main_img{ text-align: center; }
+
+/* -------------- 본문 -----------------*/
+#content{ display:flex; width: 1200px; margin: 0 auto; }
+
+.banner{ display: flex; width: 500px; margin: 80px 50px;}
+.banner img{ padding: 0px 20px; }
+
+#items{ background-color: #eeeeee; }
+.item{ width: 270px; margin: 30px 30px; }
+.item img{ width: 100%; }
+.item li { padding: 3px 0px;  }
+
+/* -------------- 푸터 -----------------*/
+#footer{ background-color: #292C32;  }
+
+.ft_content{
+	width: 1200px; margin: 0 auto;
+	display: flex; justify-content: space-between;
+	padding: 50px 0px;
+	color: white;
+}
+
+.ft_item{ width: 500px; }
+.ft_sns{ width: 200px; }
+.ft_content li{ display: inline-block ;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
