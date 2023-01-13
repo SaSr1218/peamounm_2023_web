@@ -1,33 +1,41 @@
-/*
-조건1 : 방문록 내용을 여러개 담는 배열 선언 : let contentArray = []
-조건2 : 방문록 내용작성<input>입력받기
-조건3 : 등록버튼<button> 클릭시 입력된 데이터가 배열에 저장하는 addContent() 함수 실행
-조건4 : 현재 배열에 저장된 모든 방문록을 <table>에 출력 
+console.log( '1.js작동')
 
-<tr>
-	<th>번호</th> <th>방문록</th>
-</tr>
-
-*/
-
-
-
-console.log('--------------과제3------------')
-
-let contentArray = []
-
-
-function addContent( ){
-
-	let 테이블행 = '<tr> <th>번호</th> <th>방문록</th> </tr>'
+let contentArray = [ ] // 누적 기록 
+// 1. 등록 버튼 클릭 했을때 이벤트 함수
+function addContent(){ // f s
+	//function : 함수 선언[정의]시 사용되는 키워드
+		// addContent : 함수[아무거나]
+			// ( ) : 인수
+				// { } : 함수 호출시 실행되는 구역
+	console.log('1.addContent() 함수 작동')
 	
-	let num = document.querySelector('.num').value
-	contentArray.push( num )
+	// 2. <input> 에서 입력받은 데이터[value] 가져와서 변수에 저장 
+	let content = document.querySelector('.content').value
+		console.log( '2. content : ' + content)
+	// 3. 배열내 입력받은 변수 저장 
+	contentArray.push( content )
+		console.log( '3. contentArray : ' + contentArray)
 	
-	for (let i = 0; i < contentArray.length; i++ ){
-		
-		
-		테이블행 += '<tr>' + '<th>' + (i+1) + '</th>' + '<th>' + contentArray[i] + '</th>' + '</tr>'
+	// 4. 출력할 html 구성 [ + vs ` ]
+	let html = `<tr><th>번호</th><th>방문내용</th></tr>`
+	
+	// 5. 내용추가 [ 반복 이용한 배열내 요소 출력 ]
+	for( let i = 0 ; i<contentArray.length; i++ ){
+		html += `<tr><td>${ i+1 }</td><td>${ contentArray[i] }</td></tr>`	
 	}
-	document.querySelector('.b_t').innerHTML = 테이블행
-}
+	// 6. 위에서 구성된 html를 해당 마크업에 대입
+	document.querySelector('.contentTable').innerHTML = html
+	
+} // f e
+
+
+
+
+
+
+
+
+
+
+
+ 
