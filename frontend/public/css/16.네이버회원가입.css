@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+/* -----------공통------------*/
+body{ background: #F5F6F7; }		/* 전체 배경색 */
+a{ color: black; text-decoration: none;}
+*{ font-family: "맑은 고딕"; }
+*:focus{ outline: none; } /* input 입력창에 마우스커서[포커스] 생겼을대 이벤트
+/* --------------------------*/
+
+/*-------------- 헤더 ------------------*/
+.logo{
+	width: 460px;				/* 로고 박스권 */
+	margin: 0 auto;				/* 로고 가운데정렬 */
+	display: flex;				/* 하위 요소 가운데 정렬 */
+	justify-content: center;
+}
+.logo img{
+	height: 50px;				/* 사진 높이 사이즈 */
+	margin: 50px 0px; 			/* 위아래 바깥여백 */
+}
+/* ---------------- 본문 -----------------*/
+
+#join_form{ width: 460px; margin: 0 auto; }
+
+h3{ text-align: left; font-size: 14px; margin-bottom: 8px;}
+
+/* 1. 입력상자 */
+.signup_input{
+	border: 1px solid #DADADA;	/* input , span 의 테두리 */
+	background-color: white;	
+	padding: 10px;
+	display: flex;
+	align-items: center; /* 세로정렬*/
+}
+.input_id{
+	border: none;	/* input 테두리 지우기 */
+	width: 100%;	/* input 가로사이즈 전체 */
+	height: 30px;	/* input 세로사이즈 */
+}
+.signup_at{ color:#8E8E8E; }
+
+.signup_lock{
+	/* 네이버에서 아이콘 이미지 주소 */
+	background-image: url("https://static.nid.naver.com/images/ui/join/m_icon_pw_step.png");
+	/* 요소 사이즈 */
+	width: 25px; height: 25px;
+	/* 배경이미지 사이즈 */
+	background-size: 120px 75px;
+}
+/* 생년월일 */
+.birthbox{ 
+	display: flex; 
+	justify-content: space-between; 
+}
+#birth_y , #birth_m , #birth_d 
+{ width: 120px; }
+#birth_m { margin: 0px 20px;}
+
+/* 이메일 (선택) 폰트 변경 */
+.s_text{
+	font-size: 8px;
+	color: #8E8E8E;
+	font-weight: normal; /* 진하게 제거 */
+}
+/* 휴대전화입력란 , 인증 버튼 가로배치  */
+.phonebox{ 
+	display: flex; 
+	justify-content: space-between; 
+	margin: 10px 0px;
+}
+/* 인증 버튼 */
+.btn_auth{
+	background-color: #03C75A;
+	border: none;	color: white;
+	width: 120px;
+	font-weight: bold;
+}
+/*휴대전화입력란 */
+#input_phone{ width: 300px; }
+/* 인증번호 입력란 */
+#authbox , #input_auth{ background-color: #F5F6F7 }
+
+/* 가입 버튼 */
+.btn_signup{
+	background-color: #03C75A;		/* 버튼 색상 */
+	border: none;	color: white;	/* 버튼 테두리 제거 , 폰트 색상 */
+	width: 100%; height: 50px;		/* 버튼 사이즈 */
+	font-size: 20px; 				/* 버튼 폰트 크기 */
+	font-weight: bold;				/* 버튼 폰트 진하게 */
+	margin: 30px 0px;				/* 버튼 위아래 바깥여백 */
+}
+/* 푸터 */
+.ft_box{						
+	width: 460px;					/* 푸터 내용물 사이즈 */
+	margin: 0 auto;					/* 푸터 내용물 박스 가운데 정렬 */
+	text-align: center;				/* 푸터 내용물 박스내 텍스트 가운데 정렬 */
+}
+.ft_top a{ font-size: 8px; }		/* 폰트 사이즈 */
+.ft_top a:hover{					/* 마우스를 올렸을때 */
+	color: #03C75A;	
+	text-decoration: underline;		/* 밑줄 */
+}
+.ft_sub{ 
+	margin-top:3px; 
+	display: flex; 					/* 이미지와 텍스트 가로 배치  */
+	justify-content: center; align-items: center;  /* 가로 세로 중앙 정렬  */
+}
+.ft_sub img{ height: 10px; padding: 10px; }
+.ft_sub div{ font-size: 5px; }
+
+.a_line{
+	color: #8e8e8e;
+	font-size: 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
