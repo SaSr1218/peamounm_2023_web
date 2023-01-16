@@ -19,5 +19,7 @@
 	width: 30%;
 	height: 150px;
 	border: 5px solid white;
-	background-color: #eeeeee;
+	background-color: skyblue;
+	font-size: 110px; 
+	text-align: center;
 }
