@@ -39,6 +39,7 @@ function 삭제 ( i ) { // i : 내가 삭제할 게시물의 인덱스
 	}
 } // f e
 
+
 // 3. 게시물 출력함수 [ 1. 작성 성공시 출력 2. 삭제 성공시 출력]
 function 출력(){
 		// 4. 배열내 객체 출력
@@ -57,17 +58,34 @@ function 출력(){
 					<td> ${ i+1 } </td>
 					<td> ${ boardArray[i].content } </td>
 					<td> ${ boardArray[i].writer } </td>
-					<td> <button onclick="삭제( ${i} )"> 삭제 </button></td>
+					<td>
+						<button onclick="삭제( ${i} )"> 삭제 </button>
+						<button onclick="수정( ${i} )"> 수정 </button>	
+					</td>
 				</tr>`
 	} // for end
 		// 4-3. 반복문 종료시 누적된 html 해당 table 출력
 	document.querySelector('.게시물테이블').innerHTML = html;
 }
 
+// 4. 해당 인덱스의 객체[게시물]를 1개 내용 수정 함수
+function 수정 ( i ) { // 수정버튼 클릭시 -> 비밀번호 입력받아 일치하면 새로운내용[prompt] 입력받기
+	// 1. 수정 클릭시 비밀번호 입력받는다.
+	let 비밀번호 = prompt('비밀번호 : ')
+	// 2. 입력받은 비밀번호와 내가 선택한 게시물의 비밀번호가 같으면 객체내 속성값 수정후 출력
+	if ( 비밀번호 == boardArray[i].password ){
+		새로운내용 = prompt('수정 할 내용 : ')
+		boardArray[i].content = 새로운내용;
+		alert('수정 성공');
+		출력();
+		}else{ // 같지 않으면
+		alert('비밀번호가 일치하지 않습니다. 수정 실패')
+		}
+}
 
-
-
-
+// boardArray 				: 배열
+// boardArray[i] 			: 배열내 i번째 요소 --> 객체 1개
+// boardArray[i].content 	: 객체.속성명
 
 
 
