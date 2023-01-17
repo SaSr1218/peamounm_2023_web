@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+.wrap{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap; /* 레이아웃 자동줄바꿈*/
+	
+}
+
+.addbox , .listbox , .updatebox {
+	border: 3px solid #eeeeee;
+	width: 40%;
+	text-align: center;
+}
+
+.addtable, .updatetable{
+	margin: 0 auto;
+}
+
+.updatebox { display: none; } /* 기본값으로 수정창 숨겨놓기 */
