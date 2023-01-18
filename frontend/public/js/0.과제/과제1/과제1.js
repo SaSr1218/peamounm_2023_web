@@ -32,23 +32,6 @@ let studentArray = [ '20230110' , '20230109' , '20230108' ]  // 배열
 	 	document.querySelector('.resultBox').innerHTML = '로그인성공!'
 	 	}
 }	 		 
-// 함수[onLogin] e
-
-/* 내가 작성한 코드, input value 초기화 오류
-function onRegister( ){
-	let sre = document.querySelector('.sre') 
-	let sreValue = sre.value;
-	let sreIndex = studentArray.indexOf( sreValue )
-		if ( sreValue == '' ) {
-			document.querySelector('.result2Box').innerHTML = '학번을 입력해주세요.'
-		} else if(sreValue.length != 8){
-			document.querySelector('.result2Box').innerHTML = '8자리로 입력해주세요.'
-		} 
-		  else if (sreIndex !== -1 ) {
-			document.querySelector('.result2Box').innerHTML = '등록실패'
-	}
-}*/
-
 
 // 강사님이 작성한 코드
 function onAdd( ){ // 1. 함수 시작
