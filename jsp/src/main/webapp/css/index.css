@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+/* 웹폰트 */
+@font-face {
+    font-family: 'TmonMonsori';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/TmonMonsori.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 기본값 */
+* { 
+	font-family: '맑은 고딕';
+	color:black;
+	margin: 0px; padding: 0px;
+}
+
+/* 로고 구역 */
+.logobox{
+	text-align: center;
+}
+
+/* 로고 제목 */
+.title{
+	font-family: 'TmonMonsori';
+	color: black;
+	font-size: 35px;
+}
+
+/* 하단 메뉴 top 위치 변경 */
+.h_bottom{
+	top : 50px !important; /* 충돌시 : 1.!important 쓰기 2.id값으로 sticky-top값보다 우선순위로 선정 */
+}
+
+/* 부트스트랩 class 수정 */
+.nav-link{
+	color: black !important;
+}
+
+.h_topmenu{
+	width: 100%; display: flex; justify-content: flex-end; font-size: 9px;
+}
+
+.h_bottommenu{
+	width: 100%; display: flex; justify-content: space-between; font-size: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
