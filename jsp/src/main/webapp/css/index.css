@@ -29,7 +29,7 @@
 
 /* 하단 메뉴 top 위치 변경 */
 .h_bottom{
-	top : 50px !important; /* 충돌시 : 1.!important 쓰기 2.id값으로 sticky-top값보다 우선순위로 선정 */
+	top : 40px !important; /* 충돌시 : 1.!important 쓰기 2.id값으로 sticky-top값보다 우선순위로 선정 */
 }
 
 /* 부트스트랩 class 수정 */
