@@ -226,8 +226,9 @@ function bprint(){
 }
 
 // 삭제 버튼
-function onDelete(){
-
+function onDelete( i ){
+	burgerList.splice( i , 1 )
+	
 }
 
 // 가격 수정 버튼
