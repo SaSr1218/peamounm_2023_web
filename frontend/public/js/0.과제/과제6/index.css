@@ -16,8 +16,40 @@
 	height: 100px;
 	position: absolute;
 	left : 10px;
-	top: 300px;
-	background: url("img/우니.png");
-	background-size: 70%;
-	background-repeat: no-repeat;
+	top: 470px;
+	background: url("img/캐릭터1.png"); background-size: 78%; background-repeat: no-repeat;
 }
+
+.monbox{
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	left: 910px;
+	top : 470px;
+	background : url("img/주황버섯.gif"); background-size: 75%; background-repeat: no-repeat;
+	
+	/* 애니메이션 이동 효과*/
+	transition : all 1s;
+}
+
+.m_hp{
+	background-color: red;
+	width: 300px;
+	height: 30px;
+	position: absolute;
+	left: 630px;
+	top : 40px;
+}
+
+.u_hp{
+	background-color: red;
+	width: 300px;
+	height: 30px;
+	position: absolute;
+	left: 30px;
+	top : 40px;	
+}
+
+
+
+
