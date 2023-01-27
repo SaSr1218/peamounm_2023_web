@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.wrap{ /* 게임화면 설정 */
+	width: 1000px;
+	height: 600px;
+	margin: 0 auto;
+	border: 1px solid red;
+	position: relative;
+	background: url("img/배경1.jpeg");
+	background-size: 120%;
+	background-repeat: no-repeat;
+}
+
+.userbox{
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	left : 10px;
+	top: 300px;
+	background: url("img/우니.png");
+	background-size: 70%;
+	background-repeat: no-repeat;
+}

@@ -22,8 +22,8 @@ function product_print(){
 					<div class="item_size">${ o.size }</div>	<!-- 제품사이즈 -->
 					<div class="item_price">${ o.price.toLocaleString() } 원</div>	<!-- 원가 -->
 					<div>
-						<span class="item_sale">${ ( o.price - (o.price*o.discount) ) .toLocaleString() } 원</span>	<!-- 판매가 -->
-						<span class="item_discount">${ o.discount*100 }%</span>	<!-- 할인율 -->
+						<span class="item_sale">${ ( o.price - parseInt(o.price*o.discount) ) .toLocaleString() } 원</span>	<!-- 판매가 -->
+						<span class="item_discount">${ parseInt(o.discount*100) }%</span>	<!-- 할인율 -->
 					</div>
 				</div>
 				<div class="item_bottom">	<!-- 제품정보 하단 구역  -->
