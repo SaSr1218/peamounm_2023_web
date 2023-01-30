@@ -31,7 +31,7 @@ function board_print( keyword, key ){
 	for (let i = 0 ; i < boardlist.length; i++ ){
 		html += `<tr>
 					<td> ${i+1} </td>
-					<td> ${boardlist[i].title} </td>
+					<td> <a href="view.html">${boardlist[i].title} </a> </td>
 					<td> ${boardlist[i].writer} </td>
 					<td> ${boardlist[i].date} </td>
 					<td> ${boardlist[i].view} </td>
