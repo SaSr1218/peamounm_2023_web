@@ -40,17 +40,17 @@ document.addEventListener( 'keydown' , (e)=>{
 	}else if( key == 39 ){ // 오른쪽키 -> 이동 
 		u_left += 10
 		u_left = u_left > 910 ? 910 : u_left ;
-		userbox.style.backgroundImage = `url(img/캐릭터2_이동.png)` // 이동 모션 
-		userbox.style.backgroundSize = `110%`;
+		userbox.style.backgroundImage = `url(img/뚱이이동.gif)` // 이동 모션 
+		userbox.style.backgroundSize = `80%`;
 	}else if( key == 65 && (u_left-m_left) >= -50 && (u_left-m_left) <= 50 ){ // a키 -> 공격 
-		userbox.style.backgroundImage = `url(img/캐릭터3_공격.png)` // 공격 모션
+		userbox.style.backgroundImage = `url(img/뚱이공격.gif)` // 공격 모션
 		m_hp = m_hp - u_attack
 		m_hpbox.style.width = `${ m_hp }px`
 	}
 	
 	//유저 관련
 	if( key == 83 ){ // 유저 방어
-		userbox.style.backgroundImage = `url(img/캐릭터4_방어.png)`
+		userbox.style.backgroundImage = `url(img/뚱이방어.gif)`
 		u_hp = u_hp
 		u_hpbox.style.width = `${ u_hp }px`
 	}else if((u_left-m_left) >= -20 && (u_left-m_left) <= 20 ){ // 유저 방어
@@ -79,7 +79,7 @@ document.addEventListener( 'keydown' , (e)=>{
 })
 // 2. 문서 안에서 키 떼였을때 이벤트  keyup 
 document.addEventListener( 'keyup' , (e)=>{ 
-	userbox.style.backgroundImage = `url(img/캐릭터1.png)`
+	userbox.style.backgroundImage = `url(img/뚱이.png)`
 	userbox.style.backgroundSize = `90%`;
 })
 
@@ -101,7 +101,6 @@ function mon_moving(){
 	logbox2.innerHTML = `<div> 몹 좌표 : ${ m_left }</div>`
 }
 
-console.log(monbox)
 
 /* 잘 모르겠는 부분 : 몬스터를 배열로 만들어서 호출하기
 

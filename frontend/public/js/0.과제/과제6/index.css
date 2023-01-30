@@ -6,7 +6,7 @@
 	margin: 0 auto;
 	border: 1px solid red;
 	position: relative;
-	background: url("img/배경1.jpeg");
+	background: url("img/배경1.jpg");
 	background-size: 120%;
 	background-repeat: no-repeat;
 }
@@ -17,7 +17,7 @@
 	position: absolute;
 	left : 10px;
 	top: 470px;
-	background: url("img/캐릭터1.png"); background-size: 78%; background-repeat: no-repeat;
+	background: url("img/뚱이.png"); background-size: 78%; background-repeat: no-repeat;
 }
 
 .monbox{
@@ -26,7 +26,7 @@
 	position: absolute;
 	left: 910px;
 	top : 470px;
-	background : url("img/주황버섯.gif"); background-size: 75%; background-repeat: no-repeat;
+	background : url("img/젤리피쉬.gif"); background-size: 75%; background-repeat: no-repeat;
 	
 	/* 애니메이션 이동 효과*/
 	transition : all 1s;
