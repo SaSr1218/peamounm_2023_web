@@ -9,10 +9,10 @@ let result = true;
 function qboard_write(){
 	// 1. 입력받은 데이터 가져온다.
 	let board = {
-		btitle : document.querySelector('.qtitle').value ,
-		bcontent : document.querySelector('.qcontent').value ,
-		bwriter : document.querySelector('.qwriter').value ,
-		bpassword : document.querySelector('.qpassword').value 
+		qtitle : document.querySelector('.qtitle').value ,
+		qcontent : document.querySelector('.qcontent').value ,
+		qwriter : document.querySelector('.qwriter').value ,
+		qpassword : document.querySelector('.qpassword').value 
 		// 첨부파일 X
 	}; console.log( board )
 	
@@ -26,7 +26,7 @@ function qboard_write(){
 	게시물임시저장소.push( board )
 	// 3. 결과에 따른 이벤트
 	let result = true; // java로부터 전송결과
-	if ( result ) {alert('글쓰기 성공'); location.href = 'list.html';}
+	if ( result ) {alert('글쓰기 성공'); location.href = 'list2.html';}
 	else{ alert('글쓰기 실패');}
 	/* 
 		페이지 전환 함수
