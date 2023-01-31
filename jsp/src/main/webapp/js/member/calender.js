@@ -1,9 +1,5 @@
 
-let contents = [
-	{ date: '20230101' , content : '인문학 명저 독서'} ,
-	{ date: '20230104' , content : '집안 대청소'} ,
-	{ date: '20230107' , content : '코딩 공부하기, 정처기 공부하기, 백준 공부하기'}
-]
+let contents = [ ]
 
 
 
@@ -72,7 +68,8 @@ document.querySelector('.modal_write').addEventListener('click', (e) =>{
 	// 1. 입력받은 내용과 선택된 날짜 가져와서 객체화
 	let content = {
 		date: document.querySelector('.modal_date').innerHTML ,
-		content: document.querySelector('.modal_input').value
+		content: document.querySelector('.modal_input').value ,
+		bg_color : document.querySelector('.modal_color').value
 	}; console.log( content );
 	// 2. 유효성검사 생략
 	// 3. 배열 저장
@@ -94,22 +91,38 @@ function openModal( fdate ){
 	// 2. 모달에 선택된 날짜 표시하기
 	document.querySelector('.modal_date').innerHTML = fdate
 	// 3. 해당 하는 날짜의 모든 일정 출력
-	let html = `'<tr>
+		// 1. 기본 html 구성
+	let html = `<tr>
 					<th width="5%"> # </th> <th> 일정내용 </th> <th width="15%"> 비고 </th>
-				</tr>'`
-	contents.forEach( ( o , i) =>{
-		if(fdate == o.date){
+				</tr>`
+
+		// 2. 일정목록 반복문 돌려서 선택된 날짜와 동일한 일정 찾기
+	let j = 0; // j : 동일한일정의 일정[객체]들의 개수
+// [반복문 1번 방법]
+	contents.forEach( ( o , i ) =>{ // i : 일정객체들의 인덱스 순서
+		if(fdate == o.date){ //만약에 모달클릭시 선택된 날짜와 일정목록에 있는 날짜가 같다면
+			j++;	// 찾은 개수 증가
 			html += `<tr>
-						<td> ${i+1} </td>
+						<td> ${j} </td>
 						<td> ${o.content} </td>
-						<td> <button onclick="onDelete( ${i} )">삭제</button></td>
+						<td> <button onclick="onDelete( ${i} )"> 삭제 </button></td>
 					</tr>`
 		}
 	})
 	document.querySelector('.table').innerHTML = html;
 }
+/* [반복문 2번 방법]
+   for(let i = 0 ; i<contents.length; i++){
+      if( fdate == contents[i].date){
+			html += `<tr>
+						<td> ${i+1} </td>
+						<td> ${contents[i].content} </td>
+						<td> <button onclick="onDelete( ${i} )">삭제</button></td>
+					</tr>`
+      }
+   }
+*/
 	
-
 
 // 5. 일정 출력 함수
 function contents_print(fdate){
@@ -119,7 +132,7 @@ function contents_print(fdate){
 		let html = ``
 	contents.forEach( (o) => { // 일정목록 반복문
 		if(fdate == o.date){ // 만약에 인수로 전달된 날짜와 일정목록에서 동일한 날짜가 존재하면
-			html += `<div class="content">${o.content}</div>`
+			html += `<div class="content" style="background-color : ${o.bg_color}">${o.content}</div>`
 		}
 	}) // for end
 	return html;
