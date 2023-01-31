@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">	<!-- 한글 인코딩 : UTF-8 -->
+	<title> 최성아's web </title>
+	
+	<!-- 반응형 : 뷰포트 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<!-- 사용자정의 : css -->
+	<link href="/jsp/css/index.css" rel="stylesheet">
+	<link href="../css/member/calender.css" rel="stylesheet">
+	
+	<!-- 부트스트랩 : css -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- 헤더에서 사용되는 경로 : 절대 경로 [ 페이지마다 헤더 사용하는데 페이자마다 상대경로가 다르다. ] -->
+	<!-- 
+	z
+		href, src 사용할때 주의할 점!
+		서버경로 :
+			1. http://localhost:8080/프로젝트명/파일명
+			2. http://http://192.168.56.1:8080/프로젝트명/파일명
+		서버경로 절대경로 -> 상대경로 표현 [ ip주소 , port 생략]
+			1. /프로젝트명/파일명
+			
+	 -->
+</head>
+<body>
+
+	<!-- 상단 메뉴 / sticky-top : 반응형 상단고정 bg-white : 배경색 흰색 -->
+	<div class="navbar navbar-expand-lg sticky-top bg-white h_top" >	<!-- 네비게이션 [ 메뉴 ]  -->
+		<div class="container">						<!--  구역  -->
+			<div class="collapse navbar-collapse">										<!--  감추기  -->
+				<ul class="navbar-nav h_topmenu">												<!--  메뉴 목록  -->
+					<li class="nav-item"> <a class="nav-link" href="/jsp/member/login.html"> 로그인 </a> </li>			<!-- 메뉴 항목 -->
+					<li class="nav-item"> <a class="nav-link" href="/jsp/member/signup.html"> 회원가입 </a> </li>
+					<li class="nav-item"> <a class="nav-link" href="#"> 장바구니 </a> </li>
+					<li class="nav-item"> <a class="nav-link" href="/jsp/member/info.html"> 마이페이지 </a> </li>
+					<li class="nav-item"> <a class="nav-link" href="/jsp/board/list.html"> 커뮤니티 </a> </li>
+					<li class="nav-item"> <a class="nav-link" href="/jsp/qboard/list2.html"> 문의사항 </a> </li>
+					<li class="nav-item"> <a class="nav-link" href="#"> 리뷰 </a> </li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<!--  로고  -->
+	<div class="container logobox">
+		<a class="title" href="/jsp/index.html"> 최성아's 여행</a>
+	</div>
+
+	<!-- 하단 메뉴 / sticky-top : 반응형 상단고정 bg-white : 배경색 흰색 -->
+	<div class="navbar navbar-expand-lg sticky-top bg-white h_bottom">				<!-- 네비게이션 -->
+		<div class="container">								<!-- 구역 -->
+		
+			<!-- 콜랩스 버튼 : 메뉴가 콜랩스 되었을때 보이는 버튼  -->
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<!-- 콜랩스가 적용될때 보이는 버튼 -->
+			<div class="collapse navbar-collapse" id="navContent">				<!-- 숨기기 -->
+				<ul class="navbar-nav h_bottommenu">								<!-- 메뉴 목록 -->
+					<li class="nav-item"><a class="nav-link" href="#"> 도쿄 </a></li>				<!-- 메뉴 항목 -->
+					<li class="nav-item"><a class="nav-link" href="#"> 오사카 </a></li>			<!-- 메뉴 항목 -->
+					<li class="nav-item"><a class="nav-link" href="#"> 교토 </a></li>				<!-- 메뉴 항목 -->
+					<li class="nav-item"><a class="nav-link" href="#"> 나라 </a></li>				<!-- 메뉴 항목 -->
+					<li class="nav-item"><a class="nav-link" href="#"> 코타키나발루 </a></li>		<!-- 메뉴 항목 -->
+					<li class="nav-item"><a class="nav-link" href="#"> 블라디보스톡 </a></li>		<!-- 메뉴 항목 -->
+					<li class="nav-item"><a class="nav-link" href="#"> 히바롭스크 </a></li>		<!-- 메뉴 항목 -->
+					<li class="nav-item"><a class="nav-link" href="#"> 제주도 </a></li>			<!-- 메뉴 항목 -->
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="container">					<!-- 구역 생성 -->
+		<h3 class="box_title"> 개인 캘린더 </h3>	<!-- 구역 제목 -->
+		
+		<div class="calender">	<!-- 캘린더 구역 -->
+			<div class="cal_top">	<!-- 상단 메뉴 -->
+				<button class="prevbtn" type="button"> < </button>	<!-- 이전 달 버튼 -->
+				<h3 class="top_date"> </h3>	<!-- 현재 연도/월 -->
+				<button class="nextbtn" type="button"> > </button>	<!-- 다음 달 버튼 -->
+			</div>
+			
+			<div class="cal_day"> <!-- 날짜 표시 구역 -->
+
+			</div>
+			
+		</div>
+		
+	</div>
+		
+
+
+	
+	<!-- 부트스트랩 : js -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- 사용자정의 js -->
+	<script src="../js/member/calender.js" type="text/javascript"></script>
+</body>
+</html>
