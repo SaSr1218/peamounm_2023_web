@@ -2,8 +2,8 @@
 
 /* 웹폰트 : 눈누홈페이지 */
 @font-face {
-    font-family: 'RixInooAriDuriR';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
+    font-family: 'KyoboHandwriting2020A';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/KyoboHandwriting2020A.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -15,7 +15,7 @@ a { color: black !important; text-decoration: none !important; }
 .logobox{ text-align: center; }
 
 /* 로고 제목 꾸미기 : 폰트 , 색상 , 사이즈 */
-.title{ font-family: 'RixInooAriDuriR'; color: black; font-size: 40px; }
+.title{ font-family: 'KyoboHandwriting2020A'; color: black; font-size: 40px; }
 
 /* sticky 메뉴 2개 이므로 충돌 : 하단 메뉴 top 위치 변경 */
 .h_bottom{ top : 40px !important; /* 부트스트랩보다 우선순위 */ }
@@ -35,7 +35,7 @@ a { color: black !important; text-decoration: none !important; }
 
 .box_title{
 	text-align: center; /* 텍스트 가운데 정렬 */
-	font-family: 'RixInooAriDuriR';
+	font-family: 'KyoboHandwriting2020A';
 	border-bottom: 2px solid #999999;
 	width: 20%;			/* 박스 가로길이 */
 	margin: 5% auto; 	/* 박스권 가운데정렬 */
@@ -87,9 +87,9 @@ a { color: black !important; text-decoration: none !important; }
 	color: #999999;
 	margin-top: 3%;
 }
-.item_sale{ font-family: 'RixInooAriDuriR'; font-size: 17px; }
+.item_sale{ font-family: 'KyoboHandwriting2020A'; font-size: 17px; }
 .item_discount{
-	font-family: 'RixInooAriDuriR'; color: #ff9995; font-size: 17px; }
+	font-family: 'KyoboHandwriting2020A'; color: #ff9995; font-size: 17px; }
 .item_bottom{
 	display: flex;	/* 하위 요소 가로배치 */
 	justify-content: space-between; /* 하위 요소 가로 정렬*/
