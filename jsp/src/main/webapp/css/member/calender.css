@@ -46,6 +46,7 @@
 	border: 1px solid #eeeeee;
 	width: 14%;
 	height: 100px;
+	overflow: hidden; /* 넘쳤을때 숨김 */
 }
 
 /* 일정박스 */

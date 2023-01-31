@@ -12,6 +12,7 @@ let contents = [
 let year = new Date().getFullYear(); // 현재 연도
 let month = new Date().getMonth()+1; // 현재 월
 
+
 // 2. 캘린더 상단에 표시
 cal_print();
 function cal_print(){
@@ -46,17 +47,69 @@ function cal_print(){
 	// 3. 마크업에 출력
 	document.querySelector('.cal_day').innerHTML = html
 }
+
+
 // 7. 모달 닫기 함수
 document.querySelector('.modal_close').addEventListener('click', (e) =>{
 	// 모달 배경 구역 css 변경해서 모달 숨기기
 document.querySelector('.modal_wrap').style.display = 'none';
 })
 
+
+// 9. 일정 삭제
+function onDelete( i ) {
+	// 1. 배열내 해당 인덱스 사겢
+	contents.splice( i , 1)
+	// 2. 화면 업데이트
+	document.querySelector('.modal_wrap').style.display = 'none';
+	cal_print();
+}
+
+
+
+// 8. 등록 버튼 눌렀을때 함수
+document.querySelector('.modal_write').addEventListener('click', (e) =>{
+	// 1. 입력받은 내용과 선택된 날짜 가져와서 객체화
+	let content = {
+		date: document.querySelector('.modal_date').innerHTML ,
+		content: document.querySelector('.modal_input').value
+	}; console.log( content );
+	// 2. 유효성검사 생략
+	// 3. 배열 저장
+	contents.push( content );
+	// 4. 화면 업데이트
+		// 1. 입력된 데이터 초기화
+		document.querySelector('.modal_input').value = ''
+		// 2. 모달 닫기
+		document.querySelector('.modal_wrap').style.display = 'none';
+		// 3. 캘린더 재출력[렌더링]
+		cal_print();
+})
+
+
 // 6. 모달 열기 함수
 function openModal( fdate ){
-	// 모달 배경 구역 css 변경해서 모달 숨기기
+	// 1. 모달 배경 구역 css 변경해서 모달 숨기기
 	document.querySelector('.modal_wrap').style.display = 'flex';
+	// 2. 모달에 선택된 날짜 표시하기
+	document.querySelector('.modal_date').innerHTML = fdate
+	// 3. 해당 하는 날짜의 모든 일정 출력
+	let html = `'<tr>
+					<th width="5%"> # </th> <th> 일정내용 </th> <th width="15%"> 비고 </th>
+				</tr>'`
+	contents.forEach( ( o , i) =>{
+		if(fdate == o.date){
+			html += `<tr>
+						<td> ${i+1} </td>
+						<td> ${o.content} </td>
+						<td> <button onclick="onDelete( ${i} )">삭제</button></td>
+					</tr>`
+		}
+	})
+	document.querySelector('.table').innerHTML = html;
 }
+	
+
 
 // 5. 일정 출력 함수
 function contents_print(fdate){
@@ -72,6 +125,7 @@ function contents_print(fdate){
 	return html;
 }
 
+
 // 4. 날짜 포맷 함수 [ 인수 : 날짜 ---- 로직[포맷] ----> 반환 : 변경된 날짜형식]
 function date_format( date ){
 	
@@ -82,14 +136,15 @@ function date_format( date ){
 	return `${d_year}${d_month}${d_day}`
 }
 
-// 3. 이전달 버튼 클릭 이벤트에 따른 연도와 월이 변경
+
+// 3-1 이전달 버튼 클릭 이벤트에 따른 연도와 월이 변경
 document.querySelector('.prevbtn').addEventListener( 'click', (e) => {
 	// 1. 월 1차감 했을 경우 0이면 연도 1차감 월 12로 설정
 	month --;
 	if( month < 1 ){year--; month = 12; }
 	cal_print();
 })
-// 3. 다음달 버튼 클릭 이벤트에 따른 연도와 월이 변경
+// 3-2 다음달 버튼 클릭 이벤트에 따른 연도와 월이 변경
 document.querySelector('.nextbtn').addEventListener( 'click', (e) => {
 	month ++;
 	if (month > 12){ year++; month = 1;	}
