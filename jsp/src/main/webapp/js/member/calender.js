@@ -39,11 +39,26 @@ function cal_print(){
 		let date = new Date( year , month-1 , day );
 		let fdate = date_format( date );
 		
-		html += `<div class="day"> ${day} ${ contents_print( fdate ) } </div> `
+		html += `<div class="day" onclick="openModal( ${fdate} )">
+					 ${day} ${ contents_print( fdate ) } 
+				 </div> `
 	}
 	// 3. 마크업에 출력
 	document.querySelector('.cal_day').innerHTML = html
 }
+// 7. 모달 닫기 함수
+document.querySelector('.modal_close').addEventListener('click', (e) =>{
+	// 모달 배경 구역 css 변경해서 모달 숨기기
+document.querySelector('.modal_wrap').style.display = 'none';
+})
+
+// 6. 모달 열기 함수
+function openModal( fdate ){
+	// 모달 배경 구역 css 변경해서 모달 숨기기
+	document.querySelector('.modal_wrap').style.display = 'flex';
+}
+
+
 // 5. 일정 출력 함수
 function contents_print(fdate){
 	console.log(fdate)
@@ -103,6 +118,10 @@ document.querySelector('.nextbtn').addEventListener( 'click', (e) => {
  console.log ( '월 : ' + date.getMonth()+1 )
  console.log ( '일 : ' + date.getDate() )
  console.log ( '요일 : ' + date.getDay() )
+ 
+ 
+ 	` 백틱
+ 		` 문자열 $ {js 작성할 수 있는 구역} `
  
   */
  
