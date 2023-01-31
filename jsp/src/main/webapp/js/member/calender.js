@@ -58,7 +58,6 @@ function openModal( fdate ){
 	document.querySelector('.modal_wrap').style.display = 'flex';
 }
 
-
 // 5. 일정 출력 함수
 function contents_print(fdate){
 	console.log(fdate)
@@ -96,7 +95,6 @@ document.querySelector('.nextbtn').addEventListener( 'click', (e) => {
 	if (month > 12){ year++; month = 1;	}
 	cal_print(); 
 })
-
 
 
 
