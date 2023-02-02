@@ -142,13 +142,18 @@ public class 과제1_연산자 {
         							a>=10 ? "학생" : "그외" ) );
         */
         
-        System.out.println("19번 문제");
+        System.out.println("19번 문제 : 국 영 수 점수 받아 총점, 평균 출력");
+        System.out.println("국어 : "); int a = sa.nextInt();
+        System.out.println("영어 : "); int b = sa.nextInt();
+        System.out.println("수학 : "); int c = sa.nextInt();
+        System.out.println("합계 :" + (a + b + c));
+        System.out.println("평균 :" + (a + b + c)/3 );
         
-        System.out.println("20번 문제");
+        System.out.println("20번 문제 : 아이디, 비밀번호 받아 admin , 124 맞으면 로그인성공 실패하면 로그인실패 출력");
         
-        System.out.println("21번 문제");
+        System.out.println("21번 문제 : 3개 정수 받아 제일 큰 정수 출력 ");
         
-        System.out.println("22번 문제");
+        System.out.println("22번 문제 : 가위바위보 ");
        
 
 	}
