@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author cntjr
- *
- */
-module backend {
-}
