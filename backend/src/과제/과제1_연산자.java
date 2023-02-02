@@ -142,19 +142,42 @@ public class 과제1_연산자 {
         							a>=10 ? "학생" : "그외" ) );
         */
         
+		/*
         System.out.println("19번 문제 : 국 영 수 점수 받아 총점, 평균 출력");
         System.out.println("국어 : "); int a = sa.nextInt();
         System.out.println("영어 : "); int b = sa.nextInt();
         System.out.println("수학 : "); int c = sa.nextInt();
         System.out.println("합계 :" + (a + b + c));
         System.out.println("평균 :" + (a + b + c)/3 );
+        */
+		
+		/*
+        System.out.println("20번 문제 : 아이디, 비밀번호 받아 admin , 1234 맞으면 로그인성공 실패하면 로그인실패 출력");
+        System.out.println("아이디 : ");  String a = sa.next();
+        System.out.println("비밀번호 : ");  String b = sa.next();
+        System.out.println(a.equals("admin") && b.equals("1234")? "로그인성공" : "로그인실패");
+        */
         
-        System.out.println("20번 문제 : 아이디, 비밀번호 받아 admin , 124 맞으면 로그인성공 실패하면 로그인실패 출력");
-        
+        /*
         System.out.println("21번 문제 : 3개 정수 받아 제일 큰 정수 출력 ");
+        int a = sa.nextInt();
+        int b = sa.nextInt();
+        int c = sa.nextInt();
+        int result1;
         
+        result1 = (a>b)?a:b;
+        int result2 = (c>result1)?c:result1;
+        System.out.println("제일큰 값 : " + result2);
+        */
+		
+		/*
         System.out.println("22번 문제 : 가위바위보 ");
-       
+        int a = sa.nextInt();
+        int b = sa.nextInt();        
+        System.out.println( (a == b)? "무승부" : "");
+        System.out.println( (a > b)? "플레이어1승리":"");
+        System.out.println( (a < b)? "플레이어2승리":"");
+        */
 
 	}
 }
