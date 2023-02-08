@@ -22,6 +22,14 @@ public class Ex1_참조타입 {
 		String str = null;
 		// System.out.println( str.length() );	// 오류 발생 : 힙영역이 없기때문에 길이 불가능
 		
+		// 3. p.153
+		String hobby = "여행";	// 스택영역에 hobby 이름으로 변수 선언하고 "여행" 힙의 메모리 주소 저장
+		hobby = null;			// hobby 변수의 null 변경하면 힙에 있던 "여행" 메모리 제거
+		
+		String kind1 = "자동차";	// "자동차"힙의 메모리 32번지를 스택영역의 kind1 저장
+		String kind2 = kind1;	// kind1 가지고 있던 32번지를 kind2에 저장 
+		kind1 = null;			// kind1 번지 지우기
+		System.out.println("kind2 : " + kind2);
 		
 		
 	}
