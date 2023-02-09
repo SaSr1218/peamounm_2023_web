@@ -2,7 +2,7 @@ package Day07;
 
 import java.util.Scanner;
 
-public class Ex1_회원시스템_배열 { // class s
+public class Ex1_회원시스템_배열 { // class s	// 배열만 사용!
 	public static void main(String[] args) { // main s
 		Scanner scanner = new Scanner(System.in); // 입력객체
 		// * 문자열[String] 3개를 저장할수 있는 배열 선언
