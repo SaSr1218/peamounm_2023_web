@@ -3,14 +3,18 @@ package 과제.과제4.view;
 
 import java.util.Scanner;
 
+import 과제.과제4.controller.Bcontroller;
 import 과제.과제4.controller.Mcontroller;
+
 import 과제.과제4.model.Member;
+import 과제.과제4.model.Board;
+
 
 public class Front {
 	
 	Scanner scanner = new Scanner(System.in);
 	Mcontroller mc = new Mcontroller();	// 각각 선언하면 번지가 다름! 공유하려면 위에 써야함.
-
+	Bcontroller bc = new Bcontroller(); // b컨트롤러로 이동
 	
 	// 1. 메인페이지
 	public void index() {
@@ -50,7 +54,8 @@ public class Front {
 		int result = mc.login( id, pwd );
 		if ( result >= 0 ) {
 			System.out.println("로그인 성공");
-			// 게시판으로 이동
+			mboard();
+			
 		}else if ( result == -1) {
 			System.out.println("비밀번호가 다릅니다.");
 		} else if ( result == -2) {
@@ -74,10 +79,15 @@ public class Front {
 	
 		String result = mc.findPw( id, phone );
 		System.out.println( result );
+
 	}
-	
-	
-	
+
+	// 6. board로 화면 이동
+	void mboard() {
+		System.out.println("------Board--------");
+		System.out.println("화면 이동되었습니다.");
+		
+	}
 	
 	
 } // class e

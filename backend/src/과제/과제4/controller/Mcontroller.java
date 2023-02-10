@@ -51,8 +51,19 @@ public class Mcontroller {
 			}
 		}// for e		
 	return "아이디가 다릅니다."; // 아이디 다름
-	}
 	
+	}
+	/* 아이디 for문
+	public String findId( String name, String phone);{
+		for ( Member m : memberDb){
+			if( m.name.equals(name) && m.phone.equals(phone) ) {
+				return m.id;
+			}
+		}
+		return null;
+	}
+	*/
+		
 	// 4. 비밀번호 찾기 로직
 	public String findPw( String id, String phone ) {
 		
