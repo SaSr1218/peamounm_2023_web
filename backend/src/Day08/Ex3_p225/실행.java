@@ -17,6 +17,9 @@ public class 실행 {
 		// 4.
 		Car car4 = new Car("택시", "검정", 200 );
 		System.out.println( car4.toString() );		
-				
+		
+		// 5.
+		Car car5 = new Car("투싼", "택시", "검정", 200 );
+		System.out.println( car5.toString() );
 	}
 }

@@ -30,9 +30,21 @@ public class Car {
 		this.color = color;
 		this.maxSpeed = maxSpeed;
 	}
+	
+	// 5. 생성자 : 4개 변수
+	public Car(String company, String model, String color, int maxSpeed) {
+		super();
+		this.company = company;
+		this.model = model;
+		this.color = color;
+		this.maxSpeed = maxSpeed;
+	}
+	
 	// 3. 메소드
 	@Override
 	public String toString() {
 		return "Car [company=" + company + ", model=" + model + ", color=" + color + ", maxSpeed=" + maxSpeed + "]";
 	}
+
+
 }

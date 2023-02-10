@@ -3,7 +3,7 @@
 // 클래스 선언
 	// 1. 첫글자 대문자인 영문, 띄어쓰기 X, 숫자로 시작X
 
-package Day08.Ex1;
+package Day08.Ex1_p218;
 
 public class Car {
 	
