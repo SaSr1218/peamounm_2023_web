@@ -5,16 +5,25 @@ public class Board {
 	public String writer;
 	public String title;
 	public String content;
-	public String view;
+	public int view;
+	public int no;
 	
 	// 2.생성자
 	public Board() {}
 
-	public Board(String writer, String title, String content, String view) {
+	public Board(String writer, int view, String title, String content) {
 		super();
 		this.writer = writer;
+		this.view = view;
 		this.title = title;
 		this.content = content;
+
+	}
+
+	public Board(int no, int view) {
+		super();
+		this.no = no;
+
 		this.view = view;
 	}
 	

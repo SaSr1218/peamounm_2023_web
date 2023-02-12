@@ -22,7 +22,7 @@ public class 과제2_console_키오스크 {
 				System.out.println("선택 개수 : ");
 				int count = sa.nextInt();
 				if (coke - count > 0) {
-					콜라바구니 += 10 - count;
+					콜라바구니 = count;
 				} else {
 					System.out.println("재고가 없습니다.");
 				}
@@ -32,7 +32,7 @@ public class 과제2_console_키오스크 {
 				System.out.println("선택 개수 : ");
 				int count = sa.nextInt();
 				if (cider - count > 0) {
-					사이다바구니 += 8 - count;
+					사이다바구니 = count;
 				} else {
 					System.out.println("재고가 없습니다.");
 				}
@@ -40,7 +40,7 @@ public class 과제2_console_키오스크 {
 				System.out.println("선택 개수 : ");
 				int count = sa.nextInt();
 				if (hwan - count > 0) {
-					사이다바구니 += 15 - count;
+					환타바구니 = count;
 				} else {
 					System.out.println("재고가 없습니다.");
 				}
