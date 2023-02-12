@@ -29,7 +29,14 @@ public class Bcontroller {
 		
 	}
 	
-	// 3. r
+	// 3. 글 보기
+	public Board viewBoard( int index ) {
+		boardList.get(index).view += 1;
+		
+		Board board = new Board( index , boardList.get(index).view );
+		
+		return boardList.get(index);
+	}
 	
 	
 	

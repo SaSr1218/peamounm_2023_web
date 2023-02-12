@@ -93,10 +93,10 @@ public class Front {
 					bc.mboard().get(i).title);
 		}
 		System.out.println("메뉴 > 1.글쓰기 2.글보기 3.로그아웃 ");
-		int cho = scanner.nextInt();
-		if ( cho == 1 ) { writeBoard(id);} // 글쓰기
-		else if ( cho == 2 ) { viewBoard(id); } // 글보기
-		else if ( cho == 3 ) { logOut(id); } // 로그아웃
+		int ch = scanner.nextInt();
+		if ( ch == 1 ) { writeBoard(id);} // 글쓰기
+		else if ( ch == 2 ) { viewBoard(id); } // 글보기
+		else if ( ch == 3 ) { logOut(id); } // 로그아웃
 		else { System.out.println("메뉴선택이 잘못되었습니다."); }
 		
 	}
@@ -119,11 +119,33 @@ public class Front {
 	}
 	
 	// 8. 글보기 함수
-	public void viewBoard( String id ) {}
+	public void viewBoard( String id ) {
+		System.out.println("----------글보기---------");
+		System.out.print("보고싶은 글번호 : "); int index = scanner.nextInt();
+		Board select = bc.viewBoard(index);
+		System.out.println("----------글상세---------");
+		System.out.println("제목 : \t" + select.title);
+		System.out.println("작성자 : \t" + select.writer );
+		System.out.println("조회수 : \t" + select.view );
+		System.out.println("내용 : \t" + select.content);
+		
+		System.out.println(" 메뉴 > 1.글삭제 2.글수정 3.뒤로가기 : ");
+		int ch = scanner.nextInt();
+		
+		if ( ch == 1 ) { deleteBoard(id); }	// 글삭제
+		else if ( ch == 2 ) { updateBoard(id); } // 글수정
+		else if ( ch == 3 ) { mboard(id); } // 뒤로가기
+		else { System.out.println("1~3번 중에 선택해주십시오.");}
+	}
 
 	// 9. 글삭제 함수
-	
+	public void deleteBoard( String  id ) {
+		
+	}
 	// 10. 글수정 함수
+	public void updateBoard ( String id ) {
+		
+	}
 	
 	// 11. 로그아웃 함수
 	public void logOut( String id ) {
