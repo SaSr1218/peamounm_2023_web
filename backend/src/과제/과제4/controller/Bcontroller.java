@@ -39,5 +39,35 @@ public class Bcontroller {
 	}
 	
 	
+	// 4. 글 삭제
+	public void deleteBoard( int index ) {
+		boardList.remove(index);
+	}
 	
+
+	// 5. 글 수정
+	public void updateBoard ( String title, String content, int index ) {
+		boardList.get(index).content = content;
+		boardList.get(index).title = title;
+	}
+
+	// 6. 아이디 확인
+	public int check( String id, int index) {
+		if(boardList.get(index).writer.equals(id)){
+			return 0;
+		} else {
+			return 1;
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+

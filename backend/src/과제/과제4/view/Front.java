@@ -132,19 +132,36 @@ public class Front {
 		System.out.println(" 메뉴 > 1.글삭제 2.글수정 3.뒤로가기 : ");
 		int ch = scanner.nextInt();
 		
-		if ( ch == 1 ) { deleteBoard(id); }	// 글삭제
-		else if ( ch == 2 ) { updateBoard(id); } // 글수정
+		if ( ch == 1 ) { deleteBoard(id , index); }	// 글삭제
+		else if ( ch == 2 ) { updateBoard(id, index); } // 글수정
 		else if ( ch == 3 ) { mboard(id); } // 뒤로가기
 		else { System.out.println("1~3번 중에 선택해주십시오.");}
 	}
 
 	// 9. 글삭제 함수
-	public void deleteBoard( String  id ) {
-		
+	public void deleteBoard( String  id, int index ) {
+		int check = bc.check( id, index );
+			if ( check == 0 ) {
+				bc.deleteBoard(index);
+				System.out.println("해당 게시물 삭제 완료");
+			} else {
+				System.out.println("해당 게시물 삭제 실패");
+			}
+			mboard(id);
 	}
+	
 	// 10. 글수정 함수
-	public void updateBoard ( String id ) {
-		
+	public void updateBoard ( String id, int index ) {
+		int check = bc.check(id, index);
+		if ( check == 0 ) {
+			System.out.println("수정할 제목 : "); String title = scanner.next(); scanner.nextLine();
+			System.out.println("수정할 내용 : "); String content = scanner.nextLine();
+			
+			bc.updateBoard(title, content, index);
+		}else {
+			System.out.println("해당 게시물 수정불가");
+		}
+		mboard(id);
 	}
 	
 	// 11. 로그아웃 함수
