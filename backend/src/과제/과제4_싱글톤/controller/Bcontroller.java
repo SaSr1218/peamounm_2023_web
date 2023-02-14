@@ -22,6 +22,11 @@ import 과제.과제4_싱글톤.model.Board;
 
 public class Bcontroller {
 
+	// 싱글톤
+	private static Bcontroller bc = new Bcontroller();
+	private Bcontroller() {}
+	public static Bcontroller getInstance() { return bc; }
+	
 	private ArrayList<Board> boardDB = new ArrayList<>();
 	
 	// 1. 글쓰기
@@ -48,6 +53,7 @@ public class Bcontroller {
 	
 	// 3. 글상세
 	public Board getBoard( int bno ) {
+		boardDB.get(bno).setView(boardDB.get(bno).getView() +1); // 조회수 증가
 		return boardDB.get(bno);	// 인수로 전달받은 인덱스[게시물번호]의 게시물을 반환
 	}
 	
