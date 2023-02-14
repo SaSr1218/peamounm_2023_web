@@ -86,8 +86,14 @@ public class Front {
 			System.out.println("-------------커뮤니티-----------");
 			System.out.println("번호\t조회수\t작성자\t제목");
 			
-			// 1. 내가 쓴글
-			Mcontroller.getInstance().getLogSession().getBoardlist();
+			// * 내가 쓴글 제목만 출력할경우
+			for( int j = 0 ; 
+					j< Mcontroller.getInstance().getLogSession().getBoardlist().size() ; 
+					j++ ) {
+				Board temp = Mcontroller.getInstance().getLogSession().getBoardlist().get(j);
+				// System.out.println( temp ); 			// 순환참조 걸린다.
+				System.out.println( temp.getTitle() );  // 순환참조 안걸린다.
+			}
 			
 			// 출력부 [ 전체 출력 ] 
 			int i = 0; // 인덱스 용도
@@ -146,7 +152,7 @@ public class Front {
 	}
 	
 	// 10. 게시물 수정 페이지
-	public void update_page( int bno) {
+	public void update_page( int bno ) {
 		if ( Bcontroller.getInstance().getBoard(bno).getMember()
 				.equals(Mcontroller.getInstance().getLogSession() )) {
 			System.out.println(" 새로운 제목 : "); String title = scanner.next();

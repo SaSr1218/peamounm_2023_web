@@ -35,9 +35,9 @@ public class Mcontroller {
 	private ArrayList<Member> memberDB = new ArrayList<>();
 	// 로그인 한 회원의 객체를 저장 [ *동시 접속시 문제점 발생!! ]
 		// 사용목적 : 페이지가 바뀌더라도 정보 저장 [ *메소드가 종료되더라도 정보는 저장 ]
-	private Member logSession = null;
+	private Member logSession = null; // 보통 회원번호만 들고다님 int mno 이런 식으로!
 	
-	public Member getLogSession() {
+	public Member getLogSession() {	// *********중요*****************
 		return logSession;
 	}
 	
@@ -59,6 +59,7 @@ public class Mcontroller {
 	public int login ( String id , String pw ) {
 		
 		for ( int i = 0 ; i<memberDB.size(); i++ ) {
+			
 			if(memberDB.get(i).getId().equals(id) ) { // i번째 인덱스의 아이디와 입력받은 아이디가 같으면
 				if( memberDB.get(i).getPw().equals(pw) ) {
 					// i 번째 인덱스 비밀번호와 입력받은 비밀번호가 같으면 로그인 성공 [ !로그인 성공시 흔적/식별 ]
@@ -74,7 +75,7 @@ public class Mcontroller {
 	
 	// 3. 아이디찾기 처리
 	public String findId( String name , String phone ) {
-		for ( Member m : memberDB ) { // index가 필요없을때 향상된 for문 사용
+		for ( Member m : memberDB ) { // index가 필요없을때 향상된 for문 사용 // Member m = memberDB.get(i); 이게 들어가있는 것임.
 			if( m.getName().equals(name) && m.getPhone().equals(phone) ) {
 				return m.getId();
 			}
