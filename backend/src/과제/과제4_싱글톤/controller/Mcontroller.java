@@ -35,12 +35,12 @@ public class Mcontroller {
 	private ArrayList<Member> memberDB = new ArrayList<>();
 	// 로그인 한 회원의 객체를 저장 [ *동시 접속시 문제점 발생!! ]
 		// 사용목적 : 페이지가 바뀌더라도 정보 저장 [ *메소드가 종료되더라도 정보는 저장 ]
-	Member logSession = null;
-	
+	private Member logSession = null;
 	
 	public Member getLogSession() {
 		return logSession;
 	}
+	
 	// 1. 회원가입 처리
 	public int signup ( String id, String pw, String confirmpw , String name , String phone) {
 		// 1. 유효성검사
