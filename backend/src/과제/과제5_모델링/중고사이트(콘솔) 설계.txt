@@ -1,0 +1,67 @@
+JVM
+	- MemberDb = [ 32번지, 33번지, 34번지 ]
+	- 로그인 성공하면 33번지
+	- logSession = 33번지
+	- 글쓰기
+		33번지 객체를 42번지에 저장
+		42번지 객체를 33번지에 저장
+
+- 회원제 중고거래
+	- 요구사항
+	1. 회원제로 가입하고 로그인한다. O
+	2. 로그인후 제품등록이 가능하다. O
+	3. 등록된 제품은 로그인후에만 다른 사람이 등록한 모든 제품을 볼 수 있다.	
+	4. 해당 제품을 보고 등록한 회원에게 쪽지 보내기	O
+	5. 등록한 회원은 마이페이지에서 내 쪽지를 확인한다. O
+
+-  1단계 : 세 클래스의 관계 / model 설계 
+		회원클래스 : Member
+		제품클래스 : Product
+		쪽지클래스 : Memo
+
+Member							Product					Memo
+
+id								pname						mtext
+pwd								pprice					Member member(from) : login한 사람
+name														Member member(to)   : 제품등록한 사람
+ArrayList<Product>productlist			pinfo						
+(한 명의 회원이 여러 개의 상품리스트)			Member member(로그인 1명)		
+														
+ArrayList<Memo>memolist.to   						
+ArrayList<Memo>memolist.from							
+								
+
+- 2단계 : 컨트롤 / controller 설계
+
+mcontroller(멤버)	mc			로그인
+memberDB(회원 정보)
+signup ( id, pwd, name )
+login ( id, pwd ) 			/ 유효성검사( id && pwd == 회원가입(id, pwd))
+로그인 되면 -> 제품전체출력 ( ArrayList<product> productlist )
+
+
+pcontroller(상품)	pc			글쓰기
+productDB(로그인한 회원 제품정보)
+product_write( pname, pprice, pinfo, id[자동출력, 등록한 상품 회원] ) = productDB
+product_print ( productDB )
+product_memo ( memo )		// 제일 나중에 하기
+
+
+
+mecontroller(메모)	memoc
+memoDB(로그인한 회원 메모)
+memo_write ( mtext, Member member(login한 사람, 제품등록한 사람 id 각각) )
+
+
+// 강사님 설계
+Memo										Member										Product
+frommno;	(쪽지보낸 회원번호)						mno;(회원번호)									mno; ( 등록한 회원 제품번호 )
+pno;		(받는사람 + 현재 쪽지 제품정보)				id;											pno; ( 제품번호)
+meno;		(쪽지번호)							pw;											title;
+content;									phone;										content;
+										price;
+
+ArrayList< Integer > pnolist = new ArrayList<>();	ArrayList< Integer > pnoList = new ArrayList<>(); = 양방향시
+(등록한 제품번호 / 제품정보 이면서 받은쪽지함
+ArrayList <Integer > menolist = new ArrayList<>();
+(보낸사람 쪽지번호)
