@@ -54,12 +54,13 @@ memo_write ( mtext, Member member(login한 사람, 제품등록한 사람 id 각
 
 
 // 강사님 설계
-Memo										Member										Product
-frommno;	(쪽지보낸 회원번호)						mno;(회원번호)									mno; ( 등록한 회원 제품번호 )
-pno;		(받는사람 + 현재 쪽지 제품정보)				id;											pno; ( 제품번호)
+Memo										Member										Product							
+frommno;	(쪽지보낸 회원번호)					mno;(회원번호)									mno; ( 등록한 회원 제품번호 )
+pno;		(받는사람 + 현재 쪽지 제품정보)			id;											pno; ( 제품번호)
 meno;		(쪽지번호)							pw;											title;
 content;									phone;										content;
-										price;
+																						price;
+																						카테고리번호
 
 ArrayList< Integer > pnolist = new ArrayList<>();	ArrayList< Integer > pnoList = new ArrayList<>(); = 양방향시
 (등록한 제품번호 / 제품정보 이면서 받은쪽지함
