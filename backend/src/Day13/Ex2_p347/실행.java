@@ -32,5 +32,4 @@ public class 실행 {
 		// 5. 정적 메소드 호출
 		RemoteControl.changeBattery();
 	}
-
 }

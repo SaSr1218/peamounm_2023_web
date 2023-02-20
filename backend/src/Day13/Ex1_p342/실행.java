@@ -29,13 +29,6 @@ public class 실행 {
 		rc = new Audio();
 		rc.turnOn();
 		
-		
-		
-		
-		
-		
-		
-		
 	}
 }
 

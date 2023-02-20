@@ -9,10 +9,12 @@ public class Television implements RemoteControl{
 		// 해당 클래스가 인터페이스에서 추상된 메소드를 구현하겠다!
 	// 2. 필수: ! @오버라이딩
 		// 구현한다고 했기때문에 해당 메소드를 오버라이딩 해서 구현하기
+	
 	@Override
 	public void turnOn() {
 		System.out.println("TV를 켭니다.");
 	}
+	
 	@Override
 	public void turnOff() {
 		System.out.println("TV를 끕니다.");

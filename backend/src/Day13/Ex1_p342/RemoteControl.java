@@ -4,6 +4,7 @@ package Day13.Ex1_p342;
 	// extends : 상속 [ 연장하다. ]
 // interface 키워드 : 인터페이스 선언 키워드
 	// implement : 구현하다.
+
 public interface RemoteControl { // in s
 	
 	// 인터페이스 멤버 

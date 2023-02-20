@@ -5,6 +5,7 @@ public interface RemoteControl {
 		// new 연산자[ 생성자 X ] -> 객체 X -> 인스턴스멤버X -> static 멤버만 가능
 		// 상수 : public static final 	// 고정된 값o -> 초기값 필수 : 변수 선언시 값 대입 
 		// 인터페이스 에서는 생략 --> 자동으로 선언됨
+	
 	public static final int MAX_VOLUME = 10;
 	int MIN_VOLUME = 0 ;	// 자동으로 public static final 
 	
@@ -13,6 +14,7 @@ public interface RemoteControl {
 		// { } 선언 안한다.
 		// public abstract 생략 가능  --> 자동으로 선언됨
 		// 해당 클래스들이 implements 했을때 -> 오버라이딩 필수
+	
 	//1.
 	public abstract void turnOn();	// { } 없다 
 	void turnOff();	// public abstract 생략 가능 
@@ -22,6 +24,7 @@ public interface RemoteControl {
 		// 클래스에서 사용하는 메소드 동일 [ 선언 과 구현 ] 
 		// 선언부 앞에 default 선언 
 		// 해당 클래스들이 implements 했을때 -> 오버라이딩 선택
+	
 	// 2. 
 	default void setMute( boolean mute ) {
 		if( mute ) {
@@ -36,6 +39,7 @@ public interface RemoteControl {
 		// 구현객체가 필요없다.. implements 없이 가능 
 		// static 선언 ==> 상수만 사용가능(static니까 다른 것들 다 호출 불가!)
 		// implements 없이 사용하는 메소드
+	
 	// 3. 
 	static void changeBattery( ) {	// static를 쓰는 순간 new는 필요없다!(객체 필요X)
 		System.out.println("리모콘 건전지를 교환합니다. ");
