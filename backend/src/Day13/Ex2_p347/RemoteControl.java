@@ -8,7 +8,7 @@ public interface RemoteControl {
 	public static final int MAX_VOLUME = 10;
 	int MIN_VOLUME = 0 ;	// 자동으로 public static final 
 	
-	// 추상메소드 
+	// 추상메소드 (제일 중요!!)
 		// 리턴타입 , 메소드명 , 매개변수 만 선언 
 		// { } 선언 안한다.
 		// public abstract 생략 가능  --> 자동으로 선언됨
@@ -34,7 +34,7 @@ public interface RemoteControl {
 	
 	// 정적 메소드 
 		// 구현객체가 필요없다.. implements 없이 가능 
-		// static 선언 
+		// static 선언 ==> 상수만 사용가능(static니까 다른 것들 다 호출 불가!)
 		// implements 없이 사용하는 메소드
 	// 3. 
 	static void changeBattery( ) {	// static를 쓰는 순간 new는 필요없다!(객체 필요X)
