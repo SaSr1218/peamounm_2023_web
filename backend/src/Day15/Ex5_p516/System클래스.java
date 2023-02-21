@@ -35,7 +35,7 @@ public class System클래스 {
 		// p.520
 		String data = "자바"; // 문자열 저장하고 조작하는 클래스							자				바
 		// 문자열 -> 바이트열로 변환 getBytes()	인코딩타입 : UTF-8 [ 한글3바이트 ] [-20, -98, -112, -21, -80, -108]
-		byte[] arr1 = data.getBytes(); 
+		byte[] arr1 = data.getBytes(); 		// *문자를 바이트로!*
 		// 배열의 주소값 출력
 		System.out.println( arr1 );
 		// 배열내 데이터 출력 Arrays.toString( 배열명 )
@@ -47,7 +47,7 @@ public class System클래스 {
 		
 		
 		// 바이트열 -> 문자열 new String ( 배열명 );
-		String str1 = new String( arr1 );
+		String str1 = new String( arr1 );	// *바이트를 문자로!*
 		System.out.println( str1 );		
 		
 	}
