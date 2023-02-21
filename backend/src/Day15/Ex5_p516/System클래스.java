@@ -1,10 +1,12 @@
 package Day15.Ex5_p516;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.Set;
 
 public class System클래스 {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		long time1 = System.nanoTime();	// 현재시간을 나노초로 표현
 		System.out.println( time1 );
@@ -29,6 +31,24 @@ public class System클래스 {
 					
 					);
 		}
+		
+		// p.520
+		String data = "자바"; // 문자열 저장하고 조작하는 클래스							자				바
+		// 문자열 -> 바이트열로 변환 getBytes()	인코딩타입 : UTF-8 [ 한글3바이트 ] [-20, -98, -112, -21, -80, -108]
+		byte[] arr1 = data.getBytes(); 
+		// 배열의 주소값 출력
+		System.out.println( arr1 );
+		// 배열내 데이터 출력 Arrays.toString( 배열명 )
+		System.out.println( Arrays.toString( arr1 ));
+																		//    자         바
+		// 문자열 -> 바이트열로 변환 getBytes()	인코딩타입 : EUC-KR [ 한글2바이트 ] [-64, -38, -71, -39]
+		byte[] arr2 = data.getBytes("EUC-KR");
+		System.out.println( Arrays.toString( arr2 ));
+		
+		
+		// 바이트열 -> 문자열 new String ( 배열명 );
+		String str1 = new String( arr1 );
+		System.out.println( str1 );		
 		
 	}
 }
