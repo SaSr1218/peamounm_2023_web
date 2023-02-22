@@ -101,6 +101,23 @@ public class MemberDao {
 		return false;
 	}
 	
+	// 4. 회원 삭제 [ 인수 : 누구[식별 mno]를 삭제 / 반환 : 성공[true] 실패[false] ]
+	public boolean delete ( int mno ) {
+		
+		// 1. SQL 작성
+		String sql = "delete from member where mno = ?";
+		// 2. 연결 DB에 SQL 대입
+		try {
+			ps = conn.prepareStatement(sql);
+		// 3. SQL 조작
+			ps.setInt(1, mno);
+		// 4. SQL 실행
+			ps.executeUpdate(); // insert , update , delete => rs를 당분간 받지 않음 / select만 받음
+		// 5. SQL 결과
+		 return true;
+		} catch (Exception e) { System.out.println("DB 오류 : " + e ); }
+		return false;
+	}
 	
 	
 	

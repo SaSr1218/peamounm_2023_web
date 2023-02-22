@@ -10,7 +10,6 @@ public class MemberDto {
 	public MemberDto() { }
 	
 	public MemberDto(int mno, String mid, String mpw) {
-		super();
 		this.mno = mno;
 		this.mid = mid;
 		this.mpw = mpw;
@@ -18,7 +17,7 @@ public class MemberDto {
 	// 3. 메소드 [ 무조건 : 1. get/set 2.toString() ]
 	@Override
 	public String toString() {
-		return "BoardDto [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + "]";
+		return "MemberDto [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + "]";
 	}
 
 	public int getMno() {
