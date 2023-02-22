@@ -40,7 +40,7 @@ public class MemberDao {
 			ps.setString( 1 , dto.getMid() );// SQL 구문내 첫번째 ? 에 대한 데이터 대입 
 			ps.setString( 2 , dto.getMpw() ); // SQL 구문내 두번째 ? 에 대한 데이터 대입
 			// 4. ps가 sql 실행
-			ps.executeUpdate();
+			ps.executeUpdate();		// executeUpdate : 실행 결과를 수정해줘.
 			// 5. 결과 반환
 			return true; // 여기까지 문제 없었으면 저장 성공 
 			
@@ -49,22 +49,75 @@ public class MemberDao {
 	}
 	//////////////////// ------------------------------------- ////////////////////////////////
 	
-	// 2. 모든 회원 출력 [ 인수 : X	/ 	반환 : 여러명{ArrayList vs 배열]회원[Member] ]
-	public ArrayList<MemberDao> list() {
+	// 2. 모든 회원 출력 [ 인수 : X	/ 	반환 : 여러명{ArrayList vs 배열] 회원 = dto 객체 ]
+	public ArrayList<MemberDto> list() {
+		// * 여러명의 회원DTO 객체를 저장하기 위한 리스트 선언
+		ArrayList<MemberDto> list = new ArrayList<>();
+		// 1. SQL 작성
+		String sql = "select * from member";
+		// 2. 연결된 DB에 작성된 SQL 대입
+		try {
+			ps = conn.prepareStatement(sql);
+		 
+		// 3. SQL 조작 [ 매개변수 없으면 패스 ] 
+		// 4. SQL 실행 [ SQL 결과를 rs 인터페이스에 저장 ]
+			rs = ps.executeQuery(); // 결과 : 검색된 모든 레코드	// 1. executeQuery : 실행 결과를 보여줘.
+		// 5. SQL 결과
+				// 레코드 --자바형태로 변환 --> 객체 DTO // 레코드 1개 -> DTO 1개
+			while( rs.next() ) { // rs.next() : 다음 레코드 이동 [ 없으면 false] // 마지막 레코드까지 이동
+				// re[null] -> rs.next() -> rs[1레코드] --> rs.next() --> rs[2레코드] --> false
+				
+				// 레코드를 객체화!(자바는 레코드를 사용하지 못해서) [ rs.get~~필드번호 / mno mid mpw 순 ]
+				// 레코드 1개 --> 객체화 1개로 한 것임!
+				MemberDto dto = new MemberDto(
+						rs.getInt(1), rs.getString(2), rs.getString(3) );
+				// 1개 객체 --> 리스트에 담기
+				list.add(dto);
+			}
+			return list;
+		} catch (Exception e) { System.out.println("DB 오류 : " + e ); }
 		return null;
+		
 	}
+	
+	// 3. 비밀번호 수정 [ 인수 : 누구[식별 mno]의 비밀번호를 무엇으로[새로운 mpw] 바꿀건가 /  반환 : 성공[true] 실패[false] ]
+	public boolean update( int mno , String mpw ) {
+		
+		// 1. SQL 작성
+		String sql = "update member set mpw = ? where mno = ?";
+		// 2. 연결 DB에 SQL 대입
+		try {
+			ps = conn.prepareStatement(sql);
+		// 3. SQL 조작
+			ps.setString(1, mpw);
+			ps.setInt(2, mno);
+		// 4. SQL 실행
+			ps.executeUpdate(); // insert , update , delete => executeUpdate();	결과 1개
+								// select 					=> executeQuery();	결과 여러개
+			
+		// 5. SQL 결과
+			return true;
+		} catch (Exception e) { System.out.println("DB 오류 : " + e ); }
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

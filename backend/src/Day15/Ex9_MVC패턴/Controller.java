@@ -18,8 +18,21 @@ public class Controller {
 		return result;
 	}
 	
-	public ArrayList<MemberDao> list() {
-		return null;
+	// 2. 모든 회원 호출
+	public ArrayList<MemberDto> list() {
+		// 1. 모든 회원을 호출하는 DAO 메소드 호출
+		ArrayList<MemberDto> result = MemberDao.getInstance().list();
+		// 2. 결과 반환
+		return result;
+		
 	}
+	
+	// 3. 비밀번호 수정
+	public boolean update( int mno , String mpw ) {
+		
+		
+		return true;
+	}
+	
 	
 }

@@ -1,5 +1,6 @@
 package Day15.Ex9_MVC패턴;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class View {
@@ -42,8 +43,34 @@ public class View {
 	// 3. 회원목록 화면
 	public void list() {
 		
+		System.out.println("-----------------------");
+		System.out.printf("%2s \t %10s \t %10s \n", "no" , "mid" , "mpw" );
+		// 1. 컨트롤에게 모든[여러개-ArrayList]회원[MemberDto]들의 요청해서 요청된 리스트를 저장
+		ArrayList<MemberDto> result = Controller.getInController().list();
+		// 2. 요청의 결과를 리스트를 반복문 돌리기
+		for ( int i = 0 ; i < result.size() ; i++ ) { // 0번 인덱스부터 마지막 인덱스까지 반복
+			System.out.printf("%2d \t %10s \t %10s \n" ,
+					result.get(i).getMno() , result.get(i).getMid() , result.get(i).getMpw() );
+		}
+	} // list end
+	
+	// 3. 회원수정 화면
+	public void update( int mno , String mpw ) {
+		
+		
+		
 	}
 	
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
