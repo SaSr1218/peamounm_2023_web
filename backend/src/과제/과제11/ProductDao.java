@@ -45,8 +45,8 @@ public class ProductDao {
 		return false;
 	}
 	
-		// 2. 모든 회원 출력 [ 인수 : X / 반환 : 여러명[ArrayList] 회원[dto 객체]
-	public ArrayList<ProductDto> list(){
+		// 2. 모든 상품 출력 [ 인수 : X / 반환 : 상품[ArrayList] 상품[dto 객체]
+	public ArrayList<ProductDto> getProductAll(){
 		// 여러개 상품DTO 객체 저장하기 위한 리스트 선언
 		ArrayList<ProductDto> list = new ArrayList<>();
 		// 1.
@@ -54,7 +54,6 @@ public class ProductDao {
 		// 2.
 		try {
 			ps = conn.prepareStatement(sql);
-		
 		// 3. 매개변수 없으니 패스
 		// 4.
 			rs = ps.executeQuery();
@@ -127,6 +126,7 @@ public class ProductDao {
 		return false;
 	}
 	
+	// 6. 사용자 제품번호 선택 [ 인수 : pno / 반환 : 성공[true] , 실패[false] ]
 	
 	
 	

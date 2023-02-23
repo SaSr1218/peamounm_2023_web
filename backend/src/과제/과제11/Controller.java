@@ -2,8 +2,6 @@ package 과제.과제11;
 
 import java.util.ArrayList;
 
-import Day15.Ex9_MVC패턴.MemberDao;
-
 public class Controller {
 	
 	// 싱글톤
@@ -19,9 +17,9 @@ public class Controller {
 	}
 	
 	// 2. 모든 제품 출력
-	public ArrayList<ProductDto> list() {
+	public ArrayList<ProductDto> getProductAll() {
 		
-		ArrayList<ProductDto> result = ProductDao.getInstance().list();
+		ArrayList<ProductDto> result = ProductDao.getInstance().getProductAll();
 		
 		return result;
 	}
@@ -41,8 +39,8 @@ public class Controller {
 		return ProductDao.getInstance().delete(pno);
 	}
 	
-	
-	
+	// 1. 장바구니 담기
+
 	
 	
 	

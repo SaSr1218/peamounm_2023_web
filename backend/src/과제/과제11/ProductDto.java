@@ -17,9 +17,6 @@ public class ProductDto {
 		this.pprice = pprice;
 		this.pbox = pbox;
 	}
-
-
-	
 	
 	// 3. 메소드
 	@Override
