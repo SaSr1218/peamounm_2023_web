@@ -66,7 +66,7 @@ public class BoardDao extends Dao{
 	// 4. 최신 게시물 출력 3개 출력
 	public ArrayList<BoardDto> boardPrintRecent() {
 		ArrayList<BoardDto> blist = new ArrayList<>();
-		String sql = "    select b.bno , b.btitle , b.bcontent , b.bdate , b.bview , m.mid , c.cname "
+		String sql = " select b.bno , b.btitle , b.bcontent , b.bdate , b.bview , m.mid , c.cname "
 				+ " from board b , member m , category c "
 				+ " where b.mno = m.mno and b.cno = c.cno "
 				+ " order by b.bdate desc limit 3 ";
@@ -91,6 +91,7 @@ public class BoardDao extends Dao{
 				+ " where b.mno = m.mno and b.cno = c.cno and b.cno = ?";
 		try {
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, cno);
 			rs = ps.executeQuery();
 			while( rs.next() ) {
 				BoardDto dto = new BoardDto( 

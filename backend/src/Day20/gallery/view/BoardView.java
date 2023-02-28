@@ -34,7 +34,7 @@ public class BoardView {
 				break;
 			} 
 			else if ( ch == 0 ) { categoryAdd(); }
-			else if ( ch > 0 ) { }
+			else if ( ch > 0 ) { boardPrint( ch ); }  				
 
 		}
 	}
@@ -76,45 +76,55 @@ public class BoardView {
 		
 	} // categoryPrint end
 
-	// 4. 
-	public void boardAdd() {
+	// 4. 게시글 추가하기
+	public void boardAdd( int cno ) {
 		System.out.println("===================== 게시물 쓰기 =============");
 		System.out.println("제목 : "); String btitle = scanner.next();
 		System.out.println("내용 : "); String bcontent = scanner.next();
 		
-		boolean result = BController.getInstance().boardAdd(btitle, bcontent);
+		boolean result = BController.getInstance().boardAdd(btitle, bcontent , cno);
 		if ( result ) { System.out.println("[글등록성공]");}
 		else { System.out.println("[글등록실패]");}
 		
-	}
+	} // boardAdd end
 	
-	// 5.
+	// 5. 최신 글 3개 출력 페이지
 	public void boardPrintRecent() {
-		System.out.println("===================== 갤러리 추가 =============");
+		System.out.println("===================== 최신 글 =============");
 		ArrayList<BoardDto> blist = BController.getInstance().boardPrintRecent();
-		System.out.printf(" %10s\t10%s\t10%s\t10%s\t10%s\t%10s \n" ,
-				  "번호" , "제목" , "작성자" , "작성일" , "갤러리명" , "조회수");
+		System.out.printf("%10s\t%10s\t%10s\t%10s\t%10s\t%10s \n" ,
+				"번호" , "제목" , "작성자" , "조회수" ,  "갤러리", "작성일");
 		for ( BoardDto dto : blist ) {
-			System.out.printf(" %10s\t10%s\t10%s\t10%s\t10%s\t%10s \n" ,
+			System.out.printf("%10s\t%10s\t%10s\t%10s\t%10s\t%10s \n" ,
 					dto.getBno() , dto.getBtitle() , dto.getMid() ,
-					dto.getBdate() , dto.getCname() , dto.getBview() );
-		}
+					dto.getBview() , dto.getCname() , dto.getBdate() );
+		} // for end
+	} // boardPrintRecent end
 	
-	}
-	
-	// 6.
+	// 6. 선택한 갤러리의 모든 게시물 페이지
 	public void boardPrint(int cno) {
-		System.out.println("===================== 갤러리 추가 =============");
+		System.out.println("===================== 선택한 갤러리=============");
 		ArrayList<BoardDto> blist = BController.getInstance().boardPrint(cno);
-		System.out.printf(" %10s\t10%s\t10%s\t10%s\t10%s \n " ,
-				  "번호" , "제목" , "작성자" , "작성일" , "조회수");
+		System.out.printf("%10s\t%10s\t%10s\t%10s\t%10s \n" ,
+				  "번호" , "제목" , "작성자" , "조회수" , "작성일");
 		for ( BoardDto dto : blist ) {
-			System.out.printf(" %10s\t10%s\t10%s\t10%s\t10%s\t%10s \n" ,
+			System.out.printf("%10s\t%10s\t%10s\t%10s\t%10s \n" ,
 					dto.getBno() , dto.getBtitle() , dto.getMid() ,
-					dto.getBdate() , dto.getBview() );
-		}
-	}
-
+					dto.getBview() , dto.getBdate() );
+		}// for end
+		
+		while( true ) {
+			System.out.println("갤러리 메뉴 : 1.뒤로가기 2.게시물쓰기 3.게시물보기 : ");
+			int ch = scanner.nextInt();
+			if ( ch == 1 ) { break; }
+			else if ( ch == 2 ) { boardAdd( cno ); }
+			else if ( ch == 3 ) { 
+				//미구현
+			}
+		} // while end	
+	} // boardPrint end
+	
+	
 }
 
 
