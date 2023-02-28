@@ -8,7 +8,12 @@ public class MController {
 	private static MController mcon = new MController();
 	private MController() { }
 	public static MController getInstance() { return mcon; }
-		
+	
+	// 0. 로그인 섹션 값
+	private int loginSession = 0;	// 로그인 된 회원번호 담기
+	public int getLoginSession() { return loginSession; }
+	public void setLoginSession(int loginSession) { this.loginSession = loginSession; }
+	
 	// 1. 회원가입 처리 [ 아이디중복체크 ]
 	public int signup ( String mid , String mpw , String mname , String mphone ) {
 			
@@ -25,10 +30,6 @@ public class MController {
 		}
 		
 	// 2. 로그인 처리
-	
-	// 로그인 섹션 값
-	private int loginSession = 0;	// 로그인 된 회원번호 담기
-	
 	public boolean login( String mid , String mpw ) {
 		// 1. 유효성검사
 		

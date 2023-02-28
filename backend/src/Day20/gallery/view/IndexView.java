@@ -50,7 +50,7 @@ public class IndexView {
 		boolean result = MController.getInstance().login(mid, mpw);
 		if ( result == true ) { 
 			System.out.println("[알림] 로그인 성공"); 
-			// 로그인 성공하면 게시물 초기메뉴로 이동
+			BoardView.getInstance().index(); // 로그인 성공하면 게시물 초기메뉴로 이동
 			
 		}
 		else { System.out.println("[알림] 로그인 실패"); }
