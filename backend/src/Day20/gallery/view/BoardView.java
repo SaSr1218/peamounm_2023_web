@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import Day20.gallery.controller.BController;
 import Day20.gallery.controller.MController;
+import Day20.gallery.model.Dao.BoardDao;
+import Day20.gallery.model.Dto.BoardDto;
 import Day20.gallery.model.Dto.CategoryDto;
 
 public class BoardView {
@@ -34,8 +36,6 @@ public class BoardView {
 			else if ( ch == 0 ) { categoryAdd(); }
 			else if ( ch > 0 ) { }
 
-			
-			
 		}
 	}
 	
@@ -76,6 +76,44 @@ public class BoardView {
 		
 	} // categoryPrint end
 
+	// 4. 
+	public void boardAdd() {
+		System.out.println("===================== 게시물 쓰기 =============");
+		System.out.println("제목 : "); String btitle = scanner.next();
+		System.out.println("내용 : "); String bcontent = scanner.next();
+		
+		boolean result = BController.getInstance().boardAdd(btitle, bcontent);
+		if ( result ) { System.out.println("[글등록성공]");}
+		else { System.out.println("[글등록실패]");}
+		
+	}
+	
+	// 5.
+	public void boardPrintRecent() {
+		System.out.println("===================== 갤러리 추가 =============");
+		ArrayList<BoardDto> blist = BController.getInstance().boardPrintRecent();
+		System.out.printf(" %10s\t10%s\t10%s\t10%s\t10%s\t%10s \n" ,
+				  "번호" , "제목" , "작성자" , "작성일" , "갤러리명" , "조회수");
+		for ( BoardDto dto : blist ) {
+			System.out.printf(" %10s\t10%s\t10%s\t10%s\t10%s\t%10s \n" ,
+					dto.getBno() , dto.getBtitle() , dto.getMid() ,
+					dto.getBdate() , dto.getCname() , dto.getBview() );
+		}
+	
+	}
+	
+	// 6.
+	public void boardPrint(int cno) {
+		System.out.println("===================== 갤러리 추가 =============");
+		ArrayList<BoardDto> blist = BController.getInstance().boardPrint(cno);
+		System.out.printf(" %10s\t10%s\t10%s\t10%s\t10%s \n " ,
+				  "번호" , "제목" , "작성자" , "작성일" , "조회수");
+		for ( BoardDto dto : blist ) {
+			System.out.printf(" %10s\t10%s\t10%s\t10%s\t10%s\t%10s \n" ,
+					dto.getBno() , dto.getBtitle() , dto.getMid() ,
+					dto.getBdate() , dto.getBview() );
+		}
+	}
 
 }
 

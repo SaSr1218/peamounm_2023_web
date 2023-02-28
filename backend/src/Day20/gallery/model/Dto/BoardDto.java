@@ -6,8 +6,8 @@ public class BoardDto {
     private String bcontent;
     private String bdate;		
     private int bview;		
-    private String mid;		// foreign인데 회원번호 가져와서 할 게 없어서 작성자를 가져온것임 (저장은 회원번호 저장!) 		
-    private String cname;	// 필드랑 같이 맞추기 -> 입출력 용도이므로 필요한거 생각하기(똑같지 않을 수도)		
+    private String mid;		// DB 회원번호 대신 mid 가져오려고(회원번호만 있으면 돼서)
+    private String cname;	// DB 카테고리 번호 대신 cname 가져오려고(카테고리 번호만 있으면 돼서)		
 
 	public BoardDto() { }
 	
