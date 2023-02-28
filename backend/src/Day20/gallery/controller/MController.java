@@ -24,9 +24,26 @@ public class MController {
 		return MemberDao.getInstance().signup(dto);
 		}
 		
+	// 2. 로그인 처리
 	
-
+	// 로그인 섹션 값
+	private int loginSession = 0;	// 로그인 된 회원번호 담기
 	
-
+	public boolean login( String mid , String mpw ) {
+		// 1. 유효성검사
+		
+		// 2. 
+		int result = MemberDao.getInstance().login(mid, mpw);
+		
+		// 3. 로그인증거 [ 로그인 정보 저장소 = 세션 ]
+		if ( result == 0 ) { return false; }
+		else {
+			loginSession = result; // 반환된 회원번호를 세션에 저장
+			return true;
+			}
 	}
+
+	
+
+}
 
