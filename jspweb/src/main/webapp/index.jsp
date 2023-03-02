@@ -8,15 +8,25 @@
 </head>
 <body>
 
-	JSP 웹 프로젝트 시작 [ ctrl + f11 ]
-	<h3> 예제1 : [C:쓰기] 입력받은 데이터 -> JS -> 서블릿 -> DAO </h3>
+	<p> JSP 웹 프로젝트 시작 [ ctrl + f11 ] </p>
+	<p> 강력 새로고침 [ ctrl + f5 ] </p>
+	<h3> 예제1 : [C : 쓰기] 입력받은 데이터 -> JS -> 서블릿 -> DAO </h3>
 	data : <input type="text" class="inputdata">
-	<button type="button" onclick="예제1()"> 예제1 실행 </button>
+	<button type="button" onclick="Ex1()"> 예제1 실행 </button>
 		
+	<h3> 예제2 : [R : 읽기] DAO -> 서블릿[JAVA] -> JS -> HTML </h3>
+	<div class="ex2box">
+		<!-- 서블릿에게 받은 데이터 표시되는 구역 -->
+	</div>
 	
+	<h3> 과제1 : C </h3>
+	data2 : <input type="text" class="inputdata2">
+	<button type="button" onclick="Ex3()"> Ex3 실행 </button>
 	
+	<h3> 과제1 : R </h3>
+	<div class="ex3box"> 
 	
-	
+	</div>
 	
 	
 	

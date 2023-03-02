@@ -1,18 +1,59 @@
 
-function 예제1(){
+function Ex1(){
 	let data = document.querySelector('.inputdata').value;
 	console.log( data );
-
+// post = 보통 데이터 저장
 	$.ajax({
-		url : "http://localhost:8080/jspweb/indextest" ,		// 통신할 서블릿 주소
-		method : "post" ,	// HTTP 메소드 
-		data : { "data" : data } ,	// 데이터 보내기
-		success : function( result ) { 
+		url : "/jspweb/Ex1" ,		// 통신할 서블릿 주소
+		method : "post" ,								// HTTP 메소드 
+		data : { "data" : data } ,						// 데이터 보내기
+		success : function( result ) { 					// 성공시 반환
 			console.log( result ) 
+			Ex2( );
 			}	// 데이터 받기
 	});
 	
 }
+// get = 보통 데이터 호출
+Ex2( );	// 페이지 열리면 데이터호출
+function Ex2( ){
+	$.ajax({
+		url : "/jspweb/Ex1" ,
+		method : "get" ,
+		//data : { } ,
+		success : function ( result ) {
+			console.log ( result )
+			document.querySelector('.ex2box').innerHTML = result;
+		}
+	});
+}
+
+function Ex3(){
+	let data2 = document.querySelector('.inputdata2').value;
+	console.log ( data2 );
+	$.ajax({
+		url : "/jspweb/Q1" ,
+		method : "post" ,
+		data : { "data2" : data2 } ,
+		success : function ( result ) {
+			console.log ( result )
+			Ex4();
+		}
+	});
+}
+
+Ex4();
+function Ex4(){
+	$.ajax({
+		url : "/jspweb/Q1" ,
+		method : "get" ,
+		success : function (result) {
+			console.log( result )
+			document.querySelector('.ex3box').innerHTML = result;
+		}
+	})
+}
+
 
 // document
 	// querySelector( 식별자 )
