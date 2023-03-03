@@ -65,7 +65,7 @@ public class Dao {
 	
 	// [1] 데이터 저장
 	public boolean setData2 ( String data2 ) {
-		String sql = "insert into ex2 values( ? )";
+		String sql = "insert into ex1_1 values( ? )";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, data2);
@@ -79,7 +79,7 @@ public class Dao {
 		
 		ArrayList<String> list2 = new ArrayList<>();
 		
-		String sql = "select * from ex2";
+		String sql = "select * from ex1_1";
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
