@@ -53,18 +53,28 @@ public class BoardDao {
 	
 	
 	// 3. 삭제
-	public boolean ondelete( BoardDto dto ) {
+	public boolean ondelete( int bno ) {
 		String sql = "delete from ex3 where bno = ?";
 		try {
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, dto.getBno() );
+			ps.setInt(1, bno );
 			ps.executeUpdate(); return true;
 		}catch (Exception e) {System.out.println(e);}
 		return false;
 	}
 	
 	
-	// 4.
+	// 4. 업데이트
+	public boolean onupdate( int bno , String newContent ) {
+		String sql = "update ex3 set bcontent = ? where bno = ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, newContent );
+			ps.setInt(2, bno );
+			ps.executeUpdate(); return true;
+		}catch (Exception e) {System.out.println(e);}
+		return false;
+	}
 	
 	
 	

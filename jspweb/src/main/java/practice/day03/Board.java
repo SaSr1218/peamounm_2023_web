@@ -26,7 +26,7 @@ public class Board extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    // 1. POST [등록]
+    // 1. POST [ C : 등록]
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 요청시 한글 인코딩	
 		
@@ -51,7 +51,7 @@ public class Board extends HttpServlet {
 			response.getWriter().print(result);
 	}
 
-	// 2. GET
+	// 2. GET [ R : 전체 출력 ]
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 1. 응답 매개변수 한글 인코딩
@@ -71,27 +71,30 @@ public class Board extends HttpServlet {
 		
 	}
 	
-	// 3. DELETE
+	// 3. DELETE [ D : 삭제 ]
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 삭제할 게시물번호 요청 [ ????? 매개변수 null ] delete , put 은 get요청과 같이 했을시 오류뜸!
-		int bno = Integer.parseInt(
-				request.getParameter("bno") 
-				); 
+		int bno = Integer.parseInt(request.getParameter("bno") ); 
 			System.out.println("삭제할번호요청 : " + bno);
-		
+		// 2. Dao 호출해서 결과 얻기
+		boolean result = BoardDao.getInstance().ondelete(bno);
+		// 3. 응답
+		response.getWriter().print(result);
 	}
 	
-	// 4. PUT
+	// 4. PUT [ U : 수정 ]
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		// 1. 수정할 게시물번호 요청
-		int bno = Integer.parseInt(
-				request.getParameter("bno") 
-				);
+		int bno = Integer.parseInt(request.getParameter("bno") );
 			System.out.println("수정할번호요청 : " + bno);
 		// 2. 수정할 게시물내용 요청
 		String newContent = request.getParameter("newContent");
 			System.out.println("수정할내용요청 : " + newContent);
+		// 3. Dao 호출해서 결과 얻기
+		boolean result = BoardDao.getInstance().onupdate(bno, newContent);
+		// 4. 결과 응답
+		response.getWriter().print(result);
 	}
 
 }

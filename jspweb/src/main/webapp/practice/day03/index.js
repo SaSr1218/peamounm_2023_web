@@ -64,7 +64,7 @@ function onwrite(){
 	}) // ajax end
 } // 등록함수 end
 
-// 2. 모든 게시물출력 [ 1.js열릴때 2.글작성할때]
+// 2. 모든 게시물출력 [ 1.js열릴때 2.글작성할때 3. 렌더링[삭제,수정될때마다] ]
 onprint();
 function onprint(){
 	
@@ -89,8 +89,8 @@ function onprint(){
 							<td> ${ o.bcontent }</td>
 							<td> ${ o.bwriter } </td>
 							<td> 
-								<button onclick="onDelete(${o.bno})" type="button"> 삭제 </button> 
-								<button onclick="onUpdate(${o.bno})" type="button"> 수정 </button>
+								<button onclick="ondelete(${o.bno})" type="button"> 삭제 </button> 
+								<button onclick="onupdate(${o.bno})" type="button"> 수정 </button>
 							</td>
 						</tr>`;
 				
@@ -104,7 +104,7 @@ function onprint(){
 } // 출력 함수 end
 
 // 3. 삭제 함수
-function onDelete(bno){
+function ondelete(bno){
 	console.log("onDelete()열림" + bno );
 	
 	$.ajax({
@@ -113,12 +113,14 @@ function onDelete(bno){
 		data : { "bno" : bno } ,
 		success : ( r ) => {
 			console.log( "delete 응답 성공"); console.log(r);
+			if( r == 'true' ){ alert("삭제성공"); onprint();}
+			else{ alert("삭제실패"); }
 		}
 	})
 } // 삭제함수 end
 
 // 4. 수정 함수
-function onUpdate( bno ){
+function onupdate( bno ){
 	console.log( "onupdate() 열람" + bno );
 	let newContent = prompt('수정할 내용 입력');
 	
@@ -128,6 +130,8 @@ function onUpdate( bno ){
 		data : { "bno" : bno , "newContent" : newContent } ,
 		success : ( r )=> {
 			console.log("update 응답 성공"); console.log(r);
+			if( r == 'true' ){ alert("수정정공"); onprint();}
+			else{ alert("수정실패"); }
 		}
 	})
 }
