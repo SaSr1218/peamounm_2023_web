@@ -76,8 +76,59 @@ public class BoardDao {
 		return false;
 	}
 	
+	// ----------------------------------------------------
 	
+	// 1. 제품 등록
+	public boolean c_product(ProductDto pdto ){
+		String sql = "insert into q3 ( pname , pprice ) values ( ? , ? )";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, pdto.getPname());
+			ps.setInt(2, pdto.getPprice());
+			ps.executeUpdate(); return true;
+		}catch (Exception e) {System.out.println(e);}
+		return false;
+	}
 	
+	// 2. 제품 출력
+	public ArrayList<ProductDto> c_print(){
+		ArrayList<ProductDto> list = new ArrayList<>();
+		
+		String sql = "select * from q3";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while( rs.next() ) {
+				ProductDto pdto = new ProductDto(rs.getInt(1) , rs.getString(2) , rs.getInt(3) );
+				list.add(pdto);
+			}
+		}catch (Exception e) {System.out.println(e);}
+		return list;
+	}
+	
+	// 3. 제품 삭제
+	public boolean c_delete( int pno ) {
+		String sql = "delete from q3 where pno =?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, pno);
+			ps.executeUpdate(); return true;
+		}catch (Exception e) {System.out.println(e);}
+		return false;
+	}
+	
+	// 4. 제품 수정
+	public boolean c_update ( int pno , String newPname , int newPprice ) {
+		String sql = "update q3 set pname = ? , pprice = ?  where pno = ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, newPname);
+			ps.setInt(2, newPprice);
+			ps.setInt(3, pno);
+			ps.executeUpdate(); return true;
+		}catch (Exception e) {System.out.println(e);}
+		return false;
+	}
 	
 	
 }

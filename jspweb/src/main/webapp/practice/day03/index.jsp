@@ -22,6 +22,13 @@
 	<table class="boardtable" border="1"></table>
 	
 	
+	<h3> 과제 3 : 제품 </h3>
+	제품명 : <input type="text" class="pname"> <br>
+	제품가격 : <input type="text" class="pprice"> <br>
+	<button onclick="c_product()" type="button"> 제품 등록 </button>
+	
+	<table class="p_table" border="1" ></table>
+	
 	<!--  -->
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<!--  -->
