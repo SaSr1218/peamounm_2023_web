@@ -5,12 +5,12 @@ public class BoardDto {
 	private int bno;
 	private String bcontent;
 	private String bwriter;
-	private int bdate;
+	private String bdate;
 
 	public BoardDto() {}
 
 	
-	public BoardDto(int bno, String bcontent, String bwriter, int bdate) {
+	public BoardDto(int bno, String bcontent, String bwriter, String bdate) {
 		super();
 		this.bno = bno;
 		this.bcontent = bcontent;
@@ -44,11 +44,11 @@ public class BoardDto {
 		this.bwriter = bwriter;
 	}
 
-	public int getBdate() {
+	public String getBdate() {
 		return bdate;
 	}
 
-	public void setBdate(int bdate) {
+	public void setBdate(String bdate) {
 		this.bdate = bdate;
 	}
 

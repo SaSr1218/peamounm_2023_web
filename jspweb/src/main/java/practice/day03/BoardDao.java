@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class BoardDao {
 
@@ -34,8 +35,36 @@ public class BoardDao {
 		return false;
 	}
 	
+	// 2. 모든 방문록 출력 [ 인수 : x / 반환 : 여러개[list] dto ]
+	public ArrayList<BoardDto> onprint(){
+		ArrayList<BoardDto> list = new ArrayList<>();
+		String sql = "select * from ex3";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			// 레코드1개 = if / 레코드 여러개 = while
+			while( rs.next() ) {
+				BoardDto dto = new BoardDto( rs.getInt(1) , rs.getString(2) , rs.getString(3) ,rs.getString(4)  );
+				list.add(dto);
+			} // while end
+		}catch (Exception e) {System.out.println(e);}
+		return list;
+	}
 	
 	
+	// 3. 삭제
+	public boolean ondelete( BoardDto dto ) {
+		String sql = "delete from ex3 where bno = ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, dto.getBno() );
+			ps.executeUpdate(); return true;
+		}catch (Exception e) {System.out.println(e);}
+		return false;
+	}
+	
+	
+	// 4.
 	
 	
 	
