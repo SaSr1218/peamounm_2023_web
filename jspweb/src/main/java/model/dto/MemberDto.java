@@ -4,23 +4,29 @@ public class MemberDto {
 	private int mno;
 	private String mid;
 	private String mpwd;
-	private String memail;
 	private String mimg;
+	private String memail;
 
 	
 	public MemberDto() {}
 	
-	public MemberDto(int mno, String mid, String mpwd, String memail, String mimg ) {
+	
+
+	
+	
+	public MemberDto(int mno, String mid, String mpwd, String mimg, String memail) {
 		super();
 		this.mno = mno;
 		this.mid = mid;
 		this.mpwd = mpwd;
-		this.memail = memail;
 		this.mimg = mimg;
+		this.memail = memail;
 	}
 
-	
-	
+
+
+
+
 	public int getMno() {
 		return mno;
 	}

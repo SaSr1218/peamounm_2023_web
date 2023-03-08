@@ -11,7 +11,7 @@
 
 	<h3> 모든 회원 명단</h3>
 
-	<div class="mListTable"></div>
+	<table border="1" class="mListTable"></table>
 
 
 

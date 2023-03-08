@@ -14,7 +14,7 @@
 		아이디 :				<input type="text" name="mid" class="mid">				<br/>
 		비밀번호 : 			<input type="text" name="mpwd" class="mpwd">			<br/>
 		비밀번호 확인 :  		<input type="text" name="mpwdconfirm" class="mpwdconfirm">		<br/>
-		이메일 : 				<input type="text" name="meamil" class="meamil">			<br/>
+		이메일 : 				<input type="text" name="memail" class="memail">			<br/>
 		프로필 : 				<input type="file" name="mimg" class="mimg">			<br/>
 		<button onclick="signup()" type="button"> 가입 </button>
 	</form>

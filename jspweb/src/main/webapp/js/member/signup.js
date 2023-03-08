@@ -16,11 +16,18 @@ function signup(){
 		method : "post" ,					// 첨부파일 무조건 post
 		data : signupFormData ,				// FormData 객체 전송
 		// 첨부파일 있을때 추가되는 속성
-		contentType : false , 				// 기본값 : true [ 문자열 전송 ]
-		processData : false ,
-		success : (r) => {
-			console.log('ajax 응답');
+		contentType : false , 				// true : 매개변수형식의 문자열타입 [ 기본값] , false : 해제
+												// form-urlencoded 타입으로 전송
+											// false : 해제
+											 	// multipart/form 형식으로 전송
+		processData : false ,				
+		success : (r) => {					
+			console.log('ajax 응답');			
 			console.log( r );
+			if( r == 'true'){
+				alert('회원가입성공');
+				location.href="/jspweb/index.jsp";
+			}else{alert('회원가입실패');}
 		 }
 	})
 
