@@ -24,6 +24,7 @@ public class MemberDao extends Dao {
 		}catch (Exception e) {System.out.println(e);}
 		return false;
 	}
+	
 	// 2. 모든 회원 호출 [ 관리자기준  인수:x 반환:모든회원들의 dto ]
 	public ArrayList<MemberDto> getMemberList( ){
 		ArrayList<MemberDto> list = new ArrayList<>(); // 모든 회원들의 리스트 선언 
@@ -40,6 +41,19 @@ public class MemberDao extends Dao {
 		}catch (Exception e) {System.out.println(e);}
 		return list;									// 7. 리스트 반환
 	}
+	
+	// 3. 아이디 중복 검사
+	public boolean idcheck( String mid ) {
+		String sql = "select * from member where mid = '"+mid+"' ";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if ( rs.next() ) { return true; } // 아이디 중복이면 true
+		}catch (Exception e) {System.out.println(e);}
+		return false; // 아이디 중복 아니면 false
+	}
+	
+	
 }
 
 
