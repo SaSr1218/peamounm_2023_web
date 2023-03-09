@@ -1,1 +1,9 @@
 @charset "UTF-8";
+
+.hpimg{
+	width : 30px;
+	height: 30px;
+	border : solid 1px #e8e8e8;
+	border-radius: 50%;
+	
+}
