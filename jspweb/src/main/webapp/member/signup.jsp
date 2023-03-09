@@ -23,7 +23,7 @@
 		이메일 :			<input onkeyup="emailcheck()" type="text" name="memail" 		class="memail">	
 			<span class="checkconfirm">x</span> <br/>
 		프로필 : 			<input onchange="premimg(this)" type="file" name="mimg"	 		class="mimg">		
-			<img class="premimg" alt="" src="/jspweb/member/mimg/default.webp">
+			<img class="premimg" alt="" src="/jspweb/member/mimg/default.webp" width="30px">
 		<br/>
 		<button onclick="signup()" type="button"> 가입 </button>
 	</form>
