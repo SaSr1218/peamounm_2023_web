@@ -3,7 +3,7 @@
 console.log( 'js열림')
 
 getMemberList();
-function getMemberList(){
+function getMemberList(){	// 회원 전체 호출
 	$.ajax({
 		url: "/jspweb/member",
 		method : "get",

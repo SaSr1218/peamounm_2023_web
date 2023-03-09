@@ -66,7 +66,7 @@ public class MemberDao extends Dao {
 		return false;
 	}
 	
-	// 5. 
+	// 5. 비밀번호를 제외한 정보 호출
 	public MemberDto getMember( String mid ) {
 		String sql = "select * from member where mid = ?";
 		try {
