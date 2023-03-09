@@ -8,14 +8,13 @@
 </head>
 <body>
 
+	<%@ include file="../header.jsp" %>
 
 	<h3> 모든 회원 명단</h3>
 
 	<table border="1" class="mListTable"></table>
 
-
-
-	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/jspweb/js/admin/info.js" type="text/javascript"></script>
+
 </body>
 </html>

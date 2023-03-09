@@ -8,10 +8,7 @@
 </head>
 <body>
 
-	<%@ include file = "header.jsp" %> <!-- JSP 페이지 포함 -->
-	<h3> 본문입니다.</h3>
+	<h3> 푸터입니다. </h3>
 	
-	<%@ include file = "footer.jsp" %>
-
 </body>
 </html>
