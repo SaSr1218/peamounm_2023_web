@@ -103,7 +103,7 @@ function idcheck(){ // onkeyup : 키 누르고 떼었때
 function pwdcheck(){ 
 	let mpwd = document.querySelector('.mpwd').value; // 1. 입력받은 값 가져오기 
 	// 2. 정규표현식 : 영대소문자+숫자 조합 5~20 글자 
-	let mpwdj = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,20}$/
+	let mpwdj = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{5,20}$/
 	// 3. 제어
 	if( mpwdj.test( mpwd ) ){
 		checkconfirm[1].innerHTML = 'O'; pwdconfirmcheck();
@@ -118,7 +118,7 @@ function pwdconfirmcheck(){
 	let mpwdconfirm = document.querySelector('.mpwdconfirm').value;
 		console.log( ' mpwdconfirm : ' + mpwdconfirm)
 	// 2. 정규표현식 : 영대소문자+숫자 조합 5~20 글자 
-	let mpwdj = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,20}$/
+	let mpwdj = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{5,20}$/
 	// 3. 제어
 	if( mpwdj.test( mpwdconfirm) ){
 		if( mpwd != mpwdconfirm ){ // 두 비밀번호간의 동일성 체크 [ 두 비밀번호가 서로 다르면 ]
@@ -140,7 +140,7 @@ function emailcheck(){
 	if ( memailj.test(memail) ){
 		checkconfirm[2].innerHTML = 'O'
 	}else{
-		checkconfirm[2].innerHTML = '이메일 형식으로 입력해주요'
+		checkconfirm[2].innerHTML = '이메일 형식으로 입력해주세요'
 	}
 } // emailcheck 함수 end
 
