@@ -81,6 +81,31 @@ public class MemberDao extends Dao {
 		return null;
 	}
 	
+	// 6. 아이디 찾기
+	public String findid( String memail ) {
+		String sql = "select mid from member where memail = ?";
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setString(1, memail);
+				rs = ps.executeQuery();
+				if ( rs.next() ) { return rs.getString(1); }
+			}catch (Exception e) {System.out.println(e);}
+			return "false";
+	}
+	
+	// 7. 비밀번호 찾기
+	public String findpwd ( String mid , String memail ) {
+		String sql = "select mpwd from member where mid = ? and memail = ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mid);
+			ps.setString(2, memail);
+			rs = ps.executeQuery();
+			if ( rs.next() ) { return rs.getString(1); }
+				
+		}catch (Exception e) {System.out.println(e);}
+		return "false";
+	}
 	
 	
 }
