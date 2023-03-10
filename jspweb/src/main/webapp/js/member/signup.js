@@ -46,6 +46,8 @@
 */
 
 
+
+
 // * 첨부파일 이미지 미리보기 [ 업로드랑 상관 X ] -> 방법 2개 e넣고 this 넣고 e.files 호출[1] vs 직접 js만으로 가지고 오기[2]
 	// 사용자[클라이언트]에 운영체제 접근이 불가능함!
 function premimg( object ){ // object : 해당 함수르 실행시킨 태그객체
@@ -68,6 +70,7 @@ function premimg( object ){ // object : 해당 함수르 실행시킨 태그객�
 
 // * checkconfirm span 모두 가져오기 --> 여러개의 span이 배열/리스트 객체에 대입
 let checkconfirm = document.querySelectorAll('.checkconfirm')	
+
 
 // 2. 아이디 유효성검사 [ 1. 문자 패턴 체크 2.중복검사 ]
 function idcheck(){ // onkeyup : 키 누르고 떼었때

@@ -16,7 +16,6 @@
 	비밀번호 : <input class="mpwd" type="password"> <br/>
 	<button onclick="login()" type="button"> 로그인 </button>
 
-
 	<!-- 정의 js -->
 	<script src="/jspweb/js/member/login.js" type="text/javascript"></script>
 </body>
