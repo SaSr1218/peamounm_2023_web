@@ -138,11 +138,70 @@ function emailcheck(){
 	// 도메인 구역[a-zA-Z0-9-] : 영문 + 숫자 + - + \.(. 필수)
 	let memailj = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/
 	if ( memailj.test(memail) ){
-		checkconfirm[2].innerHTML = 'O'
+		checkconfirm[2].innerHTML = '이메일 인증을 해주세요.'
+		document.querySelector('.authbtn').disabled = false;
 	}else{
 		checkconfirm[2].innerHTML = '이메일 형식으로 입력해주세요'
+		document.querySelector('.authbtn').disabled = true;
 	}
 } // emailcheck 함수 end
+
+// 6. 이메일 인증 함수
+function getauth(){
+	
+	let html = `
+				<div class="timebox"> 03 : 00 </div>
+				<input type="text" class="authinput" placeholder="인증코드">
+				<button onclick="authconfirm()" type="button"> 확인 </button>
+				`
+	document.querySelector('.authbox').innerHTML = html;
+	auth = 1234;
+	timer = 180;
+	settimer();
+} // getautd end
+
+let auth = 0;
+let timer = 0; // 인증 시간
+let timerInter; // Interval 함수를 저장할 변수
+// 7. 타이머 함수
+function settimer(){
+	
+	// setInterval : 특정 시간마다 함수 실행
+		// clearInterval : Interval 종료
+	let timerInter = setInterval( () =>{
+		let minutes = parseInt(timer / 60) ;   // 분 계산
+		let seconds = parseInt(timer % 60) ; // 분 계산후 나머지 = 초 계산
+		// 한자리수 이면 0 추가
+		minutes = minutes < 10 ? "0"+minutes : minutes;
+		seconds = seconds < 10 ? "0"+seconds : seconds;
+		let timeHTML = minutes + " : " + seconds; // 시 : 분 구성
+		document.querySelector('.timebox').innerHTML = timeHTML;
+		timer--;
+		if ( timer < 0 ) {
+			clearInterval(timerInter);
+			checkconfirm[2].innerHTML = "인증실패";
+			document.querySelector('.authbox').innerHTML = "";
+		}
+	} , 1000 ); //1초마다 { } 코드 실행
+	
+} // settimer 함수 end
+
+// 8. 인증코드 확인
+function authconfirm(){
+	let authinput = document.querySelector('.authinput').value;
+	if ( auth == authinput ){
+		clearInterval(timerInter);
+		document.querySelector('.authbox').innerHTML = "";
+		document.querySelector('.authbtn').innerHTML = "인증완료";
+		document.querySelector('.authbtn').disabled = true;
+		checkconfirm[2].innerHTML = 'O'
+	} else {
+		checkconfirm[2].innerHTML = '인증코드가 일치하지 않습니다.';
+	}
+}
+
+
+
 
 // 1. 회원가입 
 function signup(){

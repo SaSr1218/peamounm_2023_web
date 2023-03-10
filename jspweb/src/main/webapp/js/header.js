@@ -41,7 +41,6 @@ function getLogin(){
 				}
 			
 			}
-			console.log( html );
 			document.querySelector(".submenu").innerHTML = html;
 		}
 	})

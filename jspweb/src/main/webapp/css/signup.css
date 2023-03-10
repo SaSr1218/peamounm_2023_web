@@ -55,11 +55,12 @@
 	align-items: center;
 }
 
-.preimg{ /* 첨부파일 이미지 미리보기 구역 */
-	width: 100px;
-	height: 100px;
+.premimg{ /* 첨부파일 이미지 미리보기 구역 */
+    width: 100px;
+    height: 100px;
 	border: 1px solid #e8e8e8;
 	border-radius: 50%;
+	margin-left: 20px;
 }
 
 /* 회원가입 버튼 */
