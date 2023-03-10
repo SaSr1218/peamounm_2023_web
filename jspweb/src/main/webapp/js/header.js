@@ -1,5 +1,3 @@
-console.log('js열림');
-
 // 로그인한 회원정보 호출 
 getLogin();
 function getLogin(){
@@ -7,8 +5,6 @@ function getLogin(){
 		url : "/jspweb/login" ,
 		method : "get" , 
 		success : (r) => {
-			console.log('통신성공');
-			console.log( r );	// Dto1개회원 --> r객체1개 회원
 			
 			let html = '';	// 1. html 구성 
 			if( r == null ){	// 2. 로그인 안했으면 

@@ -9,8 +9,6 @@ function getMemberList(){	// 회원 전체 호출
 		method : "get",
 		//data : "" ,
 		success : (r)=>{
-			console.log('ajax통신');
-			console.log( r );	// 응답 결과 데이터 확인 
 			// 1. 응답데이터 처리 
 				// 1. 테이블 헤더 구성 
 			let html = `<tr>
