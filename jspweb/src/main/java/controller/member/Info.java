@@ -107,17 +107,81 @@ public class Info extends HttpServlet {
 
 	// 3. 회원 정보 수정 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1. 업로드 코드 구현
+			// 1. 업로드 한 파일을 해당 서버 경로로 업로드
+		String path = request.getSession().getServletContext().getRealPath("/member/mimg");
+			// 2. 객체
+		MultipartRequest multi = new MultipartRequest(
+				request,
+				path ,
+				1024*1024*10 ,
+				"UTF-8" ,
+				new DefaultFileRenamePolicy() );
+		
+		String mid = (String)request.getSession().getAttribute("login");
+		String mpwd = multi.getParameter("mpwd");
+			System.out.println("mpwd : " + mpwd);
+		String newmpwd = multi.getParameter("newmpwd");
+		String memail = multi.getParameter("newmemail");
+			System.out.println("memail : " + memail);
+		String newmimg = multi.getFilesystemName("newmimg");
+		String defaultimg = multi.getParameter("defaultimg");
+		
+		// 3. 만약에 새로운 첨부파일이 없으면
+		if ( newmimg == null ) { // 기존 이미지 파일 그대로 사용
+			newmimg = MemberDao.getInstance().getMember( mid ).getMimg();
+		} 
+		// 3. 만약에 기본프로필 사용체크 했으면
+		if ( defaultimg.equals("true") ) { // 기본프로필 사용
+			newmimg = null;
+		}
+		
+		boolean result = MemberDao.getInstance().update(mid, mpwd, newmpwd, memail, newmimg);
+		response.getWriter().print(result);
+		
 		
 	}
+
 	// 4. 회원탈퇴
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// 1. 로그인된 회원탈퇴
+			// 1. 로그인된 회원아이디 가져오기 [ 세션(object) ]
+		String mid = (String)request.getSession().getAttribute("login");
+		String mpwd = request.getParameter("mpwd");
+		// 2. dao에게 요청 후 결과 받기
+		boolean result = MemberDao.getInstance().delete(mid , mpwd);
+		
+		// 3. 결과 ajax에게 보내기
+		response.getWriter().print(result);
+			
+	
 	}
 
 }
 
 
-
+/*
+ 
+ 		// 1. 로그인된 회원수정
+			// 필요한 데이터 요청
+		String mid = (String)request.getSession().getAttribute("login");
+			System.out.println("mid : " + mid );
+		String mpwd = request.getParameter("mpwd");
+			System.out.println("mpwd : " + mpwd );
+		String newmpwd = request.getParameter("newmpwd");
+			System.out.println("newmpwd : " + newmpwd);
+		String memail = request.getParameter("memail");
+			System.out.println("memail : " + memail );
+		
+			
+		// 2. dao에게 요청 후 결과 받기
+		boolean result = MemberDao.getInstance().update(mid, mpwd , newmpwd, memail);
+	
+		// 3. 결과 ajax에게 보내기
+		response.getWriter().print(result);
+ 
+ */
 
 
 

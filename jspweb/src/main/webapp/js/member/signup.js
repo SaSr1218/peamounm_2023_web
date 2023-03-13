@@ -264,8 +264,10 @@ function signup(){
 		processData : false ,			
 		success : (r)=>{
 			if( r == 'true'){
-				alert('회원가입성공');
-				location.href="/jspweb/index.jsp"; // 해당 페이지 이동 
+				
+				openModal();
+				
+				//location.href="/jspweb/index.jsp"; // 해당 페이지 이동 
 			}else{ alert('회원가입실패') }
 		}
 	})
