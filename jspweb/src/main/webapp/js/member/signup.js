@@ -116,7 +116,6 @@ function pwdcheck(){
 function pwdconfirmcheck(){
 	let mpwd = document.querySelector('.mpwd').value;
 	let mpwdconfirm = document.querySelector('.mpwdconfirm').value;
-		console.log( ' mpwdconfirm : ' + mpwdconfirm)
 	// 2. 정규표현식 : 영대소문자+숫자 조합 5~20 글자 
 	let mpwdj = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{5,20}$/
 	// 3. 제어
@@ -151,6 +150,7 @@ function getauth(){
 	// ----------------------- 메일 전송 테스트 할 경우 ------------- //
 	
 	// * ajax가 JAVA에게 이메일 전송후 인증코드 받기!
+	/*
 	$.ajax({
 		url : "/jspweb/email" ,
 		method : "post" ,
@@ -165,13 +165,14 @@ function getauth(){
 				`
 	document.querySelector('.authbox').innerHTML = html;
 	auth = r;
-	timer = 180;
+	timer = 179;
 	settimer();
 		}
 	}) // ajax end
+	*/
 
 	// ------------------ 메일 전송 테스트 안되는 경우 --------------- // 
-	/*
+	
 		$.ajax({
 		url : "/jspweb/email" ,
 		method : "post" ,
@@ -186,11 +187,11 @@ function getauth(){
 				`
 	document.querySelector('.authbox').innerHTML = html;
 	auth = 1234;
-	timer = 180;
+	timer = 179;
 	settimer();
 		}
 	})
-	*/
+	
 
 } // getauth end
 
@@ -203,6 +204,7 @@ function settimer(){
 	// setInterval : 특정 시간마다 함수 실행
 		// clearInterval : Interval 종료
 	let timerInter = setInterval( () =>{
+		timer--;
 		let minutes = parseInt(timer / 60) ;   // 분 계산
 		let seconds = parseInt(timer % 60) ; // 분 계산후 나머지 = 초 계산
 		// 한자리수 이면 0 추가
@@ -210,7 +212,7 @@ function settimer(){
 		seconds = seconds < 10 ? "0"+seconds : seconds;
 		let timeHTML = minutes + " : " + seconds; // 시 : 분 구성
 		document.querySelector('.timebox').innerHTML = timeHTML;
-		timer--;
+		
 		if ( timer < 0 ) {
 			clearInterval(timerInter);
 			checkconfirm[2].innerHTML = "인증실패";

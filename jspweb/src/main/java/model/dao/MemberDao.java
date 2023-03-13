@@ -67,15 +67,19 @@ public class MemberDao extends Dao {
 	}
 	
 	// 5. 비밀번호를 제외한 정보 호출
-	public MemberDto getMember( String mid ) {
-		String sql = "select * from member where mid = ?";
+	public MemberDto getMember( String mid ) { // session에 mid가 들어감
+		String sql = "select m.mno , m.mid , m.mimg , m.memail , sum(p.mpamount) as mpoint "
+				+ " from member m , mpoint p "
+				+ " where m.mno = p.mno and m.mid = ?";
 		try {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, mid);
 			rs = ps.executeQuery();
-			if ( rs.next() ) { // 비밀번호 제외
-				MemberDto dto = new MemberDto(rs.getInt(1), rs.getString(2), null , rs.getString(4), rs.getString(5) );
+			if ( rs.next() ) { // 비밀번호 제외 // mno , mid , mimg , memail , mpoint
+				MemberDto dto = new MemberDto(rs.getInt(1), rs.getString(2), null , rs.getString(3), rs.getString(4) );
+				dto.setMpoint(rs.getInt(5)); // 생성자 안만들어서 별도 세팅
 				return dto;
+			
 			}
 		}catch (Exception e) {System.out.println(e);}
 		return null;

@@ -17,7 +17,6 @@
 	
 		<form class="signupForm">	<!-- 폼 전송시 자식 input의 매개변수 식별 : name -->
 			<h3> java community</h3>
-			<p> hi 자린이들 </p>
 			
 			<div class="title">아이디</div>
 			<input onkeyup="idcheck()" maxlength="30" type="text" name="mid" 	class="mid" >			
