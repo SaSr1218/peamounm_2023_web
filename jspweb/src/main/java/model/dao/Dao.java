@@ -18,7 +18,7 @@ public class Dao {
 					"jdbc:mysql://localhost:3306/jspweb" ,
 					"root" ,
 					"1234");
-			System.out.println("[연동성공]");
+			System.out.println("[ super dao 연동성공]");
 		}catch (Exception e) {System.out.println(e);}
 		
 	}

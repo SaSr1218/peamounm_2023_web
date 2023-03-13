@@ -4,5 +4,5 @@ console.log(memberInfo);
 
 document.querySelector('.mid').innerHTML = memberInfo.mid;
 document.querySelector('.memail').innerHTML = memberInfo.memail;
-document.querySelector('.mimg').src='/jspweb/member/mimg/' + memberInfo.mimg;
+document.querySelector('.mimg').src= `/jspweb/member/mimg/${ memberInfo == null ? 'default.webp' : memberInfo.mimg} ` 
 document.querySelector('.mpoint').innerHTML = memberInfo.mpoint;

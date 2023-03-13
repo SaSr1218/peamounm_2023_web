@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.dto.MemberDto;
@@ -15,12 +16,35 @@ public class MemberDao extends Dao {
 	public boolean signup( MemberDto dto ) {
 		String sql = "insert into member(mid,mpwd,memail,mimg)values(?,?,?,?)";
 		try {
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
 			ps.setString( 1 , dto.getMid() );
 			ps.setString( 2 , dto.getMpwd() );
 			ps.setString( 3 , dto.getMemail() );
 			ps.setString( 4 , dto.getMimg() );
-			ps.executeUpdate(); return true; 
+			ps.executeUpdate(); 
+			rs = ps.getGeneratedKeys(); // 방금 생성된 pk값을 rs로 받기
+			if ( rs.next() ) { 
+				int pk = rs.getInt(1);
+				setPint("회원가입축하" , 100 , pk );
+
+			}
+				// 가입 포인트 지급 [ 내용 , 개수 , 방금 회원가입한 회원번호[pk] ]
+				
+				/*
+				 	- inser 이후에 자동으로 생성된 auto key 찾기
+				 	ps = con.prepareStatement(sql);
+				 	1. 아래로 변경
+				 	ps = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
+				 	2. 생성된 pk 결과 담기
+				 	rs = ps.getGeneratedKeys(); // 방금 생성된 pk값을 rs로 받기
+				 	3.
+				 	if ( rs.next() ) { 
+						int pk = rs.getInt(1);
+						setPint("회원가입축하" , 100 , pk );
+					}
+				 
+				 */
+			return true; 
 		}catch (Exception e) {System.out.println(e);}
 		return false;
 	}
@@ -123,6 +147,50 @@ public class MemberDao extends Dao {
 		}catch (Exception e) {System.out.println(e);} 
 		return "false";
 	}
+	
+	// 8. 포인트 함수 [ 1. 지급내용 2. 지급개수 3. 지급대상 ]
+	public boolean setPint( String content , int point , int mno ) {
+		String sql = "insert into mpoint ( mpcomment , mpamount , mno) values ( ? , ? , ? ) ";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, content);
+			ps.setInt(2, point);
+			ps.setInt(3, mno);
+			ps.executeUpdate();
+			return true;
+		}catch (Exception e) {System.out.println(e);}
+		return false;
+	} 
+	
+	// 9. 회원탈퇴 [ 인수 : mid , 반환 : 성공/실패 ]
+	public boolean delete( String mid ) {
+		String sql = "delete from member where mid = ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mid);
+			int count = ps.executeUpdate(); // 삭제된 레코드수 반환 ( 0개 삭제해도 성공되긴 함)
+			if ( count == 1 ) { return true; } // 레코드 1개 삭제 성공시 true
+		}catch (Exception e) {System.out.println(e);}
+		return false;
+	}
+	
+	// 10. 회원수정
+	public boolean update( String mid , String mpwd , String memail ) {
+		String sql = "update member set mpwd = ? , memail = ? where mid = ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mpwd);
+			ps.setString(2, memail);
+			ps.setString(3, mid);
+			int count = ps.executeUpdate(); // 수정된 레코드 수 반환 ( 0개 수정해도 성공되긴 함)
+			if ( count == 1 ) { return true; } // 레코드 1개 수정 성공시 true
+		}catch (Exception e) {System.out.println(e);}
+		return false;
+	}
+	
+	
+	
 	
 	
 }
