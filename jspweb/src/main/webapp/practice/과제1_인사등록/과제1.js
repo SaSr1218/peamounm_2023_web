@@ -1,9 +1,6 @@
 // 1. 인사 등록
 function create_employee(){
 	
-	let asd = document.querySelector('.empSdate').value;
-	console.log(asd);
-	
 	let signupForm = document.querySelectorAll('.signupForm')[0];
 	let signupFormData = new FormData( signupForm );
 
@@ -17,7 +14,6 @@ function create_employee(){
 		success : (r) => {
 			if ( r == 'true' ){
 				alert('회원가입 성공!')
-				print_employee();
 			}
 			
 			
@@ -25,15 +21,12 @@ function create_employee(){
 	}) // ajax end
 } // create_employee end
 
-// 2. 인사 출력
-print_employee();
+// 2. 인사 전체 출력
 function print_employee(){
 	$.ajax({
 		url : "/jspweb/employee",
 		method : "get" ,
-		success : (r) => {
-			console.log('통신성공'); console.log(r);
-			
+		success : (r) => {			
 			let html = `<tr>
 							<th width=10%> 사원번호 </th>
 							<th width=10%> 사원사진 </th>
@@ -49,7 +42,7 @@ function print_employee(){
 			r.forEach( ( o , i ) =>{
 				html += `<tr>
 							<td> ${o.empNo} </td>
-							<td> ${o.empImg} </td>
+							<td> <img width=100% src="/jspweb/member/eimg/${ o.empImg == null ? 'default.webp' : o.empImg}">  </td>
 							<td> ${o.empName} </td>
 							<td> ${o.empGrade} </td>
 							<td> ${o.empConstruct} </td>
@@ -65,7 +58,34 @@ function print_employee(){
 	})
 }
 
+// 3. 인사 직무(부서별) 출력
+function print_job(){
+	let job = prompt('찾을 부서를 입력해주세요.' , '인사팀');
+	
+	$.ajax({
+		url : "/jspweb/employee" ,
+		method : "get" ,
+		success : (r) => {
+			let html = `<tr>
+							<th width=10%> 부서 </th>
+							<th width=10%> 사원명 </th>
+							<th width=10%> 직급 </th>
+						</tr>`
+			r.forEach( ( o , i ) =>{
+				html += `<tr>
+							<td> ${o.empDepart} </td>
+							<td> ${o.empName} </td>
+							<td> ${o.empGrade} </td>
+						</tr>`
+			}); // for end
+			document.querySelector('.empList').innerHTML = html;
+		}
+	})
+	
+}
 
+
+// 4. 퇴사자 출력
 
 
 

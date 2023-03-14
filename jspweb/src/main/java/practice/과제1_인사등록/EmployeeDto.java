@@ -9,14 +9,13 @@ public class EmployeeDto {
 	private String 	empConstruct;		// 고용형태
 	private String	empDepart;	 		// 부서
 	private String 	empSdate;	 		// 입사일
-	private String		empLdate;			// 퇴사일
+	private String	empLdate;			// 퇴사일
 	private String	empLcomment;		// 퇴사사유
 	
 	
 	public EmployeeDto() { }
-
-
 	
+	// 전체 출력
 	public EmployeeDto(int empNo, String empImg, String empName, String empGrade, String empConstruct, String empDepart,
 			String empSdate, String empLdate, String empLcomment) {
 		super();
@@ -31,16 +30,23 @@ public class EmployeeDto {
 		this.empLcomment = empLcomment;
 	}
 
-
+	// 직무(부서별) 출력
+	public EmployeeDto(String empName, String empGrade, String empDepart) {
+		super();
+		this.empName = empName;
+		this.empGrade = empGrade;
+		this.empDepart = empDepart;
+	}
+	
+	// 퇴사자 출력
+	
 
 	@Override
 	public String toString() {
 		return "EmployeeDto [empNo=" + empNo + ", empImg=" + empImg + ", empName=" + empName + ", empGrade=" + empGrade
-				+ ", empContruct=" + empConstruct + ", empDepart=" + empDepart + ", empSdate=" + empSdate + ", empLdate="
+				+ ", empConstruct=" + empConstruct + ", empDepart=" + empDepart + ", empSdate=" + empSdate + ", empLdate="
 				+ empLdate + ", empLcomment=" + empLcomment + "]";
 	}
-
-
 
 	public int getEmpNo() {
 		return empNo;

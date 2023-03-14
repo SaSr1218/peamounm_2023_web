@@ -35,6 +35,12 @@
 			<button onclick="create_employee()" type="button"> 인사 등록 </button>
 		</form>
 		
+		
+		<h3> 인사 출력 </h3>
+		<button onclick="print_employee()" type="button"> 전체 출력</button>
+		<button onclick="print_job()" type="button"> 직무(부서별) </button>
+		<button onclick="print_leave()" type="button"> 퇴사자 </button>
+		
 		<table class="empList" border="1"></table>
 
 		

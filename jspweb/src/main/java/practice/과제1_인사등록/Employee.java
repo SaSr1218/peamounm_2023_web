@@ -33,7 +33,7 @@ public class Employee extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 현재 서버에 배포된 프로젝트 내 폴더 경로
-		String uploadpath = request.getServletContext().getRealPath("/member/eimg");
+		String uploadpath = request.getSession().getServletContext().getRealPath("/member/eimg");
 		
 		// 업로드
 		MultipartRequest multi = new MultipartRequest(
@@ -46,13 +46,13 @@ public class Employee extends HttpServlet {
 		String empImg = multi.getFilesystemName("empImg");
 		String empName = multi.getParameter("empName");
 		String empGrade = multi.getParameter("empGrade");
-		String empContruct = multi.getParameter("empContruct");
+		String empConstruct = multi.getParameter("empConstruct");
 		String empDepart = multi.getParameter("empDepart");
 		String empSdate = multi.getParameter("empSdate");
 		String empLdate = multi.getParameter("empLdate");
 		String empLcomment = multi.getParameter("empLcomment");
 		
-		EmployeeDto dto = new EmployeeDto(0, empImg, empName, empGrade, empContruct, empDepart, empSdate, empLdate, empLcomment);
+		EmployeeDto dto = new EmployeeDto(0, empImg, empName, empGrade, empConstruct, empDepart, empSdate, empLdate, empLcomment);
 		
 		boolean result = EmployeeDao.getInstance().signup(dto);
 		response.getWriter().print(result);

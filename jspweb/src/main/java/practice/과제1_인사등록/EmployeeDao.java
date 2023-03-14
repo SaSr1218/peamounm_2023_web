@@ -45,7 +45,7 @@ public class EmployeeDao {
 		return false;
 	} // 인사 등록 end
 
-	// 2. 인사 출력
+	// 2.1 인사 전체출력
 	public ArrayList<EmployeeDto> getEmployeeList(){
 		ArrayList<EmployeeDto> list = new ArrayList<>();
 		String sql = "select * from emp_info";
@@ -64,8 +64,21 @@ public class EmployeeDao {
 		return list;
 	}
 	
-	
-	
+	// 2.2 인사 직무(부서별) 출력
+	public ArrayList<EmployeeDto> getEmployeejob( String empDepart ){
+		ArrayList<EmployeeDto> list2 = new ArrayList<>();
+		String sql = "select e.empDepart , e.empGrade , e.empName  from emp_info e where empDepart = ? ";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, empDepart);
+			rs = ps.executeQuery();
+			while ( rs.next() ) {
+				EmployeeDto dto2 = new EmployeeDto(rs.getString(1), rs.getString(2), rs.getString(3));
+			list2.add(dto2);
+			}
+		}catch (Exception e) {System.out.println(e);}
+		return list2;
+	} 
 	
 	
 	
