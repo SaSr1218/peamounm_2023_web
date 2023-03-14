@@ -89,7 +89,6 @@ public class Info extends HttpServlet {
 		response.getWriter().print(result);
 		
 		*/
-		
 	}
     
     // 2. 회원1명 / 회원 여러명 호출 
@@ -120,10 +119,8 @@ public class Info extends HttpServlet {
 		
 		String mid = (String)request.getSession().getAttribute("login");
 		String mpwd = multi.getParameter("mpwd");
-			System.out.println("mpwd : " + mpwd);
 		String newmpwd = multi.getParameter("newmpwd");
 		String memail = multi.getParameter("newmemail");
-			System.out.println("memail : " + memail);
 		String newmimg = multi.getFilesystemName("newmimg");
 		String defaultimg = multi.getParameter("defaultimg");
 		
@@ -138,8 +135,6 @@ public class Info extends HttpServlet {
 		
 		boolean result = MemberDao.getInstance().update(mid, mpwd, newmpwd, memail, newmimg);
 		response.getWriter().print(result);
-		
-		
 	}
 
 	// 4. 회원탈퇴
@@ -154,11 +149,11 @@ public class Info extends HttpServlet {
 		
 		// 3. 결과 ajax에게 보내기
 		response.getWriter().print(result);
-			
-	
 	}
 
-}
+
+	
+} // eenndd
 
 
 /*

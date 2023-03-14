@@ -19,7 +19,6 @@ function setDelete(){
 		method : "delete" ,
 		data : { "mpwd" : document.querySelector('.mpwd').value } ,
 		success : (r) =>{
-			console.log('통신성공!'); console.log(r);
 			if ( r == 'true' ){
 				alert('회원탈퇴성공');
 				location.href="/jspweb/member/logout.jsp";
