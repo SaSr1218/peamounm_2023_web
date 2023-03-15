@@ -48,8 +48,6 @@ public class Boardinfo extends HttpServlet {
 			response.getWriter().print(json);
 		}
 		
-
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

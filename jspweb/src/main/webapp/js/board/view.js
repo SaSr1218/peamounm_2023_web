@@ -30,6 +30,7 @@ function getBoard(){
 
 // 2. 다운로드 [ 다운로드할 파일명 ]
 function bdownload( bfile ){
+	/*
 	$.ajax({
 		url : "/jspweb/filedownload" ,
 		method : "get" ,
@@ -39,8 +40,20 @@ function bdownload( bfile ){
 			
 		}
 	}) // ajax end
+	*/
+	location.href="/jspweb/filedownload?bfile="+bfile;
+	
 } // 파일 다운로드 end 
 
+/*
+	
+	전송 방법
+		HTML 	:	1. <form>	2. <a href="">
+		JS		:	1. location.href=""
+		JQUERY	:	1. $.ajax({ })
+		servlet	:	1. response.getWriter.print();
+					2. response.sendRedirect('경로');
+ */
 
 
 
