@@ -9,12 +9,12 @@
 <body>
 
  
-	<%
+<%-- 	<%
 		// jsp로 페이지 막기
 		Object o = request.getSession().getAttribute("login");
 		if ( o == null ) { response.sendRedirect("/jspweb/member/login.jsp"); }
-	%>
-
+	%>  --%>
+	
 	<%@ include file = "/header.jsp" %>
 
 

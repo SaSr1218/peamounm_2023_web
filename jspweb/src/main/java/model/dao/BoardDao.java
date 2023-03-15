@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.util.ArrayList;
+
 import model.dto.BoardDto;
 
 public class BoardDao extends Dao {
@@ -22,6 +24,71 @@ public class BoardDao extends Dao {
 		}catch (Exception e) {System.out.println(e);}
 		return false;
 	}
+	
+	// 2. 모든 글 출력
+	public ArrayList<BoardDto> getBoardList(){
+		ArrayList<BoardDto> list = new ArrayList<>();
+		String sql = "select b.* , m.mid from member m natural join board b";
+	
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while ( rs.next() ) {
+				BoardDto dto = new BoardDto(
+						rs.getInt(1), 	 rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getInt(6), 
+						rs.getInt(7), 	 rs.getInt(8), 	  rs.getInt(9), 
+						rs.getInt(10),   rs.getString(11) );
+					list.add(dto);
+			}
+			
+		}catch (Exception e) {System.out.println(e);}
+		return list;
+	}
+	
+	// 3. 개별 글 조회 출력
+	public BoardDto getBoard( int bno ){
+		ArrayList<BoardDto> list = new ArrayList<>();
+		String sql = "select b.* , m.mid , m.mimg from member m natural join board b where b.bno = ? ";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, bno);
+			rs = ps.executeQuery();
+			if ( rs.next() ) {
+				BoardDto dto = new BoardDto(
+						rs.getInt(1), 	 rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getInt(6), 
+						rs.getInt(7), 	 rs.getInt(8), 	  rs.getInt(9), 
+						rs.getInt(10),   rs.getString(11) );
+				return dto;
+			}
+			
+		}catch (Exception e) {System.out.println(e);}
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

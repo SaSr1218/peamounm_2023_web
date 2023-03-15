@@ -1,12 +1,15 @@
 package controller.board;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -21,7 +24,32 @@ public class Boardinfo extends HttpServlet {
     public Boardinfo() { super(); }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int type = Integer.parseInt(request.getParameter("type") ); 
+		if ( type == 1 ) {
+			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList();
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonArray = mapper.writeValueAsString(result);
+			// 응답
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json");
+			response.getWriter().print(jsonArray);
+		}else if ( type == 2) { // 2. 개별 출력
+			int bno = Integer.parseInt(request.getParameter("bno") );
+			// dao 처리
+			BoardDto result = BoardDao.getInstance().getBoard(bno);
+			
+			// 형변환 처리
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(result);
+			// 응답 처리
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json");
+			response.getWriter().print(json);
+		}
+		
 
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,7 +79,7 @@ public class Boardinfo extends HttpServlet {
 			// 2. mid ---> mno ( MemberDao )
 			int mno = MemberDao.getInstance().getMno(mid);
 			// 3. 유효성검사 ( 로그인하지 않았으면 글쓰기 불가능 )
-			if ( mno > 0 ) {
+			if ( mno < 1 ) {
 				response.getWriter().print("false");
 			}
 		// Dto

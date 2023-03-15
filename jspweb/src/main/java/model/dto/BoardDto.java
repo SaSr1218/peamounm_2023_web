@@ -13,7 +13,9 @@ public class BoardDto {
     private int mno;
     private int cno;
 	
+    // 추가 필드
     private String mid;
+    
     
     // 빈 생성자
     public BoardDto() { }
@@ -44,7 +46,7 @@ public class BoardDto {
 		this.cno = cno;
 	}
 	
-	// 출력용
+	// 전체 출력용
 	public BoardDto(int bno, String btitle, String bcontent, String bfile, String bdate, int bview, int bgood, int bbad,
 			int mno, int cno, String mid) {
 		super();
@@ -60,6 +62,8 @@ public class BoardDto {
 		this.cno = cno;
 		this.mid = mid;
 	}
+	
+	// 개별 출력용
 	
 
 	@Override
