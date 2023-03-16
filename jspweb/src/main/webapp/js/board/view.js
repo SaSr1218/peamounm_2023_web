@@ -21,6 +21,7 @@ function getBoard(){
 				document.querySelector('.bfile').innerHTML = '첨부파일없음';
 			}else{ // 인수 넘기고자 할때 ' ' 로 문자 처리 해주기( . 이 JS에서 접근연산자라서 )
 				html = `${r.bfile}<button onclick="bdownload( '${ r.bfile }' )" type="button"> 다운로드 </button>`
+					// <a href="/jspweb/filedownload?bfile=${r.bfile}"> 다운로드 </a> 이렇게 보내도 됨!
 				document.querySelector('.bfile').innerHTML = html;
 			}
 		}

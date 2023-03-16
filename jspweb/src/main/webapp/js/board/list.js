@@ -1,13 +1,15 @@
 
 // 1. 모든 게시물 출력
-getBoardList();
-function getBoardList(){
+getBoardList(1);
+function getBoardList( page ){
+	// 해당함수로부터 페이징번호 받기
+	console.log('해당페이지 : ' + page);
 	$.ajax({
 		url : "/jspweb/board/info" ,
 		method : "get" ,
-		data : { "type" : 1 } , // 1 : 전체출력 / 2 : 개별출력
+		data : { "type" : 1 , "page" : page } , // 1 : 전체출력 / 2 : 개별출력
 		success : (r) => {
-				
+				console.log('통신성공'); console.log(r);
 				let html = `<tr>
 							<th> 게시물번호 </th>
 							<th> 게시물제목 </th>
@@ -16,9 +18,8 @@ function getBoardList(){
 							<th> 조회수 </th>
 							<th> 좋아요 </th>
 							<th> 싫어요 </th>
-							
 						</tr>`
-				r.forEach ( ( o , i) => {
+				r.boardList.forEach ( ( o , i ) => {
 				html += `<tr>
 							<td> ${ o.bno } </td>
 							<td> <a href="/jspweb/board/view.jsp?bno=${ o.bno }">${ o.btitle } </a></td>
@@ -28,9 +29,25 @@ function getBoardList(){
 							<td> ${ o.bgood } </td>
 							<td> ${ o.bbad } </td>			
 						</tr>`		
-				});
-			document.querySelector('.boardTable').innerHTML = html;
-		}
+				})
+				document.querySelector('.boardTable').innerHTML = html;
+				// ---------------- 페이지 버튼 출력 ---------------- //
+				html = '';
+				// 이전
+					html += 
+						`<button onclick="getBoardList(${page-1})" type="button"> 이전 </button>`				
+				// 페이징 번호 버튼 틀
+				for ( let i = 1 ; i<=r.totalpage ; i++ ){
+					html += 
+						`<button onclick="getBoardList(${i})" type="button"> ${i} </button>`
+				}
+				// 다음
+					html += 
+						`<button onclick="getBoardList(${page+1})" type="button"> 다음 </button>`				
+				
+				document.querySelector('.boardTable').innerHTML = html;
+		} // success end
+		
 	}) // ajax end
 } // 모든 게시물 출력 end
 

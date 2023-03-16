@@ -18,6 +18,8 @@
 		<table class="boardTable table table-hover">
 		
 		</table>
+		
+
 	
 	</div>
 

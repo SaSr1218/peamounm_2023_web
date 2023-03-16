@@ -16,6 +16,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import model.dao.BoardDao;
 import model.dao.MemberDao;
 import model.dto.BoardDto;
+import model.dto.PageDto;
 
 @WebServlet("/board/info")
 public class Boardinfo extends HttpServlet {
@@ -26,14 +27,46 @@ public class Boardinfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int type = Integer.parseInt(request.getParameter("type") ); 
-		if ( type == 1 ) {
-			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList();
+		if ( type == 1 ) { // 전체 출력
+			
+			// --------------- 페이징 처리 --------------- //
+			// 1. 현재페이지[ 요청 ] , 2. 현재페이지 [ 게시물시작 , 게시물끝 ]
+			int page = Integer.parseInt(request.getParameter("page") );
+			int listsize = 2;
+			int startrow = (page-1)*listsize;// 해당 페이지에서의 게시물 시작번호
+			
+			// -------------- 페이징 버튼 만들기 ----------- //
+			// 1. 전체페이지수 [ 총게시물레코드수/페이지당 표시수 ] , 2. 페이지 표시할 최대 버튼수 , 3. 시작버튼 번호
+			int totalsize = BoardDao.getInstance().gettotalsize();
+			int totalpage = totalsize % listsize == 0 ? totalsize/listsize : totalsize/listsize+1;
+			
+			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList( startrow , listsize );
+		
+					/*
+					  	총 게시물수 = 10 	, 페이지당 표시할 게시물수 = 3 
+					  	총 레코드수 = 10	, 총 레코드의 인덱스 : 0~9
+					  	1. 총 페이지수 = 012 , 345 , 678 , 9 ... --> 4
+					  	
+					  		총 레코드수/페이지당표시게시물수
+					  			1. 나머지가 없으면 => 몫		9/3 -> 3페이지
+					  			2. 나머지가 있으면 => 몫+1 	8/3	-> 2페이지 + 1
+					  		
+					  	1. 총 페이지수 = 123 , 456 , 789 , ...					  	
+					  	2. 페이지별 게시물시작 번호 찾기
+					  			1페이지 요청 -> (1-1)*3 => 0
+					  			2페이지 요청 -> (2-1)*3 => 3
+					  			3페이지 요청 -> (3-1)*3 => 6
+					 */
+			PageDto pageDto = new PageDto(page, listsize, startrow, totalsize, totalpage, result);
+			
+			// java --> js 형식 변환
 			ObjectMapper mapper = new ObjectMapper();
-			String jsonArray = mapper.writeValueAsString(result);
+			String jsonArray = mapper.writeValueAsString(pageDto);
 			// 응답
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("application/json");
 			response.getWriter().print(jsonArray);
+			
 		}else if ( type == 2) { // 2. 개별 출력
 			int bno = Integer.parseInt(request.getParameter("bno") );
 			// dao 처리

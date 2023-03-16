@@ -57,6 +57,7 @@ public class Filedownload extends HttpServlet {
 					// 1. response 응답객체에서 출력스트림 호출해서 파일출력스트림객체 만들기
 					// response.getOutputStream() : HTTP 스트림 단위[바이트] 전송
 		BufferedOutputStream fout = new BufferedOutputStream( response.getOutputStream() );
+			// 이것도 가능 : ServletOutputStream fout =  response.getOutputStream();
 					// 2. 파일입력스트림객체에서 읽어온 바이트들[바이트배열]
 					// 파일출력스트림객체 write() : 해당 배열내 바이트를 출력하는 함수
 		fout.write(bytes);
