@@ -72,15 +72,51 @@ select m.mno , m.mid , m.mimg , m.memail , sum(p.mpamount) as mpoint
 from member m natural join mpoint p 
 where  m.mid = 'qwe123';
 
-select * from member;
-select * from friend;
-select * from mpoint;
-select * from category;
-select * from board;
-
 -- 1. 카테고리 임시 대입
 insert into category (cname) values ( '공지사항' );
 insert into category (cname) values ( '커뮤니티' );
 insert into category (cname) values ( 'QnA' );
 insert into category (cname) values ( '노하우' );
+
+-- 자연조인 [ pk와 fk필드가 1개씩 존재하는 테이블에서 자주 사용 ]
+select * from member m natural join board b; 
+-- A테이블명 join B테이블명 on 조인조건 [ on 키워드를 사용해 교집합조건 사용해 조건들 구분 ]
+select * from member m join board b on m.mno = b.mno;
+
+-- 조건 없는 출력
+select b.* , m.mid from member m natural join board b;
+-- 개별 출력
+select b.* , m.mid , m.mimg from member m natural join board b where b.bno = 2 ;
+
+-- 특정 개수만 출력 [ 페이징 조건 ] limit 
+select b.* , m.mid , m.mimg from member m natural join board b limit 0 , 3; -- 1페이지
+
+-- 레코드 수 구하기 count(*)
+select count(*) from member m natural join board b;
+
+-- 조건식 [ 같다 ]
+select * from board where btitle = '4';
+-- 조건식 [ 포함 ]	필드명 like %데이터%
+select * from board where btitle like '%0%'; -- 0이 포함된 제목 레코드 찾기
+select * from board where bcontent like '%0%';
+select * from board where btitle like '_1_'; -- X1X 가 제목인 레코드 찾기
+select board , m.mid from board where mid like 'qwe';
+
+-- 결론
+	-- 1. 검색이 없을때 레코드수 구하기
+    select count(*) from member m natural join board b;
+    -- 2. 검색이 있을때 레코드수 구하기
+    select count(*) from member m natural join board b where b.btitle like '%1%';
+    -- 3. 자바에서 사용할 경우
+--  "select count(*) from member m natural join board b where "+key+" like '%"+keyword+"%'";    
+
+	-- 1. 검색이 없을때 모든 글 출력
+    select b.* , m.mid from member m natural join board b limit ? , ?; 
+    -- 2. 검색이 있을때 모든 글 출력
+    select b.* , m.mid from member m natural join board b where b.btitle like '%1%' order by b.bdate desc limit 0 ,3  ;
+    -- 3. 자바에서 사용할 경우
+-- 	"select b.* , m.mid from member m natural join board b where "+ key +" like '%"+keyword+"%' order by b.bdate desc limit 0 ,3 " ;
+
+-- 카테고리별 총 게시물 개수 구하기
+    select count(*)  from board where cno = 1;
 

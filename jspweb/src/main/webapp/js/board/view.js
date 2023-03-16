@@ -10,7 +10,10 @@ function getBoard(){
 		data : { "type" : 2 , "bno" : bno } , // 2 : 개별출력
 		success : (r) => {
 			
-			let html = `${r.bdate} / ${r.bview} / ${r.bgood} / ${r.bbad}`
+			let html = `${r.bdate} /
+						${r.bview} / 
+						<button onclick="bIncrease(2)">${r.bgood} </button> /
+						<button onclick="bIncrease(3)">${r.bbad}  </button>`
 			
 			document.querySelector('.infobox').innerHTML = html;
 			document.querySelector('.pimgbox').innerHTML = r.mid;
@@ -55,6 +58,33 @@ function bdownload( bfile ){
 		servlet	:	1. response.getWriter.print();
 					2. response.sendRedirect('경로');
  */
+
+// 3. 조회수(1) , 좋아요(2) , 싫어요(3)
+bIncrease(1); // 해당 jsp/js가 열리는순간 조회수 증가
+function bIncrease( type ){
+	let bno = document.querySelector('.bno').innerHTML;
+	$.ajax({
+		url : "/jspweb/board/view" ,
+		method : "get" ,
+		data : { "type" : type , "bno" : bno } ,
+		success : (r) => {
+			getBoard();
+		}
+	})
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
