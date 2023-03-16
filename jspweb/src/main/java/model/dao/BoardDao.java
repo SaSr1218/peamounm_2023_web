@@ -94,23 +94,7 @@ public class BoardDao extends Dao {
 		}catch (Exception e) {System.out.println(e);}
 		return null;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

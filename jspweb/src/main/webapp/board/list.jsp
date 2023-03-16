@@ -24,6 +24,15 @@
 		
 		<a href="write.jsp"> <h6> 글쓰기 </h6> </a>
 		
+		<button onclick="setsearch()" type="button"> 전체보기[검색제거] </button>
+		<div class="searchcount"> 총 게시물수 : </div>
+		
+		<select onchange="setlistsize()" class="listsize">
+			<option> 3 </option>
+			<option> 5 </option>
+			<option> 10 </option>
+		</select>
+		
 		<div>
 			현재 페이지 번호 : <span class="now_page"> </span>
 		</div>

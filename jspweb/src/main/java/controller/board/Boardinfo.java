@@ -43,7 +43,8 @@ public class Boardinfo extends HttpServlet {
 			// --------------- 페이징 처리 --------------- //
 			// 1. 현재페이지[ 요청 ] , 2. 현재페이지 [ 게시물시작 , 게시물끝 ]
 			int page = Integer.parseInt(request.getParameter("page") );
-			int listsize = 3;
+			// int listsize = 3; // 게시물 개수 체크 만들기 전
+			int listsize = Integer.parseInt(request.getParameter("listsize") );
 			int startrow = (page-1)*listsize;// 해당 페이지에서의 게시물 시작번호
 			
 			// -------------- 페이징 버튼 만들기 ----------- //

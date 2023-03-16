@@ -5,7 +5,8 @@ let pageObject = {
 	key : "" ,
 	keyword : "" , 
 	type : 1 ,		// 1 : 전체출력 / 2 : 개별출력
-	cno : document.querySelector('.cno').value
+	cno : document.querySelector('.cno').value ,
+	listsize : 3
 };
 
 // 카테고리 제목 넣어주기
@@ -71,6 +72,8 @@ function getBoardList( page ){
 						`<button onclick="getBoardList(${page+1})" type="button"> 다음 </button>`				
 
 				document.querySelector('.pagebox').innerHTML = html;
+				// -------------------- 총 게시물 수 출력 ------------- //
+				document.querySelector('.searchcount').innerHTML = `게시물 수 : ${r.totalsize}`;
 		} // success end
 		
 	}) // ajax end
@@ -101,11 +104,23 @@ function getsearch(){
 	getBoardList(1);
 }
 
+
+// 3. 검색 풀기 : 전체보기
+function setsearch(){
+	pageObject.key = '';
+	pageObject.keyword = '';
+	getBoardList(1);
+}
+
+// 4. 화면에 표시할 게시물 개수 변경 함수
+function setlistsize(){
+	let listsize = document.querySelector('.listsize').value;
+	pageObject.listsize = listsize;
+	getBoardList(1);
+}
+
+
 // 전체 게시물 출력 순서 = 페이징 처리 -> 검색 처리(key , keyword) -> 카테고리
-
-
-
-
 
 
 
