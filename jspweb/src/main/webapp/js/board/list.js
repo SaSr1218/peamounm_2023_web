@@ -1,15 +1,36 @@
 
+// pageObject : 현재 페이지 , 검색 , 전송타입 보관된 객체
+let pageObject = {
+	page : 1 ,		// page : 검색할 페이지
+	key : "" ,
+	keyword : "" , 
+	type : 1 ,		// 1 : 전체출력 / 2 : 개별출력
+	cno : document.querySelector('.cno').value
+};
+
+// 카테고리 제목 넣어주기
+let cnameHTML = '';
+if ( pageObject.cno == 1 ){ cnameHTML = '공지사항'; }
+if ( pageObject.cno == 2 ){ cnameHTML = '커뮤니티'; }
+if ( pageObject.cno == 3 ){ cnameHTML = 'QnA'; }
+if ( pageObject.cno == 4 ){ cnameHTML = '노하우'; }
+document.querySelector('.cname').innerHTML = cnameHTML;
+
+
 // 1. 모든 게시물 출력
 getBoardList(1);
 function getBoardList( page ){
 	// 해당함수로부터 페이징번호 받기
 	console.log('해당페이지 : ' + page);
+	pageObject.page = page;
+	document.querySelector('.now_page').innerHTML = page;
+	console.log(pageObject)
 	$.ajax({
 		url : "/jspweb/board/info" ,
 		method : "get" ,
-		data : { "type" : 1 , "page" : page } , // 1 : 전체출력 / 2 : 개별출력
+		data :  pageObject  , 
 		success : (r) => {
-				console.log('통신성공'); console.log(r);
+			console.log('통성'); console.log(r);
 				let html = `<tr>
 							<th> 게시물번호 </th>
 							<th> 게시물제목 </th>
@@ -72,7 +93,15 @@ function getBoardList( page ){
 		
 */
 
+function getsearch(){
+	// 입력받은 데이터를 전역객체내 필드에 대입
+	pageObject.key = document.querySelector('.key').value;
+	pageObject.keyword = document.querySelector('.keyword').value;
+	// * 게시물리스트 호출
+	getBoardList(1);
+}
 
+// 전체 게시물 출력 순서 = 페이징 처리 -> 검색 처리(key , keyword) -> 카테고리
 
 
 

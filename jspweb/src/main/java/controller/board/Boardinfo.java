@@ -29,6 +29,17 @@ public class Boardinfo extends HttpServlet {
 		int type = Integer.parseInt(request.getParameter("type") ); 
 		if ( type == 1 ) { // 전체 출력
 			
+			// --------------- 카테고리 별 출력 ---------- //
+			// 1. 카테고리 매개변수 요청 [ cno ] 2. gettotalsize() / getBoardList() 조건 전달
+			int cno = Integer.parseInt(request.getParameter("cno") );
+			
+			
+			// --------------- 검색 처리 ---------------- //
+			// 1. 검색에 필요한 매개변수 요청 [ key , keyword ] , 2. gettotalsize/getBoardList 조건 전달
+			String key = request.getParameter("key");	
+			String keyword = request.getParameter("keyword");	
+		
+			
 			// --------------- 페이징 처리 --------------- //
 			// 1. 현재페이지[ 요청 ] , 2. 현재페이지 [ 게시물시작 , 게시물끝 ]
 			int page = Integer.parseInt(request.getParameter("page") );
@@ -37,7 +48,11 @@ public class Boardinfo extends HttpServlet {
 			
 			// -------------- 페이징 버튼 만들기 ----------- //
 			// 1. 전체페이지수 [ 총게시물레코드수/페이지당 표시수 ] , 2. 페이지 표시할 최대 버튼수 , 3. 시작버튼 번호/마지막번호 버튼
-			int totalsize = BoardDao.getInstance().gettotalsize();
+				// 1. 검색이 없을때
+			// int totalsize = BoardDao.getInstance().gettotalsize();
+				// 2. 검색이 없을때
+			int totalsize = BoardDao.getInstance().gettotalsize( key , keyword , cno);
+			
 			int totalpage = totalsize % listsize == 0 ? totalsize/listsize : totalsize/listsize+1;
 			
 			int btnsize = 5; // 최대 페이징 버튼 출력수
@@ -55,8 +70,11 @@ public class Boardinfo extends HttpServlet {
 			// * 마지막 버튼수가 총페이지 수보다는 커지지 못하게 막기 [ 마지막 페이지는 총 페이지수로 대체 ]
 			if ( endbtn > totalpage ) endbtn = totalpage;
 			
-			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList( startrow , listsize );
-		
+				// 1. 검색이 없을때
+			// ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList( startrow , listsize );
+				// 2. 검색이 있을때
+			ArrayList<BoardDto> result = BoardDao.getInstance().getBoardList(startrow, listsize , key , keyword , cno );
+					
 					/*
 					  	총 게시물수 = 10 	, 페이지당 표시할 게시물수 = 3 
 					  	총 레코드수 = 10	, 총 레코드의 인덱스 : 0~9

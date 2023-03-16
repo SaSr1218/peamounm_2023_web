@@ -26,11 +26,13 @@
 			</div>
 			<!-- 본메뉴 -->
 			<ul class="mainmenu">
-				<li> <a href="/jspweb/board/list.jsp"> 커뮤니티 </a> </li>
-				<li> <a href="#"> 기능메뉴2 </a> </li>
-				<li> <a href="#"> 기능메뉴3 </a> </li>
-				<li> <a href="#"> 기능메뉴4 </a> </li>
-				<li> <a href="#"> 기능메뉴5 </a> </li>
+				<li> <a href="/jspweb/board/list.jsp?cno=1"> 공지사항 </a> </li>
+				<li> <a href="/jspweb/board/list.jsp?cno=2"> 커뮤니티 </a> </li>
+				<li> <a href="/jspweb/board/list.jsp?cno=3"> QnA </a> </li>
+				<li> <a href="/jspweb/board/list.jsp?cno=4"> 노하우 </a> </li>
+				<li> <a href="#"> 기능5 </a> </li>
+				<li> <a href="#"> 기능6 </a> </li>
+				<li> <a href="#"> 기능7 </a> </li>
 			</ul>
 			<!-- 서브메뉴 -->
 			<div class="submenu">

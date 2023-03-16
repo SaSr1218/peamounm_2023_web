@@ -25,8 +25,14 @@ public class BoardDao extends Dao {
 		return false;
 	}
 	// 2-2 게시물/레코드 수 구하기
-	public int gettotalsize() {
-		String sql = "select count(*) from member m natural join board b;";
+	public int gettotalsize( String key , String keyword , int cno) {
+		String sql = "";
+		if( key.equals("") && keyword.equals("") ) { // 검색 존재 X
+			sql = "select count(*) from member m natural join board b where b.cno = "+cno; 
+		}else { // 검색 존재 O
+			sql = "select count(*) from member m natural join board b "
+					+ " where "+key+" like '%"+keyword+"%' and b.cno="+cno; 
+		}
 		try {
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -36,9 +42,18 @@ public class BoardDao extends Dao {
 	}
 	
 	// 2. 모든 글 출력
-	public ArrayList<BoardDto> getBoardList( int startrow , int lisisize ){
+	public ArrayList<BoardDto> getBoardList( int startrow , int lisisize , String key , String keyword , int cno ){
 		ArrayList<BoardDto> list = new ArrayList<>();
-		String sql = "select b.* , m.mid from member m natural join board b limit ? , ? ";
+		String sql = "";
+		if ( key.equals("") && keyword.equals("") ) { // 검색 존재 X
+			sql = "select b.* , m.mid from member m natural join board b "
+					+ " where b.cno = "+cno
+					+ " order by b.bdate desc limit ? , ? ";
+		}else { // 검색 존재 O
+			sql = 	"select b.* , m.mid from member m natural join board b "
+					+ " where "+key+" like '%"+keyword+"%' and b.cno = "+cno
+					+ " order by b.bdate desc limit ? , ? " ;
+		}
 	
 		try {
 			ps = con.prepareStatement(sql);
