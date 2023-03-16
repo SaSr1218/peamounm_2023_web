@@ -32,20 +32,24 @@ function getBoardList( page ){
 				})
 				document.querySelector('.boardTable').innerHTML = html;
 				// ---------------- 페이지 버튼 출력 ---------------- //
-				html = '';
+				html = ''; // 기존에 들어있던 내용 제거
 				// 이전
-					html += 
-						`<button onclick="getBoardList(${page-1})" type="button"> 이전 </button>`				
+					html += page <=1 ?
+						`<button onclick="getBoardList(${page})" type="button"> 이전 </button>`				
+						: 
+						`<button onclick="getBoardList(${page-1})" type="button"> 이전 </button>`
 				// 페이징 번호 버튼 틀
-				for ( let i = 1 ; i<=r.totalpage ; i++ ){
+				for ( let i = r.startbtn ; i<=r.endbtn ; i++ ){ // 시작 버튼번호부터 마지막 버튼번호까지 버튼 생성
 					html += 
 						`<button onclick="getBoardList(${i})" type="button"> ${i} </button>`
 				}
 				// 다음
-					html += 
+					html += page >= r.totalpage ?
+						`<button onclick="getBoardList(${page})" type="button"> 다음 </button>`				
+						:
 						`<button onclick="getBoardList(${page+1})" type="button"> 다음 </button>`				
-				
-				document.querySelector('.boardTable').innerHTML = html;
+
+				document.querySelector('.pagebox').innerHTML = html;
 		} // success end
 		
 	}) // ajax end

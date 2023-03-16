@@ -19,7 +19,8 @@
 		
 		</table>
 		
-
+		<!-- 페이징처리 버튼틀 -->
+		<div class="pagebox"></div>
 	
 	</div>
 
