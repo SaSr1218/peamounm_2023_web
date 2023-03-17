@@ -89,14 +89,25 @@ public class MemberDto {
 		this.mimg = mimg;
 		this.memail = memail;
 	}
-
-
-
+	
+	// admin 멤버 출력용
+	
+	public MemberDto(int mno, String mid, String mimg, String memail) {
+		super();
+		this.mno = mno;
+		this.mid = mid;
+		this.mimg = mimg;
+		this.memail = memail;
+	}
 
 
 	public int getMno() {
 		return mno;
 	}
+
+
+
+
 
 	public void setMno(int mno) {
 		this.mno = mno;

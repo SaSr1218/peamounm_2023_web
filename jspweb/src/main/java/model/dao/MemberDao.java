@@ -50,20 +50,49 @@ public class MemberDao extends Dao {
 	}
 	
 	// 2. 모든 회원 호출 [ 관리자기준  인수:x 반환:모든회원들의 dto ]
-	public ArrayList<MemberDto> getMemberList( ){
+	public ArrayList<MemberDto> getMemberList( int startrow , int listsize , String key , String keyword ){
 		ArrayList<MemberDto> list = new ArrayList<>(); // 모든 회원들의 리스트 선언 
-		String sql = "select * from member";			// 1.SQL 명령어 작성 
+		String sql = "";		
+		
+		if ( key.equals("") && keyword.equals("") ) {
+			sql = "select m.mno , m.mid , m.mimg , m.memail from member m"
+					+ " limit ? , ? ";
+		} else {
+			sql = "select m.mno , m.mid , m.mimg , m.memail from member m "
+					+ " where "+key+" like '%"+keyword+"%'"
+					+ " limit ? , ? ";
+		}
+		
 		try {
-			ps = con.prepareStatement(sql);				// 2. 연결된 con 에 SQL 대입해서 ps 
-			rs = ps.executeQuery();						// 3. SQL 실행후 결과 RS 담고 
-			while( rs.next() ) {						// 4. rs.next() : 다음레코드 [ t / f ]
-				MemberDto dto = new MemberDto(			// 5. 레코드1개 --> dto 1개 생성 
+			ps = con.prepareStatement(sql);	
+			ps.setInt(1, startrow);
+			ps.setInt(2, listsize);
+			rs = ps.executeQuery();						
+			while( rs.next() ) {						
+				MemberDto dto = new MemberDto(			
 						rs.getInt(1), rs.getString(2), rs.getString(3), 
-						rs.getString(4), rs.getString(5));	// 5-2 rs.get타입( 필드순서번호 )
-				list.add(dto);							// 6. dto ---> 리스트 담기 
+						rs.getString(4) );
+				list.add(dto);							
 			}// w end 
 		}catch (Exception e) {System.out.println(e);}
-		return list;									// 7. 리스트 반환
+		return list;									
+	}
+	
+	// 2-1 게시물/레코드 수 구하기
+	public int gettotalsize( String key , String keyword) {
+		String sql = "";
+		if ( key.equals("") && keyword.equals("") ) {
+			sql = "select count(*) from member m ";
+		} else {
+			sql = "select count(*) from member m "
+					+ " where "+key+" like '%"+keyword+"%' ";
+		}
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if ( rs.next() ) return rs.getInt(1);
+					
+		}catch (Exception e) {System.out.println(e);} return 0;
 	}
 	
 	// 3. 아이디 중복 검사
