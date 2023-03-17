@@ -9,7 +9,7 @@ function getBoard(){
 		method : "get" ,
 		data : { "type" : 2 , "bno" : bno } , // 2 : 개별출력
 		success : (r) => {
-			
+			console.log(r);
 			let html = `${r.bdate} /
 						${r.bview} / 
 						<button onclick="bIncrease(2)">${r.bgood} </button> /
@@ -27,6 +27,16 @@ function getBoard(){
 					// <a href="/jspweb/filedownload?bfile=${r.bfile}"> 다운로드 </a> 이렇게 보내도 됨!
 				document.querySelector('.bfile').innerHTML = html;
 			}
+			
+			//-----------로그인된 회원과 작성자가 일치하면 삭제/수정 버튼 출력-----------//
+			if( memberInfo.mid == r.mid ){
+				html = `
+						<button onclick="bdelete(${bno})" type="button"> 삭제 </button>
+						<button onclick="bupdate(${bno})" type="button"> 수정 </button>						
+						`;
+						document.querySelector('.btnbox').innerHTML = html;
+			}
+			
 		}
 	}) // ajax end
 	
@@ -74,8 +84,26 @@ function bIncrease( type ){
 	
 }
 
+// 4. 삭제
+function bdelete( bno ){
+	$.ajax({
+		url : "/jspweb/board/info" ,
+		method : "delete" ,
+		data : { "bno" : bno } ,
+		success : (r) => {
+			if ( r == 'true' ){alert('삭제성공'); } 
+			else { alert ('삭제실패') }
+			
+			
+		}
+	})
+	
+}
 
-
+// 5. 수정 페이지로 이동 
+function bupdate( bno ){
+	location.href="/jspweb/board/update.jsp?bno="+bno;
+}
 
 
 

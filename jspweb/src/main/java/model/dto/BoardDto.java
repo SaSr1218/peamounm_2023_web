@@ -63,7 +63,15 @@ public class BoardDto {
 		this.mid = mid;
 	}
 	
-	// 개별 출력용
+	// 업데이트용
+	public BoardDto(int bno, String btitle, String bcontent, String bfile, int cno) {
+		super();
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bfile = bfile;
+		this.cno = cno;
+	}
 	
 
 	@Override
@@ -72,8 +80,6 @@ public class BoardDto {
 				+ ", bdate=" + bdate + ", bview=" + bview + ", bgood=" + bgood + ", bbad=" + bbad + ", mno=" + mno
 				+ ", cno=" + cno + "]";
 	}
-
-
 
 	public int getBno() {
 		return bno;

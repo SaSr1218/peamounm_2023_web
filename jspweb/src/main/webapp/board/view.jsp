@@ -48,7 +48,9 @@
 			<div> 첨부파일 </div>
 			<div class="bfile"> </div>
 		</div>	
-	
+		
+		<div class="btnbox"></div>
+
 	</div>
 
 

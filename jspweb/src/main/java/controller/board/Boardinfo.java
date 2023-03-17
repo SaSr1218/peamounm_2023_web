@@ -1,5 +1,6 @@
 package controller.board;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -45,7 +46,7 @@ public class Boardinfo extends HttpServlet {
 			int page = Integer.parseInt(request.getParameter("page") );
 			// int listsize = 3; // 게시물 개수 체크 만들기 전
 			int listsize = Integer.parseInt(request.getParameter("listsize") );
-			int startrow = (page-1)*listsize;// 해당 페이지에서의 게시물 시작번호
+			int startrow = (page-1)*listsize;// 해당 페이지에서의 게시물 시작번호 = 검색된 결과의 레코드 인덱스 번호
 			
 			// -------------- 페이징 버튼 만들기 ----------- //
 			// 1. 전체페이지수 [ 총게시물레코드수/페이지당 표시수 ] , 2. 페이지 표시할 최대 버튼수 , 3. 시작버튼 번호/마지막번호 버튼
@@ -180,10 +181,49 @@ public class Boardinfo extends HttpServlet {
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		// 업로드
+		String path = request.getSession().getServletContext().getRealPath("/board/bfile");
+		MultipartRequest multi = new MultipartRequest(
+				request, path , 1024 * 1024 * 10 , "UTF-8" , new DefaultFileRenamePolicy() ); 
+		
+		// 수정할대상 + 수정된 정보 호출
+		int bno = Integer.parseInt(multi.getParameter("bno") );
+		int cno = Integer.parseInt(multi.getParameter("cno") );
+		String btitle = multi.getParameter("btitle");
+		String bcontent = multi.getParameter("bcontent");
+		String bfile = multi.getFilesystemName("bfile");
+		
+		// dto
+		BoardDto dto = new BoardDto(bno, btitle, bcontent, bfile, cno);
+			System.out.println(" update dto : " + dto);
+		
+		// dao
+		//boolean result = BoardDao.getInstance().bupdate( dto );
+		
+		// 응답
+		//response.getWriter().print(result);
 	}
 
+	// 게시물 삭제
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		int bno = Integer.parseInt( request.getParameter("bno") );
+		// 삭제전 기존게시물의 첨부파일 명 구하기
+		String bfile = BoardDao.getInstance().getBoard( bno ).getBfile();
+		// 삭제처리 
+		boolean result = BoardDao.getInstance().bdelete( bno );
+		// 삭제/수정시 : 첨부파일 있을경우 같이 삭제 
+			// 1. 경로 찾아서 
+			// 2. 파일 객체화[?? 다양한 파일 관련 메소드 제공 .length() , .delete() , exists() 등 ]
+		if( result ) { // 만약에 db가 레코드를 삭제를 성공하면
+			String path = request.getSession().getServletContext().getRealPath("/board/bfile/"+bfile);
+			File file = new File(path); // 객체화 
+			if( file.exists() ){//만약에 파일이 존재하면 
+				file.delete(); // 파일 삭제 
+			}
+		}	
+		response.getWriter().print(result);
+		
 	}
 
 }

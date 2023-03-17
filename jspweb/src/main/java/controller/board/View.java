@@ -30,7 +30,6 @@ public class View extends HttpServlet {
 			
 			// 4. 만약에 기존 세션이 없으면 증가 O 있으면 증가 X 
 			Object o = request.getSession().getAttribute(type + ip + bno);
-				System.out.println(o);
 			if ( o == null ) { // 세션 [ bno+type+ip ] 생성한 적 X
 				
 				// 2. 세션 생성 [ bno + type + ip ] 
@@ -38,6 +37,7 @@ public class View extends HttpServlet {
 				// 3. 세션 생명주기 [ 생명주기 지나면 자동으로 메모리 삭제 ] 초 단위
 					// 세션 초기화 되는 기준
 						// 1. 서버 끌때 2. 서버 다시 켰을 때 3. setMaxInactiveInterval 
+						// 4. .invalidate() 5. setAttribute ( "세션명" , null )
 				request.getSession().setMaxInactiveInterval( 60*60*24 ); // 하루
 				
 				// dao 직접 전달
