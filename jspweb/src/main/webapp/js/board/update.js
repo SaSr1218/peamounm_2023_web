@@ -16,7 +16,9 @@ function getBoard(){
 			console.log(r);
 			document.querySelector('.btitle').value = r.btitle;
 			document.querySelector('.bcontent').value = r.bcontent;
-			document.querySelector('.oldbfile').innerHTML = r.bfile;
+			
+			// document.quesytSelector('.con').value = r.cno; // jsp에서 value 값 뺄 시!
+			
 			// 1. 기존 select option 가져와서 selectd
 			let cnoSelect = document.querySelector('.cno');
 				console.log( cnoSelect ); // select 
@@ -28,10 +30,26 @@ function getBoard(){
 					cnoSelect.options[i].selected = true;
 				}
 			}
+			
+			// 2. 첨부파일 있을때 / 없을때
+			let html = ''
+			if ( r.bfile == null ){
+					html += '<div>첨부파일없음</div>';
+			}else{ // 있을때
+				html += 				
+				`<div>
+					기존 첨부파일 : <span class="oldbfile"></span> 
+					<button onclick="bfiledelete()" type="button">삭제</button>
+				</div>`
+			}
+				html += `변경할 첨부파일 : <input name="bfile" type="file">`
+				document.querySelector('.bfilebox').innerHTML = html;
+				document.querySelector('.oldbfile').innerHTML = r.bfile;
+				
 		}
 	})
 } // 
-// 2. 
+// 2. 게시물 수정
 function bupdate(){
 	
 	let updateForm = document.querySelectorAll('.updateForm')[0];
@@ -55,9 +73,33 @@ function bupdate(){
 		}
 	})
 	
+} // 게시물 수정 end
+
+// 3. 첨부파일만 삭제 
+function bfiledelete(){
+	alert('첨부파일만 삭제합니다.');
+	$.ajax({
+		url : "/jspweb/board/info" ,
+		method : "delete" ,
+		data : { "bno" : bno , "type" : 2 } ,
+		success : (r) => {
+			if ( r == 'true' ){
+				// 특정 div만 reload 방법! [ 특정 부분만 랜더링 ]
+				// 주의점!! : location.href+' 띄어쓰기한번 '
+				$(".bfilebox").load ( location.href+' .bfilebox');
+					// load() : jquery 제공하는 랜더링[새로고침]
+					
+				/* 	해당 클래스명을 가진 태그 객체화
+					
+				*/
+			} else{
+				
+			}
+			
+		} // success end
+		
+	})// ajax end
 }
-
-
 
 
 

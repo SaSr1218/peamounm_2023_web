@@ -89,7 +89,8 @@ function bdelete( bno , cno ){
 	$.ajax({
 		url : "/jspweb/board/info" ,
 		method : "delete" ,
-		data : { "bno" : bno } ,
+		// type : 1이면 게시물삭제[첨부파일삭제] , type : 2이면 첨부파일만 삭제		
+		data : { "bno" : bno , "type" : 1 } , 
 		success : (r) => {
 			if ( r == 'true' ){alert('삭제성공'); location.href = "/jspweb/board/list.jsp?cno="+cno; } 
 			else { alert ('삭제실패') }

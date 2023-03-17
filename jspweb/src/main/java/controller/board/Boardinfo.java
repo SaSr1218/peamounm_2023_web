@@ -227,24 +227,37 @@ public class Boardinfo extends HttpServlet {
 
 	// 게시물 삭제
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		int type = Integer.parseInt( request.getParameter("type") );
 		int bno = Integer.parseInt( request.getParameter("bno") );
-		// 삭제전 기존게시물의 첨부파일 명 구하기
+
+		// [ 공통 ] 삭제전 기존게시물의 첨부파일 명 구하기
 		String bfile = BoardDao.getInstance().getBoard( bno ).getBfile();
-		// 삭제처리 
-		boolean result = BoardDao.getInstance().bdelete( bno );
-		// 삭제/수정시 : 첨부파일 있을경우 같이 삭제 
-			// 1. 경로 찾아서 
-			// 2. 파일 객체화[?? 다양한 파일 관련 메소드 제공 .length() , .delete() , exists() 등 ]
-		if( result ) { // 만약에 db가 레코드를 삭제를 성공하면
+		
+		boolean result = true; // 파일이 존재한다는 전제조건
+		
+		if ( type == 1 ) { // db 레코드 삭제 + 파일 삭제
+			// [1] 삭제처리 
+			result = BoardDao.getInstance().bdelete( bno );
+			
+		}else if ( type == 2 ) { // db bfile 업데이트 + 삭제
+			result = BoardDao.getInstance().bfiledelete ( bno );
+		}
+			// [삭제] 공통
+		if (result) {
 			String path = request.getSession().getServletContext().getRealPath("/board/bfile/"+bfile);
 			File file = new File(path); // 객체화 
 			if( file.exists() ){//만약에 파일이 존재하면 
 				file.delete(); // 파일 삭제 
-			}
-		}	
+			}			
+		}
 		response.getWriter().print(result);
-		
-	}
 
+
+	}	
 }
+
+	// 삭제/수정시 : 첨부파일 있을경우 같이 삭제 
+	// 1. 경로 찾아서 
+	// 2. 파일 객체화[?? 다양한 파일 관련 메소드 제공 .length() , .delete() , exists() 등 ]	
+	
+
