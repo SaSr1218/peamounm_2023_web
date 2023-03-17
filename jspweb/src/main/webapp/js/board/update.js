@@ -49,6 +49,9 @@ function bupdate(){
 		processData : false , 
 		success : (r)=>{
 			console.log(r);
+			if ( r == 'true' ) {
+				 alert('수정완료'); 
+				 location.href = "/jspweb/board/view.jsp?bno="+bno; }
 		}
 	})
 	
