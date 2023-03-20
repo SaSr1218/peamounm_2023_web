@@ -12,6 +12,10 @@
 	<!-- 모든페이지 공통 css -->
 	<link href="/jspweb/css/modal.css" rel="stylesheet">
 	<link href="/jspweb/css/index.css" rel="stylesheet">
+
+	<!-- 폰트어썸 css -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+	
 	
 </head>
 <body>

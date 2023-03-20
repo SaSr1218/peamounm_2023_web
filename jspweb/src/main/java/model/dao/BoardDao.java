@@ -100,6 +100,16 @@ public class BoardDao extends Dao {
 						rs.getString(4), rs.getString(5), rs.getInt(6), 
 						rs.getInt(7), 	 rs.getInt(8), 	  rs.getInt(9), 
 						rs.getInt(10),   rs.getString(11) );
+				
+				// !! : 추가된 프로필 이미지 대입
+				dto.setMimg(rs.getString(12) );
+				
+				// !! : 현재 게시물[레코드]의 댓글 수 구하기
+				sql = "select count(*) from reply where bno = "+dto.getBno();	// sql = "select count(*) from reply where bno = "+rs.getBno();
+				// 모든 게시물을 찾은 rs가 아직 끝나지 않은 상태이므로 새로운 rs를 따로 생성해 선언(방법 1) vs (방법 2) select 중첩
+				ps = con.prepareStatement(sql);
+				ResultSet rs2 = ps.executeQuery(); 
+				if (rs2.next() ) { dto.setRcount(rs2.getInt(1) ); }
 				return dto;
 			}
 			

@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 
 	<link href="/jspweb/css/list.css" rel="stylesheet"> 
-	<!-- 폰트어썸 css -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
 </head>
 <body>
 

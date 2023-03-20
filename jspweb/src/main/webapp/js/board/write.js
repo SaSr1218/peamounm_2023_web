@@ -20,3 +20,9 @@ function bwrite(){
 		}
 	})// ajax end
 } // bwrite end
+
+$(document).ready(function() {
+        $('#summernote').summernote(
+			{height : 500}
+		);
+});

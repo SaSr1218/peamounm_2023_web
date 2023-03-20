@@ -65,7 +65,6 @@ public class BoardDto {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = sdf.format(date);
-		System.out.println(now);
 			// 2. 만약에 오늘날짜와 작성일과 동일하면 [ split 문자열 자르기 ] 
 				// "yyyy-MM-dd hh:mm:ss".split(" ") --> 날짜와 시간 분해
 				// now.split(" ")[0] : 날짜   now.split(" ")[1] : 시간

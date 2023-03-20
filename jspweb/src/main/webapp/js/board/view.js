@@ -8,7 +8,7 @@ if ( memberInfo.mid == null ){
 }
 
 // 현재 보고 있는 게시물 번호
-let bno = document.querySelector('.bno').innerHTML;
+let bno = document.querySelector('.bno').value;
 
 
 // 1. 개별 게시물 출력
@@ -21,31 +21,36 @@ function getBoard(){
 		method : "get" ,
 		data : { "type" : 2 , "bno" : bno } , // 2 : 개별출력
 		success : (r) => {
-			let html = `${r.bdate} /
-						${r.bview} / 
-						<button onclick="bIncrease(2)">${r.bgood} </button> /
-						<button onclick="bIncrease(3)">${r.bbad}  </button>`
+			console.log(r);
 			
-			document.querySelector('.infobox').innerHTML = html;
-			document.querySelector('.pimgbox').innerHTML = r.mid;
+			let html = ``
+						
+			document.querySelector('.mimg').src=`/jspweb/member/mimg/${ r.mimg == null ? 'default.webp' : r.mimg}`;
+			document.querySelector('.mid').innerHTML = r.mid;
+			document.querySelector('.bdate').innerHTML = r.bdate;
+			document.querySelector('.bview').innerHTML = r.bview;
+			document.querySelector('.bgood').innerHTML = r.bgood;
+			document.querySelector('.bbad').innerHTML = r.bbad;
 			document.querySelector('.btitle').innerHTML = r.btitle;
 			document.querySelector('.bcontent').innerHTML = r.bcontent;
 			
-			if ( r.bfile == null ) {
-				document.querySelector('.bfile').innerHTML = '첨부파일없음';
-			}else{ // 인수 넘기고자 할때 ' ' 로 문자 처리 해주기( . 이 JS에서 접근연산자라서 )
-				html = `${r.bfile}<button onclick="bdownload( '${ r.bfile }' )" type="button"> 다운로드 </button>`
-					// <a href="/jspweb/filedownload?bfile=${r.bfile}"> 다운로드 </a> 이렇게 보내도 됨!
+			if( r.bfile == null ){ // 첨부파일 없을때 
+				
+			}else{ // 첨부파일 있을때 
+				// html = ` ${ r.bfile } <button onclick="bdownload( '${ r.bfile }' )" type="button"> 다운로드 </button>`
+				html = `<a href="/jspweb/filedownload?bfile=${ r.bfile }" > 
+							<i class="fas fa-download"></i>${ r.bfile } 
+						</a>`
 				document.querySelector('.bfile').innerHTML = html;
 			}
-			
-			//-----------로그인된 회원과 작성자가 일치하면 삭제/수정 버튼 출력-----------//
-			if( memberInfo.mid == r.mid ){
+			// ------------------------------------//
+			// 로그인된 회원과 작성자가 일치하면 수정/삭제 버튼 출력 
+			if( memberInfo.mid == r.mid){
 				html = `
-						<button onclick="bdelete(${bno}  , ${r.cno} )" type="button"> 삭제 </button>
-						<button onclick="bupdate(${bno})" type="button"> 수정 </button>						
-						`;
-						document.querySelector('.btnbox').innerHTML = html;
+					<button onclick="bdelete( ${ bno } , ${ r.cno } )" type="button" class="bbtn">삭제</button>
+					<button onclick="bupdate( ${bno} )" type="button" class="bbtn">수정</button>
+					`;
+				document.querySelector('.btnbox').innerHTML = html;	
 			}
 			getReplyList();
 		}
