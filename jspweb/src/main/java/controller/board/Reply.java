@@ -22,20 +22,18 @@ public class Reply extends HttpServlet {
 
     public Reply() {super(); }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1.
-		int bno = Integer.parseInt( request.getParameter("bno"));
+	protected void doGet(HttpServletRequest request , HttpServletResponse response) throws ServletException, IOException {
+		// 1. 
+		int bno = Integer.parseInt( request.getParameter("bno")	);
 		int type = Integer.parseInt( request.getParameter("type") );
-		
 		int rindex = 0;
-		if ( type == 1 ) {
+		
+		if( type == 1 ) { // 상위 댓글 
 			
-		} else if ( type == 2 ) {
-			rindex  = Integer.parseInt( request.getParameter("rindex") );
-			
+		}else if( type == 2 ) { // 하위 댓글 출력 
+			rindex = Integer.parseInt( request.getParameter("rindex") );
 		}
-		// 2. 
-		ArrayList<ReplyDto> result = BoardDao.getInstance().getReplyList ( bno , rindex );
+		ArrayList<ReplyDto> result = BoardDao.getInstance().getReplyList( bno , rindex ); // 2. 
 		// 3. 
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonArray = mapper.writeValueAsString(result);
@@ -43,30 +41,32 @@ public class Reply extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		response.getWriter().print(jsonArray);
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1.
-		request.setCharacterEncoding("UTF-8");
-		int bno = Integer.parseInt( request.getParameter("bno"));
-		int mno = MemberDao.getInstance().getMno((String)request.getSession().getAttribute("login"));
-		String rcontent = request.getParameter("rcontent");
-		int type = Integer.parseInt(request.getParameter("type") );
-
-		ReplyDto dto = new ReplyDto( rcontent , mno , bno );
-		if ( type == 1 ) { // 상위댓글
-
-		} else if ( type == 2 ) {
-			int rindex = Integer.parseInt(request.getParameter("rindex") );
-			dto.setRindex(rindex);
-		}
-			System.out.println("dto : " + dto);
 		
-		boolean result = BoardDao.getInstance().rwrite(dto);
+	}
 
-		response.getWriter().print(result);
-			
-			
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1. 
+		request.setCharacterEncoding("UTF-8");
+		int bno = Integer.parseInt( request.getParameter("bno") );
+		int mno = MemberDao.getInstance().getMno( (String)request.getSession().getAttribute("login") );
+		String rcontent = request.getParameter("rcontent");
+		
+		int type = Integer.parseInt( request.getParameter("type") );
+		
+		ReplyDto dto = new ReplyDto(rcontent, mno, bno);
+		if( type == 1 ) { // 상위댓글 
+		}else if( type == 2 ) { // 하위댓글 
+			int rindex = Integer.parseInt( request.getParameter("rindex") );
+			dto.setRindex(rindex);
+		};System.out.println( "dto:"+ dto );
+		
+		boolean result = BoardDao.getInstance().rwrite(dto); // 3. 
+		response.getWriter().print(result); // 4.
+		
+		
 	}
 
 

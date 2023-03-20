@@ -141,13 +141,14 @@ function rwrite(){
 	});	
 } // 댓글 쓰기 함수 end
 
-// 7. 댓글 출력
-function getReplyList() {
+// 7. 댓글 출력 
+function getReplyList(){
 	$.ajax({
 		url : "/jspweb/board/reply" ,
-		method : "get" ,
-		data : { "type" : 1 , "bno" : bno } ,
+		method : "get" , 
+		data : { "type" : 1 ,"bno" : bno },
 		success : (r) => {
+			console.log(r);
 			
 			let html = ''
 			r.forEach( (o,i) => {
@@ -157,52 +158,60 @@ function getReplyList() {
 						<span>${ o.mid} </span>
 						<span>${ o.rdate} </span>
 						<span>${ o.rcontent} </span>
-						<button onclick="rereplyview(${ o.rno })" type="button"> 댓글 작성 </button>
+						<button onclick="rereplyview(${ o.rno })" type="button">답글보기</button>
 						<div class="rereplybox${ o.rno }"></div>
 					</div>
 					`
 			})
-			
 			document.querySelector('.replylistbox').innerHTML = html;
-			
 		}
 	})
-}
-// 8. 하위 댓글 구역 표시
+}//end 
+// 8.하위 댓글 구역 표시 
 function rereplyview( rno ){
-	
 	$.ajax({
 		url : "/jspweb/board/reply" ,
-		async : 'false' ,
+		async : 'false',	// 동기식 통신  
 		method : "get" , 
-		data : { "type" : 2 , "bno" : bno , "rindex" : rno } ,
-		success : (r) => {
-			console.log(r);
-		}
-	})
-	
-	let html = `
+		data : { "type": 2 , "rindex" : rno , "bno" : bno },
+		success: (r)=>{	console.log(r); // 대댓글 목록 
+			let html = ''
+			r.forEach( ( o )=>{ // 대댓글 html 구성 
+				html += `--------------------------
+					<div>
+						<span>${ o.mimg} </span>
+						<span>${ o.mid} </span>
+						<span>${ o.rdate} </span>
+						<span>${ o.rcontent} </span>
+					</div>
+					`
+			 } );
+		  	html += `
 				<textarea class="rrcontent${rno}"> </textarea>
-				<button onclick="rrwrite(${rno})" type="button"> 답글 작성 </button>
-				`
-	document.querySelector('.rereplybox'+rno ).innerHTML = html;
-	
-}
+				<button type="type" onclick="rrwirte( ${rno} )"> 답글 작성 </button>`
+			document.querySelector('.rereplybox'+rno ).innerHTML = html;
+		}  // success end 
+	}) // ajax end 
+} // end 
 
-// 9. 하위 댓글 작성
-function rrwrite( rno ){ // bno , mno , rcontent , rindex(상위댓글번호) , type
+// 9.하위 댓글 쓰기 
+function rrwirte( rno ){
+	// bno , mno , rrcontnet , rindex(상위댓글번호) , type
 	$.ajax({
-		url : "/jspweb/board/reply" ,
-		method : "post" ,
+		url : "/jspweb/board/reply" , 
+		method : "post" , 
 		data : { 
-			"type" : 2 , "bno" : bno , "rindex" : rno , 
+			"type" : 2 , "bno":bno , "rindex":rno , 
 			"rcontent" : document.querySelector('.rrcontent'+rno).value } ,
 		success : (r) => {
-			console.log(r);
+			console.log( r )
+			if( r == "true"){
+				alert('대댓글 출력');
+				location.reload();
+			}
 		}
 	})
-	
-}
+} // end 
 
 
 
