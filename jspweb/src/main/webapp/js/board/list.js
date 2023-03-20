@@ -22,54 +22,53 @@ document.querySelector('.cname').innerHTML = cnameHTML;
 getBoardList(1);
 function getBoardList( page ){
 	// 해당함수로부터 페이징번호 받기
-	console.log('해당페이지 : ' + page);
 	pageObject.page = page;
-	document.querySelector('.now_page').innerHTML = page;
-	console.log(pageObject)
 	$.ajax({
 		url : "/jspweb/board/info" ,
 		method : "get" ,
 		data :  pageObject  , 
 		success : (r) => {
 			console.log('통성'); console.log(r);
-				let html = `<tr>
-							<th> 게시물번호 </th>
-							<th> 게시물제목 </th>
-							<th> 작성자 </th>
-							<th> 작성일 </th>
-							<th> 조회수 </th>
-							<th> 좋아요 </th>
-							<th> 싫어요 </th>
-						</tr>`
+				let html = ``;
 				r.boardList.forEach ( ( o , i ) => {
-				html += `<tr>
-							<td> ${ o.bno } </td>
-							<td> <a href="/jspweb/board/view.jsp?bno=${ o.bno }">${ o.btitle } </a></td>
-							<td> ${ o.mid } </td>
-							<td> ${ o.bdate } </td>
-							<td> ${ o.bview } </td>
-							<td> ${ o.bgood } </td>
-							<td> ${ o.bbad } </td>			
-						</tr>`		
+				html += `			
+						<div class="boardcontent">
+							<div>
+								<img alt="" class="hpimg" 
+								src="/jspweb/member/mimg/${ o.mimg == null ? 'default.webp' : o.mimg }">
+								
+								<span class="mid"> ${ o.mid } </span>
+								<span class="bdate"> ${ o.bdate } </span>
+							</div>
+							<div class="btitle"> 
+								<a href="/jspweb/board/view.jsp?bno=${ o.bno }"> ${ o.btitle } </a>
+							</div>
+							<div class="contentbottom">
+								<span> <i class="far fa-eye"></i> <span class="bview">${ o.bview }</span> </span>
+								<span> <i class="far fa-thumbs-up"></i> <span class="bup">${ o.bgood }</span> </span>
+								<span> <i class="far fa-thumbs-down"></i> <span class="bdown">${ o.bbad }</span> </span>
+								<span> <i class="far fa-comment-dots"></i> <span class="rcount">${ o.rcount } </span> </span>
+							</div>
+						</div>`;	
 				})
 				document.querySelector('.boardTable').innerHTML = html;
 				// ---------------- 페이지 버튼 출력 ---------------- //
 				html = ''; // 기존에 들어있던 내용 제거
 				// 이전
 					html += page <=1 ?
-						`<button onclick="getBoardList(${page})" type="button"> 이전 </button>`				
+						`<button onclick="getBoardList(${page})" type="button" class="pagebtn"> < </button>`				
 						: 
-						`<button onclick="getBoardList(${page-1})" type="button"> 이전 </button>`
+						`<button onclick="getBoardList(${page-1})" type="button" class="pagebtn"> < </button>`
 				// 페이징 번호 버튼 틀
 				for ( let i = r.startbtn ; i<=r.endbtn ; i++ ){ // 시작 버튼번호부터 마지막 버튼번호까지 버튼 생성
 					html += 
-						`<button onclick="getBoardList(${i})" type="button"> ${i} </button>`
+						`<button onclick="getBoardList(${i})" type="button" class="pagebtn"> ${i} </button>`
 				}
 				// 다음
 					html += page >= r.totalpage ?
-						`<button onclick="getBoardList(${page})" type="button"> 다음 </button>`				
+						`<button onclick="getBoardList(${page})" type="button" class="pagebtn"> > </button>`				
 						:
-						`<button onclick="getBoardList(${page+1})" type="button"> 다음 </button>`				
+						`<button onclick="getBoardList(${page+1})" type="button" class="pagebtn"> > </button>`				
 
 				document.querySelector('.pagebox').innerHTML = html;
 				// -------------------- 총 게시물 수 출력 ------------- //
