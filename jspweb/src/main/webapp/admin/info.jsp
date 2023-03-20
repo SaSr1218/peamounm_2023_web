@@ -13,7 +13,7 @@
 
 	<h3> 모든 회원 명단</h3>
 
-	<div class="container">
+	<div class="container" >
 		
 		현재 회원 페이지 번호 : <span class="now_page"> </span>
 		<div class="msearchcount"> 총 회원 수 : </div>
@@ -25,8 +25,8 @@
 		</select>
 		
 		
-		
-		<table class="mListTable" border="1"></table>
+	
+	<table class="mListTable" border="1"></table>
 		
 		
 		<!-- 버튼 -->

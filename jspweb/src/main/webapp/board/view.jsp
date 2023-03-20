@@ -48,9 +48,16 @@
 			<div> 첨부파일 </div>
 			<div class="bfile"> </div>
 		</div>	
+			<div class="btnbox"></div>
 		
-		<div class="btnbox"></div>
-
+		
+		<div>
+			<textarea class="rcontent" rows="" cols=""></textarea>
+			<button class="rwritebtn" onclick="rwrite()" type="button"> 댓글 등록 </button>
+		</div>
+		
+		<div class="replylistbox"></div>
+		
 	</div>
 
 

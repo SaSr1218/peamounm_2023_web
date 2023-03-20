@@ -1,4 +1,4 @@
-3// js -> admin -> info.js
+// js -> admin -> info.js
 
 let memberName = {
 	page : 1 ,

@@ -57,6 +57,29 @@ create table board(
 	foreign key ( cno ) references category ( cno ) on delete cascade
 );
 
+-- 댓글 테이블 [ 댓글번호 , 내용 , 작성일 , 인덱스(계층구분) , 작성자 , 게시물번호 
+drop table if exists reply;
+create table reply(
+	rno			int auto_increment primary key ,
+    rcontent	longtext ,
+    rdate		datetime default now() ,
+    rindex		int default 0 , -- 0이면 1계층 , 1~ 해당 댓글의 하위 댓글
+    mno			int ,
+    bno			int ,
+    foreign key ( mno ) references member ( mno ) on delete set null ,
+    foreign key ( bno ) references board ( bno ) on delete set null 
+);
+
+/*
+	3번 게시물
+		1번 댓글			[ rno = 1 , rindex = 0 ]
+			3번 댓글		[ rno = 3 , rindex = 1 ]
+            4번 댓글		[ rno = 4 , rindex = 1 ]
+				6번 댓글	[ rno = 6 , rindex = 4 ]
+		2번 댓글			[ rno = 2 , rindex = 0 ]
+        5번 댓글			[ rno = 5 , rindex = 0 ]
+*/
+
 -- on delete cascade	: pk가 삭제되면 fk 같이 삭제
 -- on delete set null	: pk가 삭제되면 fk는 null로 변경
 -- 생략					: fk에 존재하는 식별키[pk]는 삭제 불가능

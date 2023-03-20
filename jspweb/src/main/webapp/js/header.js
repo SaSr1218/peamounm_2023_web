@@ -9,7 +9,6 @@ function getLogin(){
 		async : false , // <------ 비동기화
 		method : "get" , 
 		success : (r) => {
-			console.log(r);
 			memberInfo = r;
 			let html = '';	// 1. html 구성 
 			if( r.mid == null ){	// 2. 로그인 안했으면 

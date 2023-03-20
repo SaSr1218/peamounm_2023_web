@@ -1,15 +1,26 @@
+
+console.log(memberInfo)
+if ( memberInfo.mid == null ){
+	document.querySelector('.rcontent').disabled = true;
+	document.querySelector('.rcontent').disabled = `로그인 후 작성가능합니다.`;
+	document.querySelector('.rwritebtn').disabled = true;
+	
+}
+
+// 현재 보고 있는 게시물 번호
+let bno = document.querySelector('.bno').innerHTML;
+
+
 // 1. 개별 게시물 출력
 getBoard();
 function getBoard(){
 	
-	let bno = document.querySelector('.bno').innerHTML;
 	
 	$.ajax({
 		url : "/jspweb/board/info" ,
 		method : "get" ,
 		data : { "type" : 2 , "bno" : bno } , // 2 : 개별출력
 		success : (r) => {
-			console.log(r);
 			let html = `${r.bdate} /
 						${r.bview} / 
 						<button onclick="bIncrease(2)">${r.bgood} </button> /
@@ -36,7 +47,7 @@ function getBoard(){
 						`;
 						document.querySelector('.btnbox').innerHTML = html;
 			}
-			
+			getReplyList();
 		}
 	}) // ajax end
 	
@@ -106,11 +117,92 @@ function bupdate( bno ){
 	location.href="/jspweb/board/update.jsp?bno="+bno;
 }
 
+// 6. 댓글 쓰기
+function rwrite(){
+	
+	$.ajax({
+		url : "/jspweb/board/reply" ,
+		method : "post" ,
+		data : { 
+			"type" : 1 ,
+			"bno" : bno , 
+			"rcontent" : document.querySelector('.rcontent').value } ,
+		success : (r) => {
+			console.log(r);
+			if (r=='true') { 
+				alert('댓글작성성공'); 
+				document.querySelector('.rcontent').value ='' 
+				// 특정 div만 새로고침[렌더링]
+				// $('.replylistbox').load(location.href+' .replylistbox')}
+				// 현재페이지 새로고침[렌더링]
+				location.reload();
+			} else { alert('댓글작성실패') }
+		}
+	});	
+} // 댓글 쓰기 함수 end
 
+// 7. 댓글 출력
+function getReplyList() {
+	$.ajax({
+		url : "/jspweb/board/reply" ,
+		method : "get" ,
+		data : { "type" : 1 , "bno" : bno } ,
+		success : (r) => {
+			
+			let html = ''
+			r.forEach( (o,i) => {
+				html +=`
+					<div>
+						<span>${ o.mimg} </span>
+						<span>${ o.mid} </span>
+						<span>${ o.rdate} </span>
+						<span>${ o.rcontent} </span>
+						<button onclick="rereplyview(${ o.rno })" type="button"> 댓글 작성 </button>
+						<div class="rereplybox${ o.rno }"></div>
+					</div>
+					`
+			})
+			
+			document.querySelector('.replylistbox').innerHTML = html;
+			
+		}
+	})
+}
+// 8. 하위 댓글 구역 표시
+function rereplyview( rno ){
+	
+	$.ajax({
+		url : "/jspweb/board/reply" ,
+		async : 'false' ,
+		method : "get" , 
+		data : { "type" : 2 , "bno" : bno , "rindex" : rno } ,
+		success : (r) => {
+			console.log(r);
+		}
+	})
+	
+	let html = `
+				<textarea class="rrcontent${rno}"> </textarea>
+				<button onclick="rrwrite(${rno})" type="button"> 답글 작성 </button>
+				`
+	document.querySelector('.rereplybox'+rno ).innerHTML = html;
+	
+}
 
-
-
-
+// 9. 하위 댓글 작성
+function rrwrite( rno ){ // bno , mno , rcontent , rindex(상위댓글번호) , type
+	$.ajax({
+		url : "/jspweb/board/reply" ,
+		method : "post" ,
+		data : { 
+			"type" : 2 , "bno" : bno , "rindex" : rno , 
+			"rcontent" : document.querySelector('.rrcontent'+rno).value } ,
+		success : (r) => {
+			console.log(r);
+		}
+	})
+	
+}
 
 
 
