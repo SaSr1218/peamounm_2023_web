@@ -34,7 +34,7 @@
 				<li> <a href="/jspweb/board/list.jsp?cno=2"> 커뮤니티 </a> </li>
 				<li> <a href="/jspweb/board/list.jsp?cno=3"> QnA </a> </li>
 				<li> <a href="/jspweb/board/list.jsp?cno=4"> 노하우 </a> </li>
-				<li> <a href="#"> 기능5 </a> </li>
+				<li> <a href="/jspweb/api/api1.jsp"> api1 </a> </li>
 				<li> <a href="#"> 기능6 </a> </li>
 				<li> <a href="#"> 기능7 </a> </li>
 			</ul>
