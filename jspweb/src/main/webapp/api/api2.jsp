@@ -18,7 +18,7 @@
 	</div>
 	
 	<!-- 카카오지도에 필요한 메소드가 저장된 js , src="~~~appkey= [ 인증키 코드 입력 자리 ]"-->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=819ed2e9364a6a018af953c58d792168"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=819ed2e9364a6a018af953c58d792168&libraries=clusterer"></script>
 	<script src="/jspweb/js/api/api2.js" type="text/javascript"></script>
 	
 </body>
