@@ -4,6 +4,8 @@
 .modal_wrap{
 	background-color: rgba(196, 188 ,188 ,50%);
 	position: fixed;
+	/* 카카오지도 z-index 사용중 */
+	z-index : 999;	/* 다른 position css와 겹쳤을때의 우선순위 */
 	top : 0; left: 0;
 	width: 100%; height: 100%;
 	display: flex;

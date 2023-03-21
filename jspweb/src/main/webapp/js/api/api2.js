@@ -142,6 +142,7 @@ marker.setMap(map);
 	        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
 	        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
 	        var markers = $(r.data).map(function(i, o) {
+
 				
 				// 마커 생성 객체
 	            let marker =  new kakao.maps.Marker({
@@ -151,7 +152,16 @@ marker.setMap(map);
 // ----------------------- 마커 클릭 이벤트  ------------------------------------ //  
 				// 위에서 생성된 마커객체의 클릭 이벤트 추가하기
 				kakao.maps.event.addListener(marker, 'click', function() {
-				      alert( o.충전소명 ); 
+				      
+				      // 모달 정보 담기
+				      document.querySelector('.modal_title').innerHTML = o.충전소명
+				      document.querySelector('.modal_title').style.fontSize = '15px';
+				      
+				      
+				      document.querySelector('.modal_content').innerHTML = o
+				      
+				      // 모달 띄우기
+				      openModal(); 
 				}); 
 				// 리턴해서 markers에 대입하기 [ map함수가 제공함 ]
 				return marker;
