@@ -142,15 +142,25 @@ marker.setMap(map);
 	        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
 	        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
 	        var markers = $(r.data).map(function(i, o) {
-	            return new kakao.maps.Marker({
+				
+				// 마커 생성 객체
+	            let marker =  new kakao.maps.Marker({
 	                position : new kakao.maps.LatLng( o['위도(WGS84)'], o['경도(WGS84)']) ,
 	                image: markerImage
 	            });
-	        });
+// ----------------------- 마커 클릭 이벤트  ------------------------------------ //  
+				// 위에서 생성된 마커객체의 클릭 이벤트 추가하기
+				kakao.maps.event.addListener(marker, 'click', function() {
+				      alert( o.충전소명 ); 
+				}); 
+				// 리턴해서 markers에 대입하기 [ map함수가 제공함 ]
+				return marker;
+	        }); // map end
 	
 	        // 클러스터러에 마커들을 추가합니다
 	        clusterer.addMarkers(markers);
 	    });
+	    
 
 
 
