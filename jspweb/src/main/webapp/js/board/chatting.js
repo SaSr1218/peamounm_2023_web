@@ -43,7 +43,10 @@ if(memberInfo.mid == null){
 }
 
 // 2. 클라이언트소켓이 접속했을때 하고 싶은 이벤트/함수 정의 [ 따로 작성할 필요가 없으면 하지 않아도 됨. ] 
-function 서버소켓연결(){ contentbox.innerHTML += `<div> ------ ${memberInfo.mid}님이 채팅방 입장 ------ </div> ` } 
+function 서버소켓연결(){ contentbox.innerHTML += `
+					<div class="alarm">
+						<span> 채팅방 입장 하셨습니다. </span>
+					</div>` } 
 
 // 3. 클라이언트소켓이 서버에게 메시지를 보내기 [ @OnMessage ]
 function 보내기(){
@@ -59,12 +62,49 @@ function 메시지받기(e) { // <---- getBasicRemote().sendText(msg)
 	console.log(e);
 	console.log(e.data) // 문자열 json -> 객체 json 형변환 시켜야함!!
 	console.log( JSON.parse( e.data ) ); // JSON.parse ( json으로 형변환 시킬 데이터 );
-	contentbox.innerHTML += `<div> ${e.data} </div>`
+	
+	let data = JSON.parse(e.data);	// 전달받은 메시지 dto
+	
+	// 보낸사람과 현재 유저와 일치하면 [ 내가 보낸 메시지 ]
+	if ( data.frommid == memberInfo.mid ){
+		contentbox.innerHTML += `
+							<div class="secontent">
+								<div class="date"> ${data.time} </div>
+								<div class="content"> ${data.msg} </div>
+							</div>`
+	}else{ // [ 내가 받은 메시지 ]
+		contentbox.innerHTML += `
+							<div class="tocontent">
+								<div><img src="/jspweb/member/mimg/${ data.fromimg == null ? 'default.webp' : data.fromimg }" class="hpimg"></div>
+								<div class="rcontent">
+									<div class="name"> ${data.frommid} </div>
+									<div class="contentdate">
+										<div class="content"> ${data.msg} </div>
+										<div class="date"> ${data.time} </div>
+									</div>
+								</div>
+							</div>`
+	}
+	// ------------------ 스크롤 하단으로 내리기 ---------------- //
+/*
+	let top = contentbox.scrollTop // 현재 스크롤의 상단 위치 좌표
+	let height = contentbox.scrollHeight; // 현재 스크롤 전체의 높이 [ 기본 값 : contentbox height ];
+*/ 
+	// 스크롤 막대의 상단 위치를 스크롤 막대의 가장 하단 위치로 대입
+	 contentbox.scrollTop = contentbox.scrollHeight;	
 }
+
 
 // 5. 서버와 연결이 끊겼을 때 [ 따로 작성할 필요가 없으면 하지 않아도 됨. ]
 function 연결해제(e){
 	console.log('연결해제')
+}
+
+// 6. 엔터키를 눌렀을때
+function enterkey() {
+	if(window.event.keyCode == 13 ){
+		보내기();
+	}
 }
 
 

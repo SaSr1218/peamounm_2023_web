@@ -32,7 +32,7 @@ public class MessageDto {
 				// 보낸 사람의 프로필 얻기		
 				this.fromimg = MemberDao.getInstance().getMember( this.frommid ).getMimg() ;
 				// 보낸 날짜[메시지객체] 생성된 날짜 (1번 방법)
-				this.time = new SimpleDateFormat("hh:mm:ss").format(new Date() ); 
+				this.time = new SimpleDateFormat("aa hh:mm").format(new Date() ); 
 			
 			} // if e
 		
