@@ -70,7 +70,7 @@ $.get(
 				            position: coords ,
 				            image : markerImage
 				        });
-				        
+				        clusterer.addMarker(marker);	
 // ----------------------- 마커 클릭 이벤트  ------------------------------------ //  
 						// 위에서 생성된 마커객체의 클릭 이벤트 추가하기
 						kakao.maps.event.addListener(marker, 'click', function() {
@@ -83,7 +83,7 @@ $.get(
 						// 모달 띄우기
 						openModal(); 
 						}); 				        
-			 			clusterer.addMarkers(marker);	
+			 			
 
 				    } // if end 
 				    
