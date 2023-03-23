@@ -32,7 +32,8 @@
 				<button onclick="보내기()" class="sendbtn" type="button"> 보내기 </button>
 					
 		</div>
-				
+			
+							
 		</div>
 	
 	
