@@ -1,11 +1,16 @@
 @charset "UTF-8";
 
-.chattingbox{
-	width: 40%;
-	margin: 50px auto;
+.chattingwrap{ /* 채팅과 명단이 포함된 구역*/
+	display: flex; 
+	justify-content: center;
 }
+.conlistbox { width: 15%; } /* 채팅방에 입장한 명단 표시되는 구역 */
+.conbox{ display: flex; align-items: center; margin-bottom: 15px; }
+.conbox .name { margin-left: 10px;}
 
-.contentbox{
+.chattingbox{ width: 40%; } /* 채팅 전체 구역 */
+
+.contentbox{ /* 채팅 정보가 출력되는 구역 */
 	background-color: #BBCEE2;
 	height: 700px;
 	/* 해당 구역크기보다 내용물이 커지면 스크롤 생성 */
@@ -66,11 +71,6 @@
 	resize: none;
 }
 
-.chattingbtnbox{
-	display: flex;
-	justify-content: flex-end;
-}
-
 .sendbtn {
 	padding: 10px;
 	font-size : 10px;
@@ -78,3 +78,40 @@
 	border : none;
 	border-radius: 5px;
 }
+
+/* 이모티콘 버튼 , 보내기 버튼 있는 구역 */
+.chattingbtnbox{
+	display: flex;
+	justify-content: space-between;
+}
+
+/* 이모티콘 버튼 */
+.emobtn{
+	background-color: transparent;
+	border : none;
+	padding: 5px;
+	font-size: 23px;	
+}
+
+/* 드롭다운 시 보이는 구역 */
+.enolist{
+	width: 300px; height: 300px;
+	overflow-y : scroll;
+}
+
+/* 내용물 안에 사진이 있으면 배경 투명 */
+.emocontent{
+	background-color:  transparent !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
