@@ -80,6 +80,25 @@ create table reply(
         5번 댓글			[ rno = 5 , rindex = 0 ]
 */
 
+drop table if exists jspweb_product;
+create table jspweb_product(
+	pno 		int auto_increment primary key , 	-- 제품 번호
+    pname		varchar(500) not null ,				-- 제품 이름
+    pcomment	text not null ,						-- 제품 설명
+    pprice		bigint not null ,					-- 제품 가격
+    pstate		int default 1 ,						-- 물품 상태 [ 1 : 판매중 / 2 : 거래중 / 3 : 판매완료 ]
+    plat		varchar(100) not null ,				-- 위도
+	plng		varchar(100) not null ,				-- 경도
+    pview		int	default 0 ,						-- 조회수
+    pdate		datetime default now()				-- 등록일
+);
+
+-- 제품 사진 테이블
+
+-- 제품 찜하기 테이블
+
+-- 제품 쪽지 테이블
+
 -- on delete cascade	: pk가 삭제되면 fk 같이 삭제
 -- on delete set null	: pk가 삭제되면 fk는 null로 변경
 -- 생략					: fk에 존재하는 식별키[pk]는 삭제 불가능
