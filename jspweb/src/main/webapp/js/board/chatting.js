@@ -81,11 +81,9 @@ function 메시지타입구분 ( msg ) {
 // 4. 서버로부터 메시지가 왔을때 메시지 받기 -> 매개변수 필수! 여기에선 e 를 말함
 function 메시지받기(e) { // <---- getBasicRemote().sendText(msg)
 	console.log(e);
-	console.log(e.data) // 문자열 json -> 객체 json 형변환 시켜야함!!
-	console.log( JSON.parse( e.data ) ); // JSON.parse ( json으로 형변환 시킬 데이터 );
 	
 	let data = JSON.parse( e.data );	// 전달받은 메시지 dto
-	
+		console.log(data)
 	// let msg = JSON.parse ( data.msg ) ; // 명단에는 data.msg가 존재 X 그래서 주석 처리 후 96, 100번째 줄을 타입변환시킴 원래는 msg.msgbox임
 	
 	// 명단[여러개=list/Array] vs 메시지정보[1개=dto/object]
@@ -173,9 +171,9 @@ function 자료보내기( msgbox , type ){
 			type : type ,
 			msgbox : msgbox
 		}	
+		
 	클라이언트소켓.send( JSON.stringify( msg ) ); // ---> @OnMessage
 }
-
 /* 
 	클라이언트 소켓 통신 결과
 		클라이언트소켓.onclose = function(e){ console.log('연결해제'); }

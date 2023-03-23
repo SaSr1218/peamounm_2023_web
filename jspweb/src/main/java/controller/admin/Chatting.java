@@ -39,11 +39,11 @@ public class Chatting {
 		// 접속한 클라이언트소켓들을 보관 
 		ClientDto clientDto = new ClientDto(session, mid);
 		접속명단.add( clientDto );
-		// 연결된 클라이언트소켓을 모든 접속명단에게  알림 메시지 보내기
 		
+		// 연결된 클라이언트소켓을 모든 접속명단에게  알림 메시지 보내기		
 		onMessage(session, "enter");
-		
-	} // OnOpen
+		 
+	} // OnOpen end
 	
 	@OnClose	// 클라이언트 소켓이 나갔을때
 	public void onClose ( Session session ) throws Exception {
