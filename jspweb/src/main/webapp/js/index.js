@@ -58,19 +58,19 @@ function getproductlist( 동 , 서 , 남 , 북 ) {
             
 			// 마커에 클릭이벤트를 등록합니다
 			kakao.maps.event.addListener(marker, 'click', function() {
-			      let html = `<button onclick="productlistprint()"> <== </button> <h3>제품목록페이지</h3>`;
+			      let html = `<button onclick="productlistprint()"> 뒤로가기 </button> <h3>제품목록페이지</h3>`;
 			      
 			html += `<div> 
-						<span> ${p.pname} </span>
-						<span> ${p.pcomment} </span>
-						<span> ${p.pprice} </span>
-						<span> ${p.pstate} </span>
-						<span> ${p.pview} </span>
-						<span> ${p.pdate} </span>
-						<span> <button onclick="setplike(${p.pno})" type="button"> ♡ </button> </span>												
+						<div> 제품명 : ${p.pname} </div>
+						<div> 제품내용 : ${p.pcomment} </div>
+						<div> 제품가격 : ${p.pprice} </div>
+						<div> 제품상태 : ${p.pstate} </div>
+						<div> 제품 조회수 : ${p.pview} </div>
+						<div> 제품 등록일자 : ${p.pdate} </div>
+						<div> <button class="plikebtn" onclick="setplike(${p.pno})" type="button"> </button> </div>												
 					</div>`			      
 			document.querySelector('.productlistbox').innerHTML = html;
-			      			        
+			getplike(p.pno) ;   			        
 			}); 
             return marker;
         });
@@ -115,10 +115,6 @@ function setplike ( pno ) {
 	if ( memberInfo.mid == null ){
 		alert('회원기능입니다. 로그인 후 사용해주세요.'); return;
 	}
-
-
-
-	// 1. get 방식 전송
 	
 	$.ajax({ // post = url에 ? 가 담기지 않음! 따라서 get 방식으로 사용
 		url : "/jspweb/product/like" ,
@@ -127,28 +123,43 @@ function setplike ( pno ) {
 		success : (r) => { 
 			if ( r == 'true'){
 				alert('찜하기 등록')
+				document.querySelector('.plikebtn').innerHTML = '♥'
 			}else{
 				alert('찜하기 취소')
+				document.querySelector('.plikebtn').innerHTML = '♡'
+				
 			}
 		} // success end 
 	}) // ajax end
-	
-	
-	// vs
-	
-	// $.get ( "/jspweb/product/like?pno="+pno , (r) => { } )
-	// $.ajax ({ url : "/jspweb/product/like?pno="+pno , success : (r) => { } })
-	
-	// $.get ( "/jspweb/product/like , { "data" : data } ,(r) => { } )
-	// $.ajax ( url : "/jspweb/product/like , { "data" : data } , (r) => { } )	
-	
-	// $.post ( "/jspweb/product/like , { "data" : data } ,(r) => { } )
-	// $.ajax ( url : "/jspweb/product/like , { "data" : data } , (r) => { } )
-	
-	
 } // setplike end
 
-
+// 4. 현재 회원의 해당 제품 찜하기 상태 호출
+function getplike ( pno ) {
+	if ( memberInfo.mid == null ){ document.querySelector('.plikebtn').innerHTML = '♡' }
+	
+	$.ajax({
+		url : "/jspweb/product/like" ,
+		data : { "pno" : pno } ,
+		async : false ,
+		success : (r) => {
+			console.log(r);
+			if ( r == 'true'){ 
+				document.querySelector('.plikebtn').innerHTML = '♥'
+				}
+			else {
+				document.querySelector('.plikebtn').innerHTML = '♡' 
+				}			
+		}
+	})
+	
+/*	
+$.get ( "/jspweb/product/like?pno"=+pno , (r) => {
+		if ( r == 'true'){ return "♥"; }
+		else { return '♡'; }
+	});
+*/
+	
+}
 
 
 

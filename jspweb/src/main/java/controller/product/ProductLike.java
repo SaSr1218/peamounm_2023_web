@@ -17,7 +17,15 @@ public class ProductLike extends HttpServlet {
     public ProductLike() {super();}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		int pno = Integer.parseInt(request.getParameter("pno") );
+		int mno = MemberDao.getInstance().getMno((String)request.getSession().getAttribute("login") );
+			
+		boolean result = ProductDao.getInstance().getplike(pno, mno);
+		response.getWriter().print(result);
+	
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

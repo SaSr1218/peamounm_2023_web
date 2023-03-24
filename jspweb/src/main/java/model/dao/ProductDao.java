@@ -73,7 +73,17 @@ public class ProductDao extends Dao{
 		return false;
 	}
 	
-	
+	// 4. 현재 회원의 해당 찜하기 제품 상태 확인하기
+	public boolean getplike( int pno , int mno ) {
+		String sql = "select * from plike where pno = "+pno+" and mno = "+mno ;
+		
+		try {
+			ps = con.prepareStatement(sql); 
+			rs = ps.executeQuery();
+			if ( rs.next() ) { return true; }
+		}catch (Exception e) {System.out.println(e);}
+		return false;
+	}
 	
 	
 	
