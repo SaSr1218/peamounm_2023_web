@@ -14,6 +14,7 @@ function onwrite() {
 	// 폼 데이터 객체 에 필드 추가
 	writeFormData.set( "plat" , plat );
 	writeFormData.set( "plng" , plng );
+	if ( plat == 0 || plng == 0 ) { return }
 	
 	$.ajax({
 		url : "/jspweb/product/info" ,
@@ -23,6 +24,9 @@ function onwrite() {
 		processData : false ,
 		success : (r) => {
 			console.log(r)
+			if ( r == 'true'){
+				alert('등록성공'); location.href="/jspweb/index.jsp"
+			}else { alert ('등록실패'); }
 		}
 	})
 	
@@ -31,7 +35,7 @@ function onwrite() {
 
 
 
-// ----------------- 카카오 지도 표시할 div 객체 ---------------
+// ----------------- 카카오 지도 표시할 div 객체 --------------- //
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -41,7 +45,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 
-// ------------------ 지도를 클릭한 위치에 표출할 마커입니다 --------------
+// ------------------ 지도를 클릭한 위치에 표출할 마커입니다 -------------- //
 var marker = new kakao.maps.Marker({ 
     // 지도 중심좌표에 마커를 생성합니다 
     position: map.getCenter() 
@@ -50,7 +54,7 @@ var marker = new kakao.maps.Marker({
 marker.setMap(map);
 
 
-// ------------------ 지도에 클릭 이벤트를 등록합니다 -----------------
+// ------------------ 지도에 클릭 이벤트를 등록합니다 ----------------- //
 // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
     
