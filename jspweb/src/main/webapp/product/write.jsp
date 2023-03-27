@@ -18,6 +18,18 @@
 			위치 : 		
 			<div id="map" style="width:100%;height:350px;"></div>
 			<button onclick="onwrite()" type="button"> 물품 등록 </button>
+			
+			 <h5> 첨부파일 한개 </h5>
+			 <input type="file" name="pfile" accept="image/*">
+			 
+			 <h5> 첨부파일 여러개 </h5>
+			 <input type="file" name="pfile1">
+			 <input type="file" name="pfile2">
+			 <input type="file" name="pfile3">
+			 
+			 <h5> 첨부파일 여러개(multiple) </h5>
+			 <input type="file" name="pfiles" multiple="multiple" accept="image/*">
+			 
 			 
 		</form>
 	
