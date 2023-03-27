@@ -90,18 +90,41 @@ create table jspweb_product(
     plat		varchar(100) not null ,				-- 위도
 	plng		varchar(100) not null ,				-- 경도
     pview		int	default 0 ,						-- 조회수
-    pdate		datetime default now()				-- 등록일
+    pdate		datetime default now()	,			-- 등록일
+    mno 		int , 								-- 등록한 회원번호
+	foreign key ( mno ) references  member ( mno ) on delete cascade 
 );
 
+-- 드래그 위치 안에 물품 표시하기 위해
+select * from jspweb_product where ? >= plng and ? <= plng and ? <= plat and ? >= plat;
+
 -- 제품 사진 테이블
+drop table if exists pimg;
+create table pimg( 
+	pimgmno int auto_increment primary key , 	-- 사진 식별 번호
+    pimgname longtext not null , 				-- 사진명
+    pno int , 									-- 해당 사진의 연결된 제품번호
+    foreign key (pno) references jspweb_product(pno) on delete cascade
+);
 
 -- 제품 찜하기 테이블
+drop table if exists plike;
+create table plike (
+    plikeno bigint auto_increment primary key , 	-- 찜하기번호 pk
+    mno int ,										-- 회원번호 fk
+    pno int ,										-- 제품번호 fk
+    foreign key ( mno ) references  member ( mno ) on delete cascade ,
+    foreign key ( pno ) references jspweb_product ( pno ) on delete cascade
+);
+select * from plike;
 
 -- 제품 쪽지 테이블
+
 
 -- on delete cascade	: pk가 삭제되면 fk 같이 삭제
 -- on delete set null	: pk가 삭제되면 fk는 null로 변경
 -- 생략					: fk에 존재하는 식별키[pk]는 삭제 불가능
+
 
 -- join 후 필요한 필드와 통계 [ 두개이상 필드 출력시 그룹필수! ] --> 회원별로 보유포인트 출력!
 select m.mno , m.mid , m.mimg , m.memail , sum(p.mpamount) as mpoint  
