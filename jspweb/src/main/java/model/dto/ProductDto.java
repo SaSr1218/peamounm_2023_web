@@ -20,7 +20,7 @@ public class ProductDto {
 	private List<String> pimglist; // 등록한 사진목록들
 	
 	
-	// 3. 등록용 생성자 [ 제품명 , 제품설명 , 제품가격 , 
+	// 3. 등록용 생성자 [ 제품명 , 제품설명 , 제품가격 , 제품가격 , 위치 , 회원번호 , 사진목록들 ] 
 	public ProductDto(String pname, String pcomment, int pprice, String plat, String plng, int mno,
 			List<String> pimglist) {
 		super();
