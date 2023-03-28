@@ -136,7 +136,8 @@ public class ProductDao extends Dao{
 	
 	// 6. 
 	public ArrayList<ChatDto> getChatList ( int pno , int mno ) {
-		String sql = "select * from note where pno = ? and ( frommno = ? || tomno = ? )";
+		String sql = "select * from note where pno = ? and ( frommno = ? or tomno = ? )";
+		
 		ArrayList<ChatDto> list = new ArrayList<>();
 		try {
 			ps = con.prepareStatement(sql);

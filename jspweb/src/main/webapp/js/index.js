@@ -115,7 +115,7 @@ let chathtml = '';
 		data : { "pno" : p.pno } ,
 		async : false , // 동기식 바꾸기 , 여러개 가져와야 해서 순차 처리를 위해
 		success: (r) => {
-			
+			console.log(r);
 			
 			r.forEach( (o)=>{
 				if ( o.frommno == memberInfo.mno ){ // 쪽지 보낸 사람과 로그인 된 사람이 일치하면!
