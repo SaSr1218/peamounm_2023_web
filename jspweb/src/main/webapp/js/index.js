@@ -22,7 +22,7 @@ function produclistprint(  ){
 			</div>
 			`
 	});
-	document.querySelector('.produclistbox').innerHTML = html;
+	 document.querySelector('.produclistbox').innerHTML = html;
 } // end 
 
 // 제품 개별 조회 
@@ -89,7 +89,7 @@ function productprint( i ){
 					 </div>
 					<div class="pviewbtnbox">
 						<button class="plikebtn" onclick="setplike(${p.pno})"  type="button"> <i class="far fa-heart"></i> </button>
-						<button type="button"> 채팅 </button>
+						<button onclick="chatprint(${i})" type="button"> 채팅 </button>
 					</div>
 				</div>
 			`	
@@ -98,6 +98,80 @@ function productprint( i ){
 	document.querySelector('.produclistbox').innerHTML = html;
 	getplike( p.pno ); // 찜하기 상태호출 
 	
+} // end
+ 
+// 채팅 페이지 이동
+function chatprint(i){
+	let p = productList[i];
+	
+	if ( memberInfo.mid == null ){
+		alert('회원기능입니다.'); return;
+	}
+
+let chathtml = '';	
+	$.ajax({
+		url : "/jspweb/product/Chat" ,
+		method : "get" ,
+		data : { "pno" : p.pno } ,
+		async : false , // 동기식 바꾸기 , 여러개 가져와야 해서 순차 처리를 위해
+		success: (r) => {
+			
+			
+			r.forEach( (o)=>{
+				if ( o.frommno == memberInfo.mno ){ // 쪽지 보낸 사람과 로그인 된 사람이 일치하면!
+					chathtml += `<div class="sendbox">${o.ncontent}</div>`
+				} else {
+					chathtml += `<div class="receivebox">${o.ncontent}</div>`
+				
+				}				
+				
+			})
+
+			
+		}// success end
+	})// ajax end
+	
+	let html = `<h3> ${p.pno}제품 채팅방 </h3>
+			<div class="chatbox">
+				
+				<div class="pviewinfo">
+					<div class="mimgbox">
+						<img src="/jspweb/product/pimg/${p.pimglist[0]}" class="hpimg">
+						<span class="pname"> ${p.pname} </span>
+					</div>
+					<div>
+						<button onclick="produclistprint()" class="pbadge" type="button"> 목록보기 </button>
+					</div>
+				</div>
+				
+				<div class="chatcontent">
+					${ chathtml }
+				</div>
+				
+				<div class="chatbtn">
+					<textarea class="ncontentinput" rows="" cols=""></textarea>
+					<button onclick="sendchat(${p.pno} , ${p.mno})" type="button"> 전송 </button>
+				</div>
+								
+			</div>`;
+	
+	document.querySelector('.produclistbox').innerHTML = html;
+}
+
+// 5. 쪽지 보내기
+function sendchat( pno , tomno ) {
+	let ncontent = document.querySelector('.ncontentinput').value;
+	$.ajax({
+		url : "/jspweb/product/Chat" ,
+		method : "post" ,
+		data : {"pno" : pno , "tomno" : tomno , "ncontent" : ncontent } ,
+		success : (r) => {
+			console.log(r);
+			if ( r == 'true' ){
+				document.querySelector('.ncontentinput').value = '';	
+			}
+		} // success end
+	}) // ajax end
 }
 
 
@@ -115,7 +189,7 @@ var clusterer = new kakao.maps.MarkerClusterer({
 // $.ajax( { url:"/jspweb/product/info" , success : (r) => { } );
 
 // ----------------------- 마커 이미지 변경 ------------------------------------ //
-var imageSrc = '/jspweb/img/ezenlogo.png', // 마커이미지의 주소입니다    
+var imageSrc = '/jspweb/img/전기차.png', // 마커이미지의 주소입니다    
     imageSize = new kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
     imageOption = {offset: new kakao.maps.Point(10, 20)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
       

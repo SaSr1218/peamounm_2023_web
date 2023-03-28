@@ -119,7 +119,18 @@ create table plike (
 select * from plike;
 
 -- 제품 쪽지 테이블
-
+drop table if exists note;
+create table note(
+	nno bigint auto_increment primary key ,
+    ncontent text not null ,
+    ndate datetime default now() ,
+    pno int ,
+    frommno int ,
+    tomno int ,
+    foreign key (pno) references jspweb_product (pno) on delete cascade ,
+    foreign key ( frommno ) references member (mno) on delete cascade ,
+    foreign key ( tomno) references member (mno) on delete cascade
+);
 
 -- on delete cascade	: pk가 삭제되면 fk 같이 삭제
 -- on delete set null	: pk가 삭제되면 fk는 null로 변경

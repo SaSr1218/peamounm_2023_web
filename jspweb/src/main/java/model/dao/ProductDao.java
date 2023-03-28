@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.dto.ChatDto;
 import model.dto.ProductDto;
 
 public class ProductDao extends Dao{
@@ -118,9 +119,41 @@ public class ProductDao extends Dao{
 		return false;
 	}
 	
+	// 5. 
+	public boolean setChat ( ChatDto dto ) {
+		String sql = "insert into note (ncontent , pno , frommno , tomno ) values ( ? , ? , ? , ?)";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getNcontent());
+			ps.setInt(2, dto.getPno());
+			ps.setInt(3, dto.getFrommno());
+			ps.setInt(4, dto.getTomno());
+			ps.executeUpdate();
+			return true;
+		}catch (Exception e) {System.out.println(e);}
+		return false;
+	}
 	
-	
-	
+	// 6. 
+	public ArrayList<ChatDto> getChatList ( int pno , int mno ) {
+		String sql = "select * from note where pno = ? and ( frommno = ? || tomno = ? )";
+		ArrayList<ChatDto> list = new ArrayList<>();
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, pno);
+			ps.setInt(2, mno);
+			ps.setInt(3, mno);
+			rs = ps.executeQuery();
+			while (rs.next() ) {
+				list.add( new ChatDto(
+						rs.getInt(1), rs.getString(2), 
+						rs.getString(3), rs.getInt(4), 
+						rs.getInt(5), rs.getInt(6)) );
+			} 
+			
+		}catch (Exception e) {System.out.println(e);}
+		return list;
+	}
 	
 	
 	

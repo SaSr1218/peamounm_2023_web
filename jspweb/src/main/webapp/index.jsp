@@ -20,11 +20,10 @@
 		<!-- 사이드바 -->
 		<div class="produclistbox">
 		
-
-
-	
 		</div>
+		
 	</div>
+	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b7c0acb1395b016fc6b2661dad73840f&libraries=clusterer"></script>
 	<script src="/jspweb/js/index.js" type="text/javascript"></script>
 </body>
