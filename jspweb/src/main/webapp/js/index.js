@@ -1,17 +1,25 @@
+/*
 
-/* 
-	1. produclistprint() : 모든 제품 목록 html 출력 함수
-	2. productprint() 	 : productList 내 i번째 제품 1개 html 출력 함수
-	3. chatprint()		 : 채팅창 html 출력 함수 
-	4. sendchat() 		 : 채팅창에서 입력된 데이터 [DB] 저장하는 함수
-	5. getproductlist()  : 기준[동서남북,검색]에 따른 제품목록 요청해서 결과를 받는 함수 / 마커 생성
-	6. get동서남북()		 : 현재 보고 있는 지도 좌표 구하기
-	7. setplike( )	 	 : 찜하기 등록
-	8. getplike()		 : 찜하기 상태호출
-*/ 
+	1. produclistprint(  ) 	: 모든 제품 목록 html 출력 함수  
+	2. productprint( )		: productList내 i번째 제품1개 html 출력 함수 
+	3. chatprint()			: 채팅창 html 출력 함수 
+	
+	4. sendchat()			: 채팅창에서 입력된 데이터 [DB]저장하는 함수 
+	
+	5. getproductlist()		: 기준[동서남북,검색]에 따른 제품목록 요청해서 결과를 받는 함수 / 마커 생성
+	6. get동서남북()			: 현재 보고 있는 지도의 좌표 구하기
+	
+	7. setplike()			: 찜하기 등록 
+	8. getplike()			: 찜하기 상태호출 
+	
+*/
 
-// 1. 제품 목록 출력 
-let productList = null; // getproductlist()의 ajax 로부터 요청된 결과를 담는곳
+// * 전역변수
+let productList = null;	// getproductlist() 의 ajax 로부터 요청된 결과를 담는곳
+let index = 0;		// 현재 보고 있는 제품의 제품 인덱스 
+let chatmno = 0;	// 현재 채팅하고 있는 상대방의 mno , 채팅대상자
+
+//  1. 모든 제품 목록 html 출력 함수  
 function produclistprint(  ){
     let html = `<p style="font-size:12px; text-align:right" > 제품목록수 : ${ productList.length } 개 </h6>`;
     productList.forEach( ( p , i) => {
@@ -33,10 +41,10 @@ function produclistprint(  ){
 			</div>
 			`
 	});
-	  document.querySelector('.produclistbox').innerHTML = html;
+	document.querySelector('.produclistbox').innerHTML = html;
 } // end 
 
-// 2. 제품 개별 조회 
+// 2. 제품 개별 조회 : productList내 i번째 제품1개 html 출력 함수 
 function productprint( i ){
 	let p = productList[i];
 	// 이미지 슬라이드에 대입할 html 구성 
@@ -83,7 +91,6 @@ function productprint( i ){
 				    <span class="visually-hidden">Next</span>
 				  </button>
 				</div>
-				
 					<div class="pdate"> ${ p.pdate } </div>
 					<div class="pname"> ${ p.pname } </div>
 					<div class="pcomment"> ${ p.pcomment } </div>
@@ -100,96 +107,86 @@ function productprint( i ){
 					 </div>
 					<div class="pviewbtnbox">
 						<button class="plikebtn" onclick="setplike(${p.pno})"  type="button"> <i class="far fa-heart"></i> </button>
-						<button onclick="chatprint(${i})" type="button"> 채팅 </button>
+						<button onclick="chatprint( ${i} )" type="button"> 채팅 </button>
 					</div>
 				</div>
 			`	
-		
-		
 	document.querySelector('.produclistbox').innerHTML = html;
 	getplike( p.pno ); // 찜하기 상태호출 
 	
-} // end
- 
-// 9. 제품별 채팅방 목록 페이지 이동
-function chatlistprint( i ) {
+} // end 
+
+// 9. 제품별 채팅 목록 페이지 이동 
+function chatlistprint( i ){
 	let p = productList[i];
-	let html = '';
+	let html =``;
 	$.ajax({
-		url : "/jspweb/product/Chat" ,
-		data : {"pno" : p.pno} ,
-		async : false ,
-		success : (r) => {
-			let printfrommno = [] // 출력된 mno -> 채팅 목록 판단 여부
+		url : "/jspweb/product/chat" , 
+		method : "get" ,
+		data : { "pno" : p.pno , "chatmno" : 0 }  ,
+		async : false , 
+		success : (r) =>{
+			let printfrommno =[] // 출력된 mno
 			r.forEach( (o) => {
-				if ( !printfrommno.includes( o.frommno ) ){
-					printfrommno.push( o.frommno )
-				
-				// 구매자별 채팅방은 1개만 출력
-				html += `
-						<div class="chatlist">
-							<div class="frommimg"> <img src="/jspweb/member/mimg/default.webp" class="hpimg"> </div>
-							<div class="frominfo">
-								<div class="fromndate"> ${o.ndate} </div>
-								<div class="frommid"> ${o.frommno} </div>
-								<div class="fromcontent"> ${o.ncontent} </div>
-							</div>
-						</div>
-						`
+				console.log(o);
+				if( !printfrommno.includes( o.frommno ) ){ // 구매자 채팅을 출력한적이 없으면 
+					printfrommno.push( o.frommno ); // 구매자번호 저장후  // 구매자별 1번씩 만 출력
+					html += `										
+							<div onclick="chatinfoprint( ${ i } , ${ o.frommno } )" class="chatlist">
+								<div class="frommimg"> <img src="/jspweb/member/mimg/${ o.frommimg == null ? 'default.webp' : o.frommimg }" class="hpimg"> </div>
+								<div class="frominfo">
+									<div class="fromndate"> ${ o.ndate } </div>
+									<div class="frommid"> ${ o.frommid } </div>
+									<div class="fromncontent"> ${ o.ncontent } </div>
+								</div>
+							</div>`
 				}
-			})
-			if ( printfrommno.length == 0 ) { html += `채팅 목록이 없습니다.`}
-			
+			})	
+			// 구매자 번호가 존재하지 않으면
+			if( printfrommno.length == 0 ){ html+= `채팅 목록이 없습니다.`}
 		}
-	}) // ajax end
+	}) // ajax end 
 	document.querySelector('.produclistbox').innerHTML = html;
 }
- 
-// 3. 채팅 페이지 이동 [ 로그인 검사 , 등록자인지 검사 ]
-function chatprint(i){
-	
-	if ( memberInfo.mid == null ){
-		alert('회원기능입니다.'); return;
-	}
-	
-	let p = productList[i];
-	
-	if ( memberInfo.mno == p.mno ){ // 물품 등록한 본인이면
-		alert('본인이 등록한 제품입니다.');
-		chatlistprint(i);
-		return;
-	}
 
-let chathtml = '';	
+
+
+// 10. 채팅방 내용물 요청해서 해당 html에 출력
+function getcontent( ){
+	let chathtml = '';
+	let pno = productList[index].pno;
 	$.ajax({
-		url : "/jspweb/product/Chat" ,
-		method : "get" ,
-		data : { "pno" : p.pno } ,
-		async : false , // 동기식 바꾸기 , 여러개 가져와야 해서 순차 처리를 위해
-		success: (r) => {
-			console.log(r);
-			
-			r.forEach( (o)=>{
-				if ( o.frommno == memberInfo.mno ){ // 쪽지 보낸 사람과 로그인 된 사람이 일치하면!
-					chathtml += `<div class="sendbox">${o.ncontent}</div>`
-				} else {
-					chathtml += `<div class="receivebox">${o.ncontent}</div>`
-				
-				}				
-				
-			})
-
-			
-		}// success end
-	})// ajax end
+		url : "/jspweb/product/chat" ,
+		method : "get",
+		data : { "pno" : pno , "chatmno" : chatmno },
+		async : false , /* 동기식 */
+		success : (r)=>{
+			r.forEach( ( o )=> {
+				if( o.frommno == memberInfo.mno ){ // 현재 로그인된 회원과 보낸 사람과 일치하면 
+					chathtml += `<div class="sendbox"> ${ o.ncontent }</div>`
+				}else { // 메시지 보낸 사람과 채팅 대상자가 일치하면
+					chathtml += `<div class="receivebox"> ${ o.ncontent }</div>`
+				}
+			})	
+		}
+	}) // end 
+	document.querySelector('.chatcontent').innerHTML = chathtml;
+}
+// 11. 채팅방 html 구성
+function chatinfoprint( i , tomno ){
+	console.log( tomno + '에게 메시지 전송 페이지 ');
+	// 전역변수에 담기 
+	index = i ;
+	chatmno = tomno;
 	
-	let html = `<h3> ${p.pno}제품 채팅방 </h3>
+	let p = productList[index];
+	
+	let html = `
 			<div class="chatbox">
-				
 				<div class="pviewinfo">
 					<div class="mimgbox">
-						<img src="/jspweb/product/pimg/${p.pimglist[0]}" class="hpimg">
-						<span class="pname"> ${p.pname} </span>
+						<img src="/jspweb/product/pimg/${ p.pimglist[0] }" class="hpimg">
+						<span class="pname"> ${ p.pname } </span>
 					</div>
 					<div>
 						<button onclick="produclistprint()" class="pbadge" type="button"> 목록보기 </button>
@@ -197,42 +194,57 @@ let chathtml = '';
 				</div>
 				
 				<div class="chatcontent">
-					${ chathtml }
+					
 				</div>
-				
 				<div class="chatbtn">
 					<textarea class="ncontentinput" rows="" cols=""></textarea>
-					<button onclick="sendchat(${p.pno} , ${p.mno})" type="button"> 전송 </button>
+					<button onclick="sendchat( ${p.pno} )" type="button">전송</button>
 				</div>
-								
-			</div>`;
-	
+			</div>
+				`;
 	document.querySelector('.produclistbox').innerHTML = html;
+	getcontent( );
 }
+// 3. 채팅 페이지 이동 [ 로그인 검사 , 등록자인지 검사 ]
+function chatprint( i ){
+	if( memberInfo.mid == null ){ // 로그인 검사
+		alert('회원기능 입니다. 로그인후 사용해주세요.'); return;
+	}
+	let p = productList[i];
+	// 만약에 등록한 회원이면  [ 판매자 ]
+	if( memberInfo.mno == p.mno  ){ 
+		alert('본인이 등록한 제품입니다.');
+		chatlistprint(i); // 9.채팅목록으로 이동 
+		return;
+	}
+	// 만약에 등록한 회원이 아니면  [ 구매자 ] 받는사람 : 제품등록자
+	chatinfoprint( i , p.mno )
+	
+} // end 
 
-// 4. 쪽지 보내기
-function sendchat( pno , tomno ) {
+// 4. 채팅 보내기[ db 처리 ]
+function sendchat( pno  ){
 	let ncontent = document.querySelector('.ncontentinput').value;
 	$.ajax({
-		url : "/jspweb/product/Chat" ,
-		method : "post" ,
-		data : {"pno" : pno , "tomno" : tomno , "ncontent" : ncontent } ,
-		success : (r) => {
-			console.log(r);
-			if ( r == 'true' ){
-				document.querySelector('.ncontentinput').value = '';	
+		url : "/jspweb/product/chat" ,
+		method : "post",
+		data : { "pno" : pno , "tomno" : chatmno , "ncontent" : ncontent  } ,
+		success : (r)=>{ 
+			console.log( r )
+			if( r =="true"){
+				document.querySelector('.ncontentinput').value = '';
+				getcontent(); // 채팅창 목록 새로고침
 			}
-		} // success end
-	}) // ajax end
+		}
+	})
 }
 
-
+// ------------------------------------ 지도 출력 --------------------------------------
 var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
     center : new kakao.maps.LatLng(37.3218778,126.8308848), // 지도의 중심좌표 
     level : 6 // 지도의 확대 레벨 
 });
-    
-// 마커 클러스터러를 생성합니다 
+// ------------------------------------- 마커 클러스터러를 생성합니다  -------------------
 var clusterer = new kakao.maps.MarkerClusterer({
     map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
     averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
@@ -262,7 +274,7 @@ function getproductlist( 동 , 서  , 남 , 북 ){
 		    productList = r;	// 제품목록 결과를 전역변수 담아주기 
 			produclistprint(  );
 		   //------------ 마커 작업 ----------------------
-		    var markers = r.map( ( p , i ) => {		console.log( p )
+		    var markers = r.map( ( p , i ) => {		
 				// 마커에 추가코드 작성하기 위해 변수화
 		        let marker = new kakao.maps.Marker({	
 		            position : new kakao.maps.LatLng( p.plat, p.plng) ,
@@ -296,7 +308,7 @@ function get동서남북(){
 // 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
 kakao.maps.event.addListener( map, 'dragend', ()=>{ get동서남북(); });
 
-// 7. 찜하기 버튼를 눌렀을때[ 첫 클릭시 찜하기등록 / 다음 클릭시 찜하기 취소 / 다음 클릭시 찜하기 등록 ]
+//7. 찜하기 버튼를 눌렀을때[ 첫 클릭시 찜하기등록 / 다음 클릭시 찜하기 취소 / 다음 클릭시 찜하기 등록 ]
 function setplike( pno ){
 	// alert(pno);
 	if( memberInfo.mid == null ){
@@ -329,7 +341,6 @@ function getplike( pno ){
 		async : 'false',
 		data : { "pno" : pno },
 		success : (r)=>{ 
-			console.log( r )
 			if(r == "true"){ document.querySelector('.plikebtn').innerHTML = '♥'; }
 			else{ document.querySelector('.plikebtn').innerHTML = '♡'; }
 		 }

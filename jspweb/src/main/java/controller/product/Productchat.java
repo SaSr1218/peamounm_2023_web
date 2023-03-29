@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import controller.admin.Alarm;
 import model.dao.MemberDao;
 import model.dao.ProductDao;
 import model.dto.ChatDto;
@@ -18,7 +19,7 @@ import model.dto.ChatDto;
 /**
  * Servlet implementation class Productchat
  */
-@WebServlet("/product/Chat")
+@WebServlet("/product/chat")
 public class Productchat extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,8 +32,9 @@ public class Productchat extends HttpServlet {
 		
 		int pno = Integer.parseInt(request.getParameter("pno") );
 		int mno = MemberDao.getInstance().getMno((String)request.getSession().getAttribute("login") );
+		int chatmno = Integer.parseInt(request.getParameter("chatmno") ); // 채팅 대상자
 		
-		ArrayList<ChatDto> result = ProductDao.getInstance().getChatList(pno, mno);
+		ArrayList<ChatDto> result = ProductDao.getInstance().getChatList(pno, mno, chatmno);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonArray = mapper.writeValueAsString(result);
 		
@@ -46,19 +48,27 @@ public class Productchat extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+		// 1.
+		String 쪽지내용 = request.getParameter("ncontent");
+		int 제품번호 = Integer.parseInt(request.getParameter("pno") );
+		int 보낸회원번호 = MemberDao.getInstance().getMno((String)request.getSession().getAttribute("login") );		
+		int 받는회원번호 = Integer.parseInt(request.getParameter("tomno") ) ;
 		
-		String ncontent = request.getParameter("ncontent");
-		int pno = Integer.parseInt(request.getParameter("pno") );
-		int mno = MemberDao.getInstance().getMno((String)request.getSession().getAttribute("login") );		
-		int tomno = Integer.parseInt(request.getParameter("tomno") ) ;
-			
-		ChatDto dto = new ChatDto(0, ncontent, null, pno, mno, tomno);
+		// 2.	
+		ChatDto dto = new ChatDto(0, 쪽지내용, null, 제품번호, 보낸회원번호, 받는회원번호);
 				
-		System.out.println("dto : " + dto);
-		
+		// 3.
 		boolean result = ProductDao.getInstance().setChat(dto);
-		response.getWriter().print(result);
+		// 4. 만약에 채팅 등록 성공했으면 tomno 에게 소켓 알림 메시지 보내기
+		if ( result ) {
+			// 서버소켓에게 받은 유저의 번호와 내용을 전달
+			try {Alarm.서버메시지( null , 받는회원번호+","+쪽지내용 );} 
+			catch (Exception e) {e.printStackTrace(); }
+		}
 		
+		// 5.
+		response.getWriter().print(result);
+	
 	}
 	
 	

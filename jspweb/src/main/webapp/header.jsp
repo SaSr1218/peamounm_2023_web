@@ -20,6 +20,10 @@
 </head>
 <body>
 	
+	<div class="msgbox">
+		확인 할 메시지가 있습니다.
+	</div>
+	
 	<div class="container"> <!-- bs 박스권 -->
 		<div class="header">
 			<!-- logo -->

@@ -10,7 +10,27 @@ public class ChatDto {
 	private int tomno;
 	
 	// 추가필드
+	private String frommid; // 보낸 사람 id 
+	private String frommimg;// 보낸 사람 프로필
 	
+	
+	
+	public String getFrommid() {
+		return frommid;
+	}
+
+	public void setFrommid(String frommid) {
+		this.frommid = frommid;
+	}
+
+	public String getFrommimg() {
+		return frommimg;
+	}
+
+	public void setFrommimg(String frommimg) {
+		this.frommimg = frommimg;
+	}
+
 	// 1. 빈 생성자
 	public ChatDto() {
 		// TODO Auto-generated constructor stub
