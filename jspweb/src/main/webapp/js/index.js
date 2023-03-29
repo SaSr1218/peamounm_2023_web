@@ -1,6 +1,17 @@
 
-// 제품 목록 출력 
-let productList = null;
+/* 
+	1. produclistprint() : 모든 제품 목록 html 출력 함수
+	2. productprint() 	 : productList 내 i번째 제품 1개 html 출력 함수
+	3. chatprint()		 : 채팅창 html 출력 함수 
+	4. sendchat() 		 : 채팅창에서 입력된 데이터 [DB] 저장하는 함수
+	5. getproductlist()  : 기준[동서남북,검색]에 따른 제품목록 요청해서 결과를 받는 함수 / 마커 생성
+	6. get동서남북()		 : 현재 보고 있는 지도 좌표 구하기
+	7. setplike( )	 	 : 찜하기 등록
+	8. getplike()		 : 찜하기 상태호출
+*/ 
+
+// 1. 제품 목록 출력 
+let productList = null; // getproductlist()의 ajax 로부터 요청된 결과를 담는곳
 function produclistprint(  ){
     let html = `<p style="font-size:12px; text-align:right" > 제품목록수 : ${ productList.length } 개 </h6>`;
     productList.forEach( ( p , i) => {
@@ -22,10 +33,10 @@ function produclistprint(  ){
 			</div>
 			`
 	});
-	 document.querySelector('.produclistbox').innerHTML = html;
+	  document.querySelector('.produclistbox').innerHTML = html;
 } // end 
 
-// 제품 개별 조회 
+// 2. 제품 개별 조회 
 function productprint( i ){
 	let p = productList[i];
 	// 이미지 슬라이드에 대입할 html 구성 
@@ -100,12 +111,53 @@ function productprint( i ){
 	
 } // end
  
-// 채팅 페이지 이동
-function chatprint(i){
+// 9. 제품별 채팅방 목록 페이지 이동
+function chatlistprint( i ) {
 	let p = productList[i];
+	let html = '';
+	$.ajax({
+		url : "/jspweb/product/Chat" ,
+		data : {"pno" : p.pno} ,
+		async : false ,
+		success : (r) => {
+			let printfrommno = [] // 출력된 mno -> 채팅 목록 판단 여부
+			r.forEach( (o) => {
+				if ( !printfrommno.includes( o.frommno ) ){
+					printfrommno.push( o.frommno )
+				
+				// 구매자별 채팅방은 1개만 출력
+				html += `
+						<div class="chatlist">
+							<div class="frommimg"> <img src="/jspweb/member/mimg/default.webp" class="hpimg"> </div>
+							<div class="frominfo">
+								<div class="fromndate"> ${o.ndate} </div>
+								<div class="frommid"> ${o.frommno} </div>
+								<div class="fromcontent"> ${o.ncontent} </div>
+							</div>
+						</div>
+						`
+				}
+			})
+			if ( printfrommno.length == 0 ) { html += `채팅 목록이 없습니다.`}
+			
+		}
+	}) // ajax end
+	document.querySelector('.produclistbox').innerHTML = html;
+}
+ 
+// 3. 채팅 페이지 이동 [ 로그인 검사 , 등록자인지 검사 ]
+function chatprint(i){
 	
 	if ( memberInfo.mid == null ){
 		alert('회원기능입니다.'); return;
+	}
+	
+	let p = productList[i];
+	
+	if ( memberInfo.mno == p.mno ){ // 물품 등록한 본인이면
+		alert('본인이 등록한 제품입니다.');
+		chatlistprint(i);
+		return;
 	}
 
 let chathtml = '';	
@@ -158,7 +210,7 @@ let chathtml = '';
 	document.querySelector('.produclistbox').innerHTML = html;
 }
 
-// 5. 쪽지 보내기
+// 4. 쪽지 보내기
 function sendchat( pno , tomno ) {
 	let ncontent = document.querySelector('.ncontentinput').value;
 	$.ajax({
@@ -197,7 +249,7 @@ var imageSrc = '/jspweb/img/전기차.png', // 마커이미지의 주소입니�
 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
     markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
 
-// 1. 제품목록 호출 [ 1. 현재 보이는 지도좌표내 포함된 제품만 2. ]
+// 5. 제품목록 호출 [ 1. 현재 보이는 지도좌표내 포함된 제품만 2. ]
 function getproductlist( 동 , 서  , 남 , 북 ){
 	clusterer.clear() // 클러스터 비우기 [ 기존 마커들 제거 ]
 	$.ajax({
@@ -228,7 +280,7 @@ function getproductlist( 동 , 서  , 남 , 북 ){
 	}); // ajax end  
 } // getproductlist end 
 
-// 2. 현재 지도의 좌표얻기
+// 6. 현재 지도의 좌표얻기
 get동서남북();
 function get동서남북(){
 	var bounds = map.getBounds();  // 지도의 현재 영역을 얻어옵니다 
@@ -244,7 +296,7 @@ function get동서남북(){
 // 지도가 이동, 확대, 축소로 인해 중심좌표가 변경되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
 kakao.maps.event.addListener( map, 'dragend', ()=>{ get동서남북(); });
 
-//3. 찜하기 버튼를 눌렀을때[ 첫 클릭시 찜하기등록 / 다음 클릭시 찜하기 취소 / 다음 클릭시 찜하기 등록 ]
+// 7. 찜하기 버튼를 눌렀을때[ 첫 클릭시 찜하기등록 / 다음 클릭시 찜하기 취소 / 다음 클릭시 찜하기 등록 ]
 function setplike( pno ){
 	// alert(pno);
 	if( memberInfo.mid == null ){
@@ -268,7 +320,7 @@ function setplike( pno ){
 	})
 }
 
-// 4. 현재 회원이 해당 제품의 찜하기 상태 호출 
+// 8. 현재 회원이 해당 제품의 찜하기 상태 호출 
 function getplike( pno ){
 	if( memberInfo.mid == null ){ document.querySelector('.plikebtn').innerHTML = '♡'; }
 	$.ajax({

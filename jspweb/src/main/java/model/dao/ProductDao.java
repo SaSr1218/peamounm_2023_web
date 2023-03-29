@@ -119,7 +119,7 @@ public class ProductDao extends Dao{
 		return false;
 	}
 	
-	// 5. 
+	// 5. 채팅받기
 	public boolean setChat ( ChatDto dto ) {
 		String sql = "insert into note (ncontent , pno , frommno , tomno ) values ( ? , ? , ? , ?)";
 		try {
@@ -134,7 +134,7 @@ public class ProductDao extends Dao{
 		return false;
 	}
 	
-	// 6. 
+	// 6. 채팅받은리스트 출력
 	public ArrayList<ChatDto> getChatList ( int pno , int mno ) {
 		String sql = "select * from note where pno = ? and ( frommno = ? or tomno = ? )";
 		
