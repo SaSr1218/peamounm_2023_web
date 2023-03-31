@@ -23,6 +23,7 @@ let chatmno = 0;	// 현재 채팅하고 있는 상대방의 mno , 채팅대상�
 function produclistprint(  ){
     let html = `<p style="font-size:12px; text-align:right" > 제품목록수 : ${ productList.length } 개 </h6>`;
     productList.forEach( ( p , i) => {
+		console.log(p);
 		html += `
 			<div onclick="productprint( ${ i } )" class="productbox">
 				<div class="pimgbox">

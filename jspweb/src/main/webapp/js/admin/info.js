@@ -1,3 +1,51 @@
+// --------------------- 차트 ------------------ //
+
+	// new Chart( 'dom객체' , { 차트옵션 } );
+	// {type : '차트이름' , data : { 차트에 표시할 데이터 } , options : { 차트옵션 } }
+		// labels : 가로축
+		
+/*
+	JSON = JS 객체
+	let 객체명 = { 필드명/키 : 데이터 , 필드명/키 : 데이터 ,,,}
+	1. 해당 객체의 필드명만 호출/추출
+		Object.keys(객체명) : 객체 내 모든 필드명/키 이름을 배열로 추출
+	2. 해당 객체의 값만 호출/추출
+		Object.values(객체명) : 객체 내 모든 데이터 를 배열로 추출 	 
+	 
+*/
+const ctx = document.getElementById('myChart');
+	
+$.get ( "/jspweb/point" , (r) => {
+	console.log(r);
+	console.log( Object.keys(r) );
+	console.log( Object.values(r) );
+
+  new Chart(ctx, {
+    type: 'bar', // bar : 막대차트 vs line : 선차트
+    data: {
+      labels: Object.keys(r) ,
+      datasets: [{
+        label: '4 mno 멤버 포인트 충전 내역' ,			// 데이터 항목명
+        data: Object.values(r) ,	// 해당 항목 데이터 
+        borderWidth: 4							// 막대 굵기
+      }] ,
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+	
+})
+
+
+
+
+// -----------------------관리자 기준 모든 회원 호출----------------- //
+
 // js -> admin -> info.js
 
 let memberName = {

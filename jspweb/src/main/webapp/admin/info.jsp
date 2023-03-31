@@ -10,6 +10,9 @@
 	<%@ include file="../header.jsp" %>
 	
 
+	<div>
+	  <canvas id="myChart"></canvas>
+	</div>
 
 	<h3> 모든 회원 명단</h3>
 
@@ -18,12 +21,7 @@
 		현재 회원 페이지 번호 : <span class="now_page"> </span>
 		<div class="msearchcount"> 총 회원 수 : </div>
 		
-		<select onchange="setlistsize()" class="listsize">
-			<option> 3 </option>
-			<option> 5 </option>
-			<option> 10 </option>
-		</select>
-		
+	
 		
 	
 	<table class="mListTable" border="1"></table>
@@ -50,7 +48,8 @@
 	</div>
 
 	
-	
+	<!-- chart.js -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	
 	<script src="/jspweb/js/admin/info.js" type="text/javascript"></script>
 
